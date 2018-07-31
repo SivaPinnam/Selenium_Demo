@@ -1,0 +1,86 @@
+package com.pathway.scripts;
+
+import org.openqa.selenium.By;
+
+import com.pathway.selenium.factory.SeleniumFunctions;
+
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Survey_Cage_View_Consumer extends SeleniumFunctions {
+	
+	//Locators
+
+		By ConsumerName = By.xpath(".//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table/tbody/tr[2]/td[1]/a");
+		By Name = By.xpath("//div[text()='Name']");
+		By show_more_link =  By.linkText("Show More");
+		By view_link = By.xpath("//a[contains(text(),'View')]");
+		//By view_link1 = By.linkText("View");
+		By Survey_label = By.xpath("//*[text()='CAGE Survey']");
+		By Gender = By.xpath("//span[@id='j_id0:j_id20:Gender']");
+		By Survey_tab = By.xpath("//div[@id='j_id0:ConsumerSurveysTab:j_id767:careplanformid:j_id770']/div/h3");
+		//By Surveytab = By.xpath("//*[text()='Surveys']");
+		By Datefield = By.xpath("//span[@id='j_id0:j_id20:j_id79']/span");
+		By Statusfield = By.xpath("//span[text()='In Progress']");
+		By FirstRadiobutton_view = By.xpath(".//*[@id='j_id0:j_id20:j_id265:0:j_id267:1:j_id282:0']");
+		By SecondRadiobutton_view = By.xpath(".//*[@id='j_id0:j_id20:j_id265:0:j_id267:2:j_id282:0']");
+		By ThirdRadiobutton_view = By.xpath(".//*[@id='j_id0:j_id20:j_id265:0:j_id267:3:j_id282:0']");
+		By FourthRadiobutton_view = By.xpath(".//*[@id='j_id0:j_id20:j_id265:0:j_id267:4:j_id282:1']");
+		
+	
+		
+	@When("^user clicks on Show More link in Surveys Page\\.$")
+	public void user_clicks_on_Show_More_link_in_Surveys_Page()  {
+		click(show_more_link);
+		System.out.println("clicked on Show More link");
+		}
+	@When("^clicks on  Consumer Name$")
+	public void clicks_on_Consumer_Name() {
+		wait(10);
+		click(ConsumerName);
+		System.out.println("clicked on Survey tab");
+	}
+
+	@Then("^validates Date field$")
+	public void validates_Date_field() {
+		verifyValues("Date field is avialble", true, isElementExist(Datefield));
+		System.out.println("Date field is displayed successfully");
+	}
+
+	@Then("^validates Status field$")
+	public void validates_Status_field() {
+		verifyValues("Gender field is avialble", true, isElementExist(Statusfield));
+		System.out.println("Status field is displayed successfully");
+	}
+	
+	@Then("^validates Have you felt you should cut down on your drinking\\? as Yes is selected$")
+	public void validates_Have_you_felt_you_should_cut_down_on_your_drinking_as_Yes_is_selected()  {
+		verifyValues("Have you felt you should cut down on your drinking radio button is selected" , true, isElementSelected(FirstRadiobutton_view));
+		System.out.println(" Have you felt you should cut down on your drinking radio button is selected");
+	}
+
+	@Then("^validates Have others annoyed you by criticizing your drinking\\? as Yes is selected$")
+	public void validates_Have_others_annoyed_you_by_criticizing_your_drinking_as_Yes_is_selected()  {
+		verifyValues("Have others annoyed you by criticizing your drinking radio button is selected" , true, isElementSelected(SecondRadiobutton_view));
+		System.out.println("Have others annoyed you by criticizing your drinking radio button is selected");
+	}
+
+	@Then("^validates Have you ever felt guilty about your drinking\\? as Yes is selected$")
+	public void validates_Have_you_ever_felt_guilty_about_your_drinking_as_Yes_is_selected()  {
+		verifyValues("Have you ever felt guilty about your drinking radio button is selected" , true, isElementSelected(ThirdRadiobutton_view));
+		System.out.println("Have you ever felt guilty about your drinking radio button is selected");
+	}
+
+	@Then("^validates Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover\\? as Yes is selected$")
+	public void validates_Have_you_ever_had_a_drink_first_thing_in_the_morning_to_steady_your_nerves_or_get_rid_of_a_hangover_as_Yes_is_selected()  {
+		verifyValues("Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover radio button is selected" , true, isElementSelected(FourthRadiobutton_view));
+		System.out.println("Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover radio button is selected");
+	}
+
+	@Then("^validates that Survey tab is displayed$")
+	public void validates_that_Survey_tab_is_displayed() {
+		verifyValues("Survey tab is displayed.", true, isElementExist(Survey_tab));
+		System.out.println("User is on the Surveys page");
+		
+	}
+}

@@ -1,0 +1,253 @@
+/**********
+*  Created By: Persistent Automation Team
+*  Created On: 11/28/2016
+*  Modified On: 12/9/2016
+**********/
+
+package com.pathway.scripts;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import cucumber.api.java.en.*;
+
+
+public class Survey_Page extends SeleniumFunctions {
+
+	By add_survey_button = By.xpath("//a[text()='Add Survey']");
+	By add_health_assessment_button = By.xpath("//a[contains(text(),'Add Health Assessment')]");
+	
+	By selectSurvey_dropdown = By.xpath("//span[@id='j_id0:j_id20:j_id50']/div[2]/div/center/div/div/select");
+	By next_survey_button = By.xpath("//*[@id='j_id0:j_id20:j_id50']/div[2]/div[2]/input[1]");
+	By cancel_survey_button = By.xpath("//*[@id='j_id0:j_id20:j_id50']/div[2]/div[2]/input[2]");
+	
+	By select_assessment_dropdown = By.xpath("//select[@name='j_id0:frm:j_id54']");
+	By next_assessment_button = By.xpath("//input[@value='Next']");
+	By cancel_assessment_button = By.xpath("//input[@value='Cancel']");
+	
+	By show_more_link =  By.linkText("Show More"); 
+	//By survey_RelatedList = By.xpath("//*[@id='j_id0:j_id24:EngReleatedTab:j_id238:Surveyformid:j_id240:j_id251']");
+	//By survey_RelatedList=By.xpath("//*[@id='j_id0:j_id24:EngReleatedTab:j_id245:Surveyformid:j_id247:j_id291:tb']");
+	By survey_RelatedList=By.xpath("//tbody[@id='j_id0:j_id24:EngReleatedTab:j_id252:Surveyformid:j_id254:j_id298:tb']");
+	//By survey_RelatedList_withoutShowMore = By.xpath("//tbody[@id='j_id0:j_id24:EngReleatedTab:j_id245:Surveyformid:j_id247:j_id258:tb']");
+	By survey_RelatedList_withoutShowMore = By.xpath("//tbody[@id='j_id0:j_id24:EngReleatedTab:j_id245:Surveyformid:j_id247:j_id258:tb']");
+	
+	//By survey_RelatedList = By.xpath("//*[@id='j_id0:j_id24:EngReleatedTab:j_id238:Surveyformid:j_id240:j_id284']");
+	By date_sort_filter = By.xpath("//*[text()='Completed by Date/Time']");
+	By noSurvey_table = By.xpath(".//*[@id='j_id0:j_id24:EngReleatedTab:j_id245:Surveyformid:j_id247:j_id258:tb']");  
+	
+	int count;
+	public static int surveyCount_beforeadd;
+	private String date1;
+	String date_time;
+	String surevy_ID;
+	public static String new_surevy_ID;
+		
+	@When("^user adds Survey type \"([^\"]*)\"$")
+	public void user_clicks_on_Add_Survey_button(String surveyType) {
+		surveyCount_beforeadd = get_survey_count(surveyType);
+		click(add_survey_button);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		System.out.println("clicked on add Survey button");
+		selectByVisibleText(selectSurvey_dropdown, surveyType);
+		click(next_survey_button);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+	}
+
+	@When("^user adds Health Assessment type \"([^\"]*)\"$")
+	public void user_adds_Health_Assessment_type(String assessment_type) {
+	if (assessment_type.trim().equalsIgnoreCase("Aspen"))
+		{
+			surveyCount_beforeadd = get_survey_count("Aspen Assessment for Malnutrition");
+		}
+		else{
+			surveyCount_beforeadd = get_survey_count(assessment_type);
+		}
+		
+        click(add_health_assessment_button);
+        waitForElementToDisappear(Common_Utility_Page.spinner);
+        System.out.println("clicked on add health assessment button");
+        WebElement dropDownList = findElement(select_assessment_dropdown);
+        List<WebElement> rows = dropDownList.findElements(By.tagName("option"));
+        for (int i = 0; i < rows.size();i++) {
+               String cell_survey_type = rows.get(i).getText();
+              System.out.println(cell_survey_type);
+                     if (assessment_type.contains(cell_survey_type)) {             
+            System.out.println(cell_survey_type);
+            selectByVisibleText(select_assessment_dropdown, cell_survey_type);
+            click(next_assessment_button);
+            waitForElementToDisappear(Common_Utility_Page.spinner);
+              break; 
+                     }
+        }
+
+		/*click(add_health_assessment_button);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		System.out.println("clicked on add health assessment button");
+		selectByVisibleText(select_assessment_dropdown, assessment_type);
+		click(next_assessment_button);
+		waitForElementToDisappear(Common_Utility_Page.spinner);*/
+	}
+
+	@Then("^validate that Health Assessment \"([^\"]*)\" is created successfully$")
+	public void validate_that_Health_Assessment_is_created_successfully(String assessment_type) {
+		int count = get_survey_count(assessment_type);
+		verifyValues("Health Assessment " + assessment_type + " is not added", surveyCount_beforeadd + 1, count);
+		System.out.println("survey_count:" + count);
+	}
+
+	@Then("^validate that Health Assessment \"([^\"]*)\" is not created$")
+	public void validate_that_Health_Assessment_is_not_created(String assessment_type) {
+		int count = get_survey_count(assessment_type);
+		verifyValues("Health Assessment " + assessment_type + " is not added", surveyCount_beforeadd, count);
+		System.out.println("survey_count:" + count);
+	}
+
+	@When("^user clicks on Add Health Assessment button to add type \"([^\"]*)\"$")
+	public void user_clicks_on_Add_Health_Assessment_button_to_add_type(String assessment_type) {
+		surveyCount_beforeadd = get_survey_count(assessment_type);
+		click(add_health_assessment_button);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		System.out.println("clicked on add health assessment button");
+	}
+
+	@When("^user clicks on Cancel button on Select Survey Page$")
+	public void user_clicks_on_Cancel_button_on_Select_Survey_Page() {
+		click(cancel_survey_button);
+	}
+
+	@When("^user clicks on Cancel button on Select Assessment Page$")
+	public void user_clicks_on_Cancel_button_on_Select_Assessment_Page() {
+		click(cancel_assessment_button);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+	}
+	
+	/******************************************************************************************
+	*  This method is to return number of Survey/assessment record present.
+	*  It will return 0 in case of no records.
+	*******************************************************************************************/
+	public int get_survey_count(String survey_type) {
+		int survey_count = 0;
+		String noRecordCheck;		
+		if (isElementExist(show_more_link)) {
+			// waitForElementToDisappear(Common_Utility_Page.spinner);
+			new Common_Utility_Page().user_clicks_on_Show_More_link();
+		}
+		wait(2);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		sort_by_date(date_sort_filter);
+		WebElement table = findElement(survey_RelatedList);
+		List<WebElement> all_rows = table.findElements(By.tagName("tr"));
+		noRecordCheck = all_rows.get(0).findElements(By.tagName("td")).get(0).getText();		
+		if (!(noRecordCheck.equalsIgnoreCase("No data available in table"))) {
+			for (int i = 0; i < all_rows.size(); i++) {
+				List<WebElement> cells = all_rows.get(i).findElements(By.tagName("td"));
+				String cell_survey_type = cells.get(2).getText();
+				if (cell_survey_type.equals(survey_type)) {
+					survey_count++;
+				}
+			}
+		}
+		return survey_count;
+	}
+	
+
+	public void sort_by_date(By date_sort_filter) {
+		waitForElementtoBeVisible(date_sort_filter);
+		click(date_sort_filter);
+		wait(1);
+		click(date_sort_filter);
+		wait(1);
+	}
+
+	public String find_date_for_previous_record(String surveyType) {
+		//new Common_Utility_Page().click(show_more_link);
+		//sort_by_date(date_sort_filter);
+		WebElement table = findElement(survey_RelatedList);
+		List<WebElement> all_rows = table.findElements(By.tagName("tr"));
+		for (int i = 0; i < all_rows.size(); i++) {
+			String record = all_rows.get(i).findElements(By.tagName("td")).get(2).getText();
+			if (record.equals(surveyType)) {
+				date_time = all_rows.get(i).findElements(By.tagName("td")).get(5).getText();
+				surevy_ID = all_rows.get(i).findElements(By.tagName("td")).get(1).getText();
+				break;
+			}
+		}
+		return date_time;
+	}
+
+	@When("^validate initial count and date for latest survey for Survey type \"([^\"]*)\"$")
+	public void validate_initial_count_and_date_for_latest_survey_for_Survey_type(String surveyType) {
+		wait(2);
+		int survey_count = get_survey_count(surveyType);
+		date1 = find_date_for_previous_record(surveyType);
+		System.out.println("Survey count is: "+survey_count+" and creation time is: " + date1);
+		
+	}
+
+	@Then("^validates that new survey is not created for Survey type \"([^\"]*)\"$")
+	public void validates_that_new_survey_is_not_created(String survey_type) {
+		int count = get_survey_count(survey_type);
+		verifyValues("Survey " + survey_type + " is added", surveyCount_beforeadd, count);
+		System.out.println("survey_count:"+count);
+	}
+
+	@Then("^validates that new \"([^\"]*)\" Survey is created$")
+	public void validates_that_new_Survey_is_created(String survey_type) {
+		int count = get_survey_count(survey_type);
+		verifyValues("Survey " + survey_type + " is not added", surveyCount_beforeadd + 1, count);
+		System.out.println("survey_count:"+count);
+			
+	}
+
+	public boolean compare_date_of_new_record_with_previous(String dateA, String dateB) {
+		DateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		Date newDate = null;
+		Date olddate = null;
+		try {
+			newDate = format.parse(dateB);
+			olddate = format.parse(dateA);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if (newDate.getTime() > olddate.getTime()) {
+			return true;
+		}
+		return false;
+	}
+
+	public String get_status_of_survey(String assessment_type) {
+		String status = null;
+		sort_by_date(date_sort_filter);
+		waitForElementtoBeVisible(survey_RelatedList);
+		WebElement table = findElement(survey_RelatedList);
+		List<WebElement> all_rows = table.findElements(By.tagName("tr"));
+		for (int i = 0; i < all_rows.size(); i++) {
+			String record = all_rows.get(i).findElements(By.tagName("td")).get(2).getText();
+			if (record.contains(assessment_type)) {
+				new_surevy_ID = all_rows.get(i).findElements(By.tagName("td")).get(1).getText();
+				status = all_rows.get(i).findElements(By.tagName("td")).get(6).getText();
+				break;
+			}
+		}
+		System.out.println(new_surevy_ID);
+		System.out.println("Survey status is: " + status);
+		return status;
+	}
+
+	@Then("^validate that Health Assessment Status for type \"([^\"]*)\" is \"([^\"]*)\"$")
+	public void validate_that_Health_Assessment_Status_for_type_is(String assessment_type, String status) {
+		verifyValues("Health Assessment status not matched", status, get_status_of_survey(assessment_type));
+		
+	}
+
+	@Then("^validate that Add Survey Status for type \"([^\"]*)\" is \"([^\"]*)\"$")
+	public void validate_that_Add_Survey_Status_for_type_is(String survey_type, String status) {
+		verifyValues("Survey status not matched", status, get_status_of_survey(survey_type));
+	}
+}

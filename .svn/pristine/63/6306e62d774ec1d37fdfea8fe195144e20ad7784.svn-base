@@ -1,0 +1,284 @@
+package com.pathway.scripts;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import cucumber.api.java.en.When;
+
+public class Create_Client extends SeleniumFunctions {
+
+	// Client Locators
+	By home_Tab_button = By.xpath(".//*[@id='home_Tab']/a");
+	By all_Tabs_button = By.xpath("//*[@id='AllTab_Tab']/a");
+	By client_tab = By.xpath("//a[@title='Client Tab']");
+	By new_Client_button = By.xpath("//input[@value='Add New Client']");
+	By account_Name_text = By.xpath("//*[contains(text(),'Account Name')]//following::input[1]");
+	By phone_text = By.xpath("//*[contains(text(),'Phone')]//following::input[1]");
+	By fax_text = By.xpath("//*[contains(text(),'Fax')]//following::input[1]");
+	/*By billing_Street_text = By.xpath(".//*[@id='pageid:form:j_id27:BillingStreet']");
+	By billing_City_text = By.xpath(".//*[@id='pageid:form:j_id27:BillingCity']");
+	By billing_State_text = By.xpath(".//*[@id='pageid:form:j_id27:BillingState']");
+	By billing_PostalCode_text = By.xpath(".//*[@id='pageid:form:j_id27:BillingPostalCode']");
+	By billing_Country_text = By.xpath(".//*[@id='pageid:form:j_id27:BillingCountry']");
+	By population_Group_multicombo = By.xpath(".//*[@id='pageid:form:j_id27:PopulationGroups_unselected']");
+	By population_Group_rightArrow = By.xpath(".//*[@id='pageid:form:j_id27:PopulationGroups_right_arrow']");
+	By plant_Type_multicombo = By.xpath(".//*[@id='pageid:form:j_id27:PlanType_unselected']");
+	By plant_Type_rightArrow = By.xpath(".//*[@id='pageid:form:j_id27:PlanType_right_arrow']");
+	By client_Effective_Date = By.xpath(".//*[@id='pageid:form:j_id27:ClientEffectiveDate']");
+	*/	
+	By billing_Street_text = By.xpath("//*[contains(text(),'Billing Street')]//following::input[1]");
+	By billing_City_text = By.xpath("//*[contains(text(),'Billing City')]//following::input[1]");
+	By billing_State_text = By.xpath("//*[contains(text(),'Billing State')]//following::input[1]");
+	By billing_PostalCode_text = By.xpath("//*[contains(text(),'Billing Zip')]//following::input[1]");
+	By billing_Country_text = By.xpath("//*[contains(text(),'Billing Country')]//following::input[1]");
+	By population_Group_multicombo = By.xpath("//select[contains(@id,'PopulationGroups_unselected')]");
+	By population_Group_rightArrow = By.xpath("//img[contains(@id,'PopulationGroups_right_arrow')]");
+	By plant_Type_multicombo = By.xpath("//select[contains(@id,'PlanType_unselected')]");
+	By plant_Type_rightArrow = By.xpath("//img[contains(@id,'PlanType_right_arrow')]");
+	By client_Effective_Date = By.xpath("//*[contains(text(),'Client Effective Date')]//following::input[1]");	
+	By copy_Address_link = By.linkText("Copy Billing Address to Shipping Address");
+	
+	// Clinical Program Locators
+	By clinical_Program_tab = By.xpath("//a[@title='Clinical Programs Tab']");
+	By add_button = By.xpath("//input[@value='Add']");
+	By clinical_Program_Name_text = By.xpath("//*[contains(text(),'Product Category')]//preceding::input[1]");
+	By product_Category_dropdown = By.xpath("//*[contains(text(),'Product Category')]//following::select[1]");
+	By client_Clinical_Program_link = By.xpath("//img[@title='Client Clinical Programs']");
+	By client_Name_lookUp = By.xpath("//img[@title='Client Lookup (New Window)']");
+	By clinical_Program_lookUp = By.xpath("//img[@title='Clinical Program Lookup (New Window)']");
+	/*
+	By billing_Method_dropdown = By.xpath(".//*[@id='pg:form:pgb:pgbsgenI:j_id76:billingMethod']");
+	By coding_Process_dropdown = By.xpath(".//*[@id='pg:form:pgb:pgbsgenI:codprcs:j_id86']");
+	*/
+	By billing_Method_dropdown = By.xpath("//select[contains(@id,'billingMethod')]");
+	By coding_Process_dropdown = By.xpath("//select[contains(@id,'codprcs')]");	
+	By search_button = By.id("lksrch");
+	By go_button = By.xpath("//input[@title='Go!']");
+	By clinical_Program_Id_label = By.xpath("//*[@class='pageDescription']");
+	By campaign_link = By.linkText("CCM Campaign");
+	By new_Campaign_button = By.xpath("//input[@value='New Campaign']");
+	/*
+	By campign_name_text = By.xpath(".//*[@id='j_id0:myForm:j_id3:j_id29:j_id30:j_id34']");
+	By status_dropdown = By.xpath(".//*[@id='j_id0:myForm:j_id3:j_id29:j_id57:j_id61']");
+	By campaign_Load_Date = By.xpath(".//*[@id='j_id0:myForm:j_id3:j_id29:j_id65:j_id67']/span/span/a");
+	By campaign_start_Date = By.xpath(".//*[@id='j_id0:myForm:j_id3:j_id29:j_id75:j_id77']/span/span/a");
+	By inbound_File_Date = By.xpath(".//*[@id='j_id0:myForm:j_id3:j_id29:j_id70:j_id72']/span/span/a");
+	*/
+	By campign_name_text = By.xpath("//*[contains(text(),'Campaign Name')]//following::input[1]");
+	By status_dropdown = By.xpath("//label[contains(text(),'Status')]//following::select[1]");
+	By campaign_Load_Date = By.xpath("//*[contains(text(),'Campaign Load Date')]//following::a[1]");
+	By campaign_start_Date = By.xpath("//*[contains(text(),'Start Date')]//following::a[1]");
+	By inbound_File_Date = By.xpath("//*[contains(text(),'Inbound File Date')]//following::a[1]");	
+	By client_Clinical_Program_lookUp = By.xpath("//img[@title='Client Clinical Program Lookup (New Window)']");	
+	By save_button = By.xpath("//input[@value='Save']");
+
+
+	// Client Data
+	String excel_file = "files//Contacts.xlsx";
+	String sheet_name = "Client";
+	String sheet_name_output = "Contacts";
+	
+	String account_Name_data = Excel.readFromExcel(excel_file, sheet_name, 1, 1);
+	String phone_data = Excel.readFromExcel(excel_file, sheet_name, 2, 1);
+	String fax_data = Excel.readFromExcel(excel_file, sheet_name, 3, 1);
+	String billing_Street_data = Excel.readFromExcel(excel_file, sheet_name, 4, 1);
+	String billing_City_data = Excel.readFromExcel(excel_file, sheet_name, 5, 1);
+	String billing_State_data = Excel.readFromExcel(excel_file, sheet_name, 6, 1);
+	String billing_PostlCode_data = Excel.readFromExcel(excel_file, sheet_name, 7, 1);
+	String billing_Country_data = Excel.readFromExcel(excel_file, sheet_name, 8, 1);
+	String population_Group_data = Excel.readFromExcel(excel_file, sheet_name, 9, 1);
+	String plan_Type_data = Excel.readFromExcel(excel_file, sheet_name, 10, 1);
+	String client_Eff_Data_data = Excel.readFromExcel(excel_file, sheet_name, 11, 1);
+
+	// Clinical Program Data
+	String clinical_Program_Name_data = Excel.readFromExcel(excel_file, sheet_name, 12, 1);
+	String product_Category_data = Excel.readFromExcel(excel_file, sheet_name, 13, 1);
+
+	String billing_Method_data = Excel.readFromExcel(excel_file, sheet_name, 14, 1);
+	String coding_process_data = Excel.readFromExcel(excel_file, sheet_name, 15, 1);
+	String campaign_Name_data = Excel.readFromExcel(excel_file, sheet_name, 16, 1);
+
+	String parent_Window_Handle;
+	String client_Clinical_Program_Window_Handle;
+
+	public void writeToExcel(String filePath, String sheetName, int row, int col, String ValueToWrite) {
+
+		try {
+			File src = new File(filePath);
+			FileInputStream file = new FileInputStream(src);
+			@SuppressWarnings("resource")
+			XSSFWorkbook workbook = new XSSFWorkbook(file);
+			XSSFSheet sheet = workbook.getSheet(sheetName);
+			XSSFCell cell = null;
+			// Retrieve the row and check for null
+			XSSFRow sheetrow = sheet.getRow(row);
+			if (sheetrow == null) {
+				sheetrow = sheet.createRow(row);
+			}
+			// Update the value of cell
+			cell = sheetrow.getCell(col);
+			if (cell == null) {
+				cell = sheetrow.createCell(col);
+			}
+			cell.setCellValue(ValueToWrite);
+			file.close();
+			FileOutputStream fileOut = new FileOutputStream(src);
+			workbook.write(fileOut);
+			fileOut.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@When("^user creates new Client$")
+	public void user_creates_new_Client() {
+		click(client_tab);
+		wait(4);
+		click(new_Client_button);
+		enter(account_Name_text, account_Name_data);
+		enter(phone_text, phone_data);
+		enter(fax_text, fax_data);
+		enter(billing_Street_text, billing_Street_data);
+		enter(billing_City_text, billing_City_data);
+		enter(billing_State_text, billing_State_data);
+		enter(billing_PostalCode_text, billing_PostlCode_data);
+		enter(billing_Country_text, billing_Country_data);
+		click(copy_Address_link);
+		enter(client_Effective_Date, client_Eff_Data_data);
+		for (String val : population_Group_data.split(";")) {
+			selectByVisibleText(population_Group_multicombo, val);
+			System.out.println("Values are " + val);
+		}
+		click(population_Group_rightArrow);
+		for (String val : plan_Type_data.split(";")) {
+			selectByVisibleText(plant_Type_multicombo, val);			
+		}
+		click(plant_Type_rightArrow);		
+		click(save_button);
+		writeToExcel(excel_file, sheet_name_output, 11, 1, account_Name_data);
+		System.out.println(account_Name_data + " - Client Created Successfully");
+		click(home_Tab_button);
+	}
+
+	@When("^user create new Clinical Prgram$")
+	public void user_create_new_Clinical_Prgram() {
+		click(clinical_Program_tab);
+		wait(4);
+		click(add_button);
+		parent_Window_Handle = getWindowHandle();
+		for (String winHandle : getWindowHandles()) {
+			if (!(parent_Window_Handle.equals(winHandle))) {
+				switchToWindow(winHandle);
+				enter(clinical_Program_Name_text, clinical_Program_Name_data);
+				selectByVisibleText(product_Category_dropdown, product_Category_data);
+				click(save_button);
+				wait(3);
+				writeToExcel(excel_file, sheet_name_output, 10, 1, clinical_Program_Name_data);
+				System.out.println(clinical_Program_Name_data + " -  Clinical Program Created successfully");
+				closeCurrentTab();
+				switchToWindow(parent_Window_Handle);
+			}
+		}
+		click(home_Tab_button);
+	}
+
+
+	@When("^user create new Client Clinical Program$")
+	public void user_create_new_Client_Clinical_Program() {
+		click(all_Tabs_button);
+		wait(3);
+		click(client_Clinical_Program_link);
+		wait(4);
+		click(add_button);
+		parent_Window_Handle = getWindowHandle();
+		String clinical_Program_Id;
+		for (String winHandle : getWindowHandles()) {
+			if (!(parent_Window_Handle.equals(winHandle))) {
+				client_Clinical_Program_Window_Handle = winHandle;
+				switchToWindow(client_Clinical_Program_Window_Handle);
+				click(client_Name_lookUp);
+				for (String childHandle : getWindowHandles()) {
+					if (!((parent_Window_Handle.equals(childHandle))
+							|| (client_Clinical_Program_Window_Handle.equals(childHandle)))) {
+						switchToWindow(childHandle);
+						switchToFrame("searchFrame");
+						enter(search_button, account_Name_data);
+						click(go_button);
+						switchToDefaultContent();
+						switchToFrame("resultsFrame");
+						click(By.linkText(account_Name_data));
+						switchToWindow(client_Clinical_Program_Window_Handle);
+					}
+				}
+
+				click(clinical_Program_lookUp);
+				for (String childHandle : getWindowHandles()) {
+					if (!((parent_Window_Handle.equals(childHandle))
+							|| (client_Clinical_Program_Window_Handle.equals(childHandle)))) {
+						switchToWindow(childHandle);
+						switchToFrame("searchFrame");
+						enter(search_button, clinical_Program_Name_data);
+						click(go_button);
+						switchToDefaultContent();
+						switchToFrame("resultsFrame");
+						click(By.linkText(clinical_Program_Name_data));
+						switchToWindow(client_Clinical_Program_Window_Handle);
+					}
+				}
+				selectByVisibleText(billing_Method_dropdown, billing_Method_data);
+				selectByVisibleText(coding_Process_dropdown, coding_process_data);
+				click(save_button);
+				wait(3);
+				clinical_Program_Id = getText(clinical_Program_Id_label);
+				writeToExcel(excel_file, sheet_name_output, 12, 1, clinical_Program_Id);
+				System.out.println(clinical_Program_Id + "Clinical Program Id Created Successfully");
+				closeCurrentTab();
+				switchToWindow(parent_Window_Handle);
+			}
+		}
+		click(home_Tab_button);
+	}
+	
+	@When("^user create Campaign$")
+	public void user_create_Campaign() {
+		click(all_Tabs_button);
+		wait(3);
+		click(campaign_link);
+		click(new_Campaign_button);
+		enter(campign_name_text, campaign_Name_data);
+		selectByVisibleText(status_dropdown, "Active");
+		click(campaign_Load_Date);
+		click(campaign_start_Date);
+		click(inbound_File_Date);
+		parent_Window_Handle = getWindowHandle();
+		String clinical_Program_Id = Excel.readFromExcel(excel_file, sheet_name_output, 12, 1);
+		click(client_Clinical_Program_lookUp);
+		for (String childHandle : getWindowHandles()) {
+			if (!(parent_Window_Handle.equals(childHandle))){					
+				switchToWindow(childHandle);
+				switchToFrame("searchFrame");
+				enter(search_button, clinical_Program_Id);
+				click(go_button);
+				switchToDefaultContent();
+				switchToFrame("resultsFrame");
+				click(By.linkText(clinical_Program_Id));
+				switchToWindow(parent_Window_Handle);
+			}
+		}
+		writeToExcel(excel_file, sheet_name_output, 13, 1, campaign_Name_data);
+		wait(4);
+		click(save_button);
+		System.out.println(campaign_Name_data + "Campaign Created Successfully");
+	}
+}

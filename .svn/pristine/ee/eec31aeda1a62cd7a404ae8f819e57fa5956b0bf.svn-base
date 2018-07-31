@@ -1,0 +1,4126 @@
+[
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "#Created By : Persistent Automation Team"
+      },
+      {
+        "line": 2,
+        "value": "#Created on: 12/6/2016"
+      },
+      {
+        "line": 3,
+        "value": "#Modified on:15/21/2016"
+      }
+    ],
+    "line": 6,
+    "elements": [
+      {
+        "line": 7,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 52598347014,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1925804745,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 10,
+        "name": "Add Advance Care Plan",
+        "description": "",
+        "id": "advance-care-plan-feature-validation;add-advance-care-plan",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 6100590836,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 7724167745,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "user clicks on Advance Care Plan link",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_Advance_Care_Plan_link()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 9399471522,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "user clicks on Add ACP button",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_Add_ACP_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 16017303,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "verify Advance Care Plan form displayed",
+            "match": {
+              "location": "Advance_Care_Plan_Page.verify_Advance_Care_Plan_form_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 3124402189,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "user clicks on expand all link on Advance Care Plan page",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_expand_all_link_on_Advance_Care_Plan_page()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 112084728,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "user clicks on Full Code radio button",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_Full_Code_radio_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 74212982,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "user clicks yes for Antibiotics",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_Antibiotics()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 79905500,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "user clicks yes for Blood Transfusion",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_Blood_Transfusion()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 74735489,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "user clicks yes for Tube Feeding",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_Tube_Feeding()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 75139809,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "user clicks yes for Hospitalization",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_Hospitalization()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 77375078,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "user clicks yes for IV Hydration",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_IV_Hydration()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 83012546,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "user clicks yes for Surgical Intervention",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_Surgical_Intervention()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5392752652,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "user selects value as Will",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_selects_as_Will()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 104131438,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "user selects value from Enrollee Primary Goal of Care",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_selects_from_Enrollee_Primary_Goal_of_Care()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 113986900,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "user selects value from Family Primary Goal of Care",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_selects_from_Family_Primary_Goal_of_Care()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 107165395,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "user selects value from Mortality Risk Assessment Score",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_selects_from_Mortality_Risk_Assessment_Score()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 163474144,
+              "status": "passed"
+            },
+            "line": 27,
+            "name": "user enters text for Goals of Care",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_text_for_Goals_of_Care()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 87955828,
+              "status": "passed"
+            },
+            "line": 28,
+            "name": "user clicks on no for Consumer Responsible for Self",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_no_for_Consumer_Responsible_for_Self()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 107104747,
+              "status": "passed"
+            },
+            "line": 29,
+            "name": "user clicks on Not Applicable checkbox",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_Not_Applicable_checkbox()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 105915112,
+              "status": "passed"
+            },
+            "line": 30,
+            "name": "user clicks on No for Hospice Appropriate",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_No_for_Hospice_Appropriate()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 140044096,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "user enters date for Date Last Reviewed",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_date_for_Date_Last_Reviewed()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 104390825,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "user selects value for Reviewed Care Goals with Interdisciplinary Care Team",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_selects_value_for_Reviewed_Care_Goals_with_Interdisciplinary_Care_Team()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 147283916,
+              "status": "passed"
+            },
+            "line": 33,
+            "name": "user enters text for Reviewed with field",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_text_for_Reviewed_with_field()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 164529109,
+              "status": "passed"
+            },
+            "line": 34,
+            "name": "user enters date for Update Date",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_date_for_Update_Date()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 148271391,
+              "status": "passed"
+            },
+            "line": 35,
+            "name": "user enters date for Discussed Date",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_date_for_Discussed_Date()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 125705966,
+              "status": "passed"
+            },
+            "line": 36,
+            "name": "user enters text for Discussed With",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_text_for_Discussed_With()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 165125325,
+              "status": "passed"
+            },
+            "line": 37,
+            "name": "user enters text for Discussed Notes",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_text_for_Discussed_Notes()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 10119666355,
+              "status": "passed"
+            },
+            "line": 38,
+            "name": "user clicks on Cancel button on Advance Care Plan page",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_Cancel_button_on_Advance_Care_Plan_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 49121179,
+              "status": "passed"
+            },
+            "line": 39,
+            "name": "verify Advance Care Plan cancelled",
+            "match": {
+              "location": "Advance_Care_Plan_Page.verify_Advance_Care_Plan_cancelled()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 6335282571,
+              "status": "passed"
+            },
+            "line": 40,
+            "name": "user clicks on Add ACP button",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_Add_ACP_button()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3108489699,
+              "status": "passed"
+            },
+            "line": 41,
+            "name": "user clicks on expand all link on Advance Care Plan page",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_expand_all_link_on_Advance_Care_Plan_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 210612910,
+              "status": "passed"
+            },
+            "line": 42,
+            "name": "verify values present in Enrollees Primary Goal of Care dropdown",
+            "match": {
+              "location": "Advance_Care_Plan_Page.verified_values_present_in_Enrollees_Primary_Goal_of_Care_dropdown()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 177140790,
+              "status": "passed"
+            },
+            "line": 43,
+            "name": "verify values present in Familys Primary Goal of Care dropdown",
+            "match": {
+              "location": "Advance_Care_Plan_Page.verified_values_present_in_Familys_Primary_Goal_of_Care_dropdown()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 146909143,
+              "status": "passed"
+            },
+            "line": 44,
+            "name": "verify values present in Mortality Risk Assessment dropdown",
+            "match": {
+              "location": "Advance_Care_Plan_Page.verified_values_present_in_Mortality_Risk_Assessment_dropdown()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 66968807,
+              "status": "passed"
+            },
+            "line": 45,
+            "name": "user clicks on Full Code radio button",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_Full_Code_radio_button()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 67793621,
+              "status": "passed"
+            },
+            "line": 46,
+            "name": "user clicks yes for Antibiotics",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_Antibiotics()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 80063497,
+              "status": "passed"
+            },
+            "line": 47,
+            "name": "user clicks yes for Blood Transfusion",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_Blood_Transfusion()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 68818107,
+              "status": "passed"
+            },
+            "line": 48,
+            "name": "user clicks yes for Tube Feeding",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_Tube_Feeding()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 71035959,
+              "status": "passed"
+            },
+            "line": 49,
+            "name": "user clicks yes for Hospitalization",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_Hospitalization()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 73148687,
+              "status": "passed"
+            },
+            "line": 50,
+            "name": "user clicks yes for IV Hydration",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_IV_Hydration()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 76918196,
+              "status": "passed"
+            },
+            "line": 51,
+            "name": "user clicks yes for Surgical Intervention",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_yes_for_Surgical_Intervention()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5359936466,
+              "status": "passed"
+            },
+            "line": 52,
+            "name": "user selects value as Will",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_selects_as_Will()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 87760199,
+              "status": "passed"
+            },
+            "line": 53,
+            "name": "user selects value from Enrollee Primary Goal of Care",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_selects_from_Enrollee_Primary_Goal_of_Care()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 90752169,
+              "status": "passed"
+            },
+            "line": 54,
+            "name": "user selects value from Family Primary Goal of Care",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_selects_from_Family_Primary_Goal_of_Care()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 89703114,
+              "status": "passed"
+            },
+            "line": 55,
+            "name": "user selects value from Mortality Risk Assessment Score",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_selects_from_Mortality_Risk_Assessment_Score()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 147416721,
+              "status": "passed"
+            },
+            "line": 56,
+            "name": "user enters text for Goals of Care",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_text_for_Goals_of_Care()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 80004715,
+              "status": "passed"
+            },
+            "line": 57,
+            "name": "user clicks on no for Consumer Responsible for Self",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_no_for_Consumer_Responsible_for_Self()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 88424218,
+              "status": "passed"
+            },
+            "line": 58,
+            "name": "user clicks on Not Applicable checkbox",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_Not_Applicable_checkbox()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 81094203,
+              "status": "passed"
+            },
+            "line": 59,
+            "name": "user clicks on No for Hospice Appropriate",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_No_for_Hospice_Appropriate()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 153045480,
+              "status": "passed"
+            },
+            "line": 60,
+            "name": "user enters date for Date Last Reviewed",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_date_for_Date_Last_Reviewed()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 95996514,
+              "status": "passed"
+            },
+            "line": 61,
+            "name": "user selects value for Reviewed Care Goals with Interdisciplinary Care Team",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_selects_value_for_Reviewed_Care_Goals_with_Interdisciplinary_Care_Team()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 142386665,
+              "status": "passed"
+            },
+            "line": 62,
+            "name": "user enters text for Reviewed with field",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_text_for_Reviewed_with_field()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 139825763,
+              "status": "passed"
+            },
+            "line": 63,
+            "name": "user enters date for Update Date",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_date_for_Update_Date()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 160034311,
+              "status": "passed"
+            },
+            "line": 64,
+            "name": "user enters date for Discussed Date",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_date_for_Discussed_Date()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 111343889,
+              "status": "passed"
+            },
+            "line": 65,
+            "name": "user enters text for Discussed With",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_text_for_Discussed_With()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 134136665,
+              "status": "passed"
+            },
+            "line": 66,
+            "name": "user enters text for Discussed Notes",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_enters_text_for_Discussed_Notes()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3134258584,
+              "status": "passed"
+            },
+            "line": 67,
+            "name": "user clicks on Save button on Advance Care Plan page",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_Save_button_on_Advance_Care_Plan_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3870985760,
+              "status": "passed"
+            },
+            "line": 68,
+            "name": "user clicks on Update ACP button",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_Update_ACP_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3111260537,
+              "status": "passed"
+            },
+            "line": 69,
+            "name": "user clicks on expand all link on Advance Care Plan page",
+            "match": {
+              "location": "Advance_Care_Plan_Page.user_clicks_on_expand_all_link_on_Advance_Care_Plan_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3787446976,
+              "status": "passed"
+            },
+            "line": 70,
+            "name": "verify Advance Care Plan created",
+            "match": {
+              "location": "Advance_Care_Plan_Page.verify_Advance_Care_Plan_created()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Advance Care Plan Feature Validation",
+    "description": "",
+    "id": "advance-care-plan-feature-validation",
+    "keyword": "Feature",
+    "uri": "Advance_Care_Plan.feature",
+    "tags": [
+      {
+        "line": 5,
+        "name": "@SmokeTest"
+      }
+    ]
+  },
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "#Created By : Persistent Automation Team"
+      },
+      {
+        "line": 2,
+        "value": "#Created on: 12/4/2016"
+      },
+      {
+        "line": 3,
+        "value": "#Modified on:12/26/2016"
+      }
+    ],
+    "line": 6,
+    "elements": [
+      {
+        "line": 8,
+        "name": "To add a New Clinical Note and validates that note gets added.",
+        "description": "",
+        "id": "clinical-note;to-add-a-new-clinical-note-and-validates-that-note-gets-added.",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1983177478,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 90295677537,
+              "error_message": "java.lang.AssertionError: Element is not visible : By.linkText: Personal Information\r\n\tat org.junit.Assert.fail(Assert.java:88)\r\n\tat com.pathway.selenium.factory.SeleniumFunctions.waitForElementtoBeVisible(SeleniumFunctions.java:489)\r\n\tat com.pathway.selenium.factory.SeleniumFunctions.click(SeleniumFunctions.java:32)\r\n\tat com.pathway.scripts.Clinical_Note_Page.gets_the_timezone_of_the_user(Clinical_Note_Page.java:94)\r\n\tat ✽.When gets the timezone of the user(Clinical_Note.feature:10)\r\n",
+              "status": "failed"
+            },
+            "line": 10,
+            "name": "gets the timezone of the user",
+            "match": {
+              "location": "Clinical_Note_Page.gets_the_timezone_of_the_user()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 11,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 12,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 13,
+            "name": "user clicks on Clinical Note tab",
+            "match": {
+              "location": "Clinical_Note_Page.user_clicks_on_Clinical_Note_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 14,
+            "name": "validates that Clinical Note tab is displayed",
+            "match": {
+              "location": "Clinical_Note_Page.validates_that_Clinical_Note_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 15,
+            "name": "User clicks on Add New Clinical Note button",
+            "match": {
+              "location": "Clinical_Note_Page.user_clicks_on_Add_New_Clinical_Note_button()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 16,
+            "name": "validates that Clinical Note form is displayed",
+            "match": {
+              "location": "Clinical_Note_Page.validates_that_Clinical_Note_form_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 17,
+            "name": "clicks on Cancel button on Clinical Note form",
+            "match": {
+              "location": "Clinical_Note_Page.clicks_on_Cancel_button_on_Clinical_Note_form()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 18,
+            "name": "validates that user should land on Engagement detail list page",
+            "match": {
+              "location": "Clinical_Note_Page.validates_that_user_should_land_on_Engagement_detail_list_page()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 19,
+            "name": "validates that new Clinical Note is not created",
+            "match": {
+              "location": "Clinical_Note_Page.validates_that_new_Clinical_Note_is_not_created()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 21,
+            "name": "User clicks on Add New Clinical Note button",
+            "match": {
+              "location": "Clinical_Note_Page.user_clicks_on_Add_New_Clinical_Note_button()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 22,
+            "name": "validates that Clinical Note form is displayed",
+            "match": {
+              "location": "Clinical_Note_Page.validates_that_Clinical_Note_form_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 23,
+            "name": "verify the time is captured",
+            "match": {
+              "location": "Clinical_Note_Page.verify_the_time_is_captured()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 24,
+            "name": "clicks on Electronically Sign button on Clinical Note",
+            "match": {
+              "location": "Clinical_Note_Page.clicks_on_Electronically_Sign_button_on_Clinical_Note()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 25,
+            "name": "validates that user should gets validation message",
+            "match": {
+              "location": "Clinical_Note_Page.validates_that_user_should_gets_validation_message()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 26,
+            "name": "enters value for Subject on Clinical Note Page",
+            "match": {
+              "location": "Clinical_Note_Page.enters_value_for_Subject_on_Clinical_Note_Page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 27,
+            "name": "enters value for Clinical Note on Clinical Note Page",
+            "match": {
+              "location": "Clinical_Note_Page.enters_value_for_Clinical_Note_on_Clinical_Note_Page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 29,
+            "name": "clicks on Electronically Sign button on Clinical Note",
+            "match": {
+              "location": "Clinical_Note_Page.clicks_on_Electronically_Sign_button_on_Clinical_Note()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 30,
+            "name": "validate that Clinical Note is created",
+            "match": {
+              "location": "Clinical_Note_Page.validate_that_Clinical_Note_is_created()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 32,
+            "name": "clicks on View link for Clinical Note",
+            "match": {
+              "location": "Clinical_Note_Page.clicks_on_View_link_for_Record_type()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 33,
+            "name": "validates that Clinical Note form is displayed for View",
+            "match": {
+              "location": "Clinical_Note_Page.validates_that_Clinical_Note_form_is_displayed_View()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 34,
+            "name": "validates the values provided by user on add page for Clinical Note",
+            "match": {
+              "location": "Clinical_Note_Page.validates_the_values_provided_on_view_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 35,
+            "name": "validates signature for Clinical Note",
+            "match": {
+              "location": "Clinical_Note_Page.validates_signature_for_Clinical_Note()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 36,
+            "name": "clicks on Cancel button on Clinical Note form",
+            "match": {
+              "location": "Clinical_Note_Page.clicks_on_Cancel_button_on_Clinical_Note_form()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 37,
+            "name": "validates that user should land on Engagement detail list page",
+            "match": {
+              "location": "Clinical_Note_Page.validates_that_user_should_land_on_Engagement_detail_list_page()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Clinical Note",
+    "description": "",
+    "id": "clinical-note",
+    "keyword": "Feature",
+    "uri": "Clinical_Note.feature",
+    "tags": [
+      {
+        "line": 5,
+        "name": "@SmokeTest"
+      }
+    ]
+  },
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "#Created By : Persistent Automation Team"
+      },
+      {
+        "line": 2,
+        "value": "#Created on: 12/23/2016"
+      },
+      {
+        "line": 3,
+        "value": "#Modified on:"
+      }
+    ],
+    "line": 6,
+    "elements": [
+      {
+        "line": 8,
+        "name": "Create a new Engagement",
+        "description": "",
+        "id": "createclient;create-a-new-engagement",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2125053456,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 15086421899,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "user creates new Client",
+            "match": {
+              "location": "Create_Client.user_creates_new_Client()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 18275940799,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "user create new Clinical Prgram",
+            "match": {
+              "location": "Create_Client.user_create_new_Clinical_Prgram()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 118121014296,
+              "error_message": "java.lang.AssertionError: Element is not present : By.xpath: //*[@class\u003d\u0027pageDescription\u0027]\r\n\tat org.junit.Assert.fail(Assert.java:88)\r\n\tat com.pathway.selenium.factory.SeleniumFunctions.waitForElementtoBePresent(SeleniumFunctions.java:498)\r\n\tat com.pathway.selenium.factory.SeleniumFunctions.getText(SeleniumFunctions.java:89)\r\n\tat com.pathway.scripts.Create_Client.user_create_new_Client_Clinical_Program(Create_Client.java:223)\r\n\tat ✽.When user create new Client Clinical Program(Engagement/AACreate_Client.feature:12)\r\n",
+              "status": "failed"
+            },
+            "line": 12,
+            "name": "user create new Client Clinical Program",
+            "match": {
+              "location": "Create_Client.user_create_new_Client_Clinical_Program()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 13,
+            "name": "user create Campaign",
+            "match": {
+              "location": "Create_Client.user_create_Campaign()"
+            },
+            "keyword": "When "
+          }
+        ]
+      }
+    ],
+    "name": "CreateClient",
+    "description": "",
+    "id": "createclient",
+    "keyword": "Feature",
+    "uri": "Engagement/AACreate_Client.feature",
+    "tags": [
+      {
+        "line": 5,
+        "name": "@SmokeTest"
+      }
+    ]
+  },
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "#Created By : Persistent Automation Team"
+      },
+      {
+        "line": 2,
+        "value": "#Created on: 12/23/2016"
+      },
+      {
+        "line": 3,
+        "value": "#Modified on:"
+      }
+    ],
+    "line": 6,
+    "elements": [
+      {
+        "line": 8,
+        "name": "Create a new Engagement",
+        "description": "",
+        "id": "createengagement;create-a-new-engagement",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2295990107,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 8536528936,
+              "error_message": "org.openqa.selenium.NoSuchFrameException: No frame element found by name or id searchFrame\nBuild info: version: \u00272.53.1\u0027, revision: \u0027a36b8b1cd5757287168e54b817830adce9b0158d\u0027, time: \u00272016-06-30 19:26:09\u0027\nSystem info: host: \u0027NGD22918\u0027, ip: \u002710.222.46.6\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: driver.version: unknown\r\n\tat org.openqa.selenium.remote.RemoteWebDriver$RemoteTargetLocator.frame(RemoteWebDriver.java:997)\r\n\tat com.pathway.selenium.factory.SeleniumFunctions.switchToFrame(SeleniumFunctions.java:373)\r\n\tat com.pathway.scripts.Create_Engagement.createNewEngagementId(Create_Engagement.java:203)\r\n\tat com.pathway.scripts.Create_Engagement.user_creates_new_engagement_id(Create_Engagement.java:173)\r\n\tat ✽.When user creates new engagement id(Engagement/AACreate_Engagement.feature:10)\r\n",
+              "status": "failed"
+            },
+            "line": 10,
+            "name": "user creates new engagement id",
+            "match": {
+              "location": "Create_Engagement.user_creates_new_engagement_id()"
+            },
+            "keyword": "When "
+          }
+        ]
+      }
+    ],
+    "name": "CreateEngagement",
+    "description": "",
+    "id": "createengagement",
+    "keyword": "Feature",
+    "uri": "Engagement/AACreate_Engagement.feature",
+    "tags": [
+      {
+        "line": 5,
+        "name": "@SmokeTest"
+      }
+    ]
+  },
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "#Created By : Persistent Automation Team"
+      },
+      {
+        "line": 2,
+        "value": "#Created on: 12/6/2016"
+      },
+      {
+        "line": 3,
+        "value": "#Modified on:12/22/2016"
+      }
+    ],
+    "line": 6,
+    "elements": [
+      {
+        "line": 8,
+        "name": "To add a new Fall Risk and validates that note gets added.",
+        "description": "",
+        "id": "fall-risk;to-add-a-new-fall-risk-and-validates-that-note-gets-added.",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1982434151,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1217627866,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1512339698,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 24737630988,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "user clicks on Fall Risk tab",
+            "match": {
+              "location": "Fall_Risk_Page.user_clicks_on_Fall_Risk_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 68854184,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "validates that Fall Risk tab is displayed",
+            "match": {
+              "location": "Fall_Risk_Page.validates_that_Fall_Risk_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1433243771,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "User clicks on Add Fall Risk button",
+            "match": {
+              "location": "Fall_Risk_Page.user_clicks_on_Add_Fall_Risk_button()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2082223811,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "validates that Fall Risk form is displayed",
+            "match": {
+              "location": "Fall_Risk_Page.validates_that_Fall_Risk_form_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2199917395,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "clicks on Cancel button on Fall Risk form",
+            "match": {
+              "location": "Fall_Risk_Page.clicks_on_Cancel_button_on_Fall_Risk_form()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2097863540,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "validates that user should land on Fall Risk list page",
+            "match": {
+              "location": "Fall_Risk_Page.validates_that_user_should_land_on_Fall_Risk_list_page()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 6358984758,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "validates that new Fall Risk is not created",
+            "match": {
+              "location": "Fall_Risk_Page.validates_that_new_Fall_Risk_is_not_created()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1319091412,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "User clicks on Add Fall Risk button",
+            "match": {
+              "location": "Fall_Risk_Page.user_clicks_on_Add_Fall_Risk_button()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2086859809,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "validates that Fall Risk form is displayed",
+            "match": {
+              "location": "Fall_Risk_Page.validates_that_Fall_Risk_form_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2113202519,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "clicks on Save button on Fall Risk Page",
+            "match": {
+              "location": "Fall_Risk_Page.clicks_on_Save_button_on_Fall_Risk_Page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1106686119,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "validates that user should gets validation message on Fall Risk Page",
+            "match": {
+              "location": "Fall_Risk_Page.validates_user_gets_validation_message_on_Fall_Risk_Page()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 91377311,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "selects value for Mental Status on Fall Risk Page",
+            "match": {
+              "location": "Fall_Risk_Page.enters_value_for_Mental_Status_on_Fall_Risk_Page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 92213632,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "selects value for Mobility Status on Fall Risk Page",
+            "match": {
+              "location": "Fall_Risk_Page.enters_value_for_Mobility_Status_on_Fall_Risk_Page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 78853025,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "selects value for Elimination Status on Fall Risk Page",
+            "match": {
+              "location": "Fall_Risk_Page.enters_value_for_Elimination_Status_on_Fall_Risk_Page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2139375412,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "clicks on Save button on Fall Risk Page",
+            "match": {
+              "location": "Fall_Risk_Page.clicks_on_Save_button_on_Fall_Risk_Page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1065789126,
+              "status": "passed"
+            },
+            "line": 27,
+            "name": "validate Confirmation message on Fall Risk Page",
+            "match": {
+              "location": "Fall_Risk_Page.validate_Confirmation_message_on_Fall_Risk_Page()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 8619389707,
+              "status": "passed"
+            },
+            "line": 28,
+            "name": "validate that Fall Risk is created",
+            "match": {
+              "location": "Fall_Risk_Page.validate_that_Fall_Risk_is_created()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 141682525,
+              "status": "passed"
+            },
+            "line": 30,
+            "name": "clicks on View link for Fall Risk",
+            "match": {
+              "location": "Fall_Risk_Page.clicks_on_View_link_for_Fall_Risk_Record_type()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3113421162,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "validates that Fall Risk form is displayed for View",
+            "match": {
+              "location": "Fall_Risk_Page.validates_that_Fall_Risk_form_is_displayed_for_View()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 309572158,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "validates that fields on View form for Fall Risk",
+            "match": {
+              "location": "Fall_Risk_Page.validates_that_fields_on_view_form()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2161929018,
+              "status": "passed"
+            },
+            "line": 33,
+            "name": "clicks on Cancel button on Fall Risk form",
+            "match": {
+              "location": "Fall_Risk_Page.clicks_on_Cancel_button_on_Fall_Risk_form()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2123520460,
+              "status": "passed"
+            },
+            "line": 34,
+            "name": "validates that user should land on Fall Risk list page",
+            "match": {
+              "location": "Fall_Risk_Page.validates_that_user_should_land_on_Fall_Risk_list_page()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 62049164,
+              "status": "passed"
+            },
+            "line": 35,
+            "name": "close current tab for Fall Risk",
+            "match": {
+              "location": "Fall_Risk_Page.close_current_tab_for_Fall_Risk()"
+            },
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "Fall Risk",
+    "description": "",
+    "id": "fall-risk",
+    "keyword": "Feature",
+    "uri": "Fall_Risk.feature",
+    "tags": [
+      {
+        "line": 5,
+        "name": "@SmokeTest"
+      }
+    ]
+  },
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "# Created By: Persistent Automation Team"
+      },
+      {
+        "line": 2,
+        "value": "# Created On: 12/05/2016"
+      },
+      {
+        "line": 3,
+        "value": "# Modified On: 12/22/2016"
+      }
+    ],
+    "line": 5,
+    "elements": [
+      {
+        "line": 7,
+        "name": "To add new record in In-Patient Stay and validates that a new record gets added.",
+        "description": "",
+        "id": "add-record-in-patient-stay-page;to-add-new-record-in-in-patient-stay-and-validates-that-a-new-record-gets-added.",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1984681238,
+              "status": "passed"
+            },
+            "comments": [
+              {
+                "line": 8,
+                "value": "# Cancelling In-Patient Stay record after providing values to fields"
+              }
+            ],
+            "line": 9,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 777820733,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1510977450,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3240589835,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "user clicks on In-Patient Stay tab",
+            "match": {
+              "location": "Add_In_Patient_Stay.user_clicks_on_in_patient_stay_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 10009964939,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "validates that In-Patient Stay tab is displayed",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_in_patient_stay_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 715913703,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "user clicks on Show More link",
+            "match": {
+              "location": "Common_Utility_Page.user_clicks_on_Show_More_link()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7292011285,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "user clicks on Add In-Patient Stay button",
+            "match": {
+              "location": "Add_In_Patient_Stay.user_clicks_on_add_In_patient_stay_button()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 37654346,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "validates that In-Patient Stay page is displayed",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_In_Patient_Stay_page_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 82005167,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "user selects value for Status By field",
+            "match": {
+              "location": "Add_In_Patient_Stay.user_selects_value_for_Status_By_field()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 116426506,
+              "error_message": "org.openqa.selenium.NoSuchFrameException: No frame element found by name or id searchFrame\nBuild info: version: \u00272.53.1\u0027, revision: \u0027a36b8b1cd5757287168e54b817830adce9b0158d\u0027, time: \u00272016-06-30 19:26:09\u0027\nSystem info: host: \u0027NGD22918\u0027, ip: \u002710.222.46.6\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: driver.version: unknown\r\n\tat org.openqa.selenium.remote.RemoteWebDriver$RemoteTargetLocator.frame(RemoteWebDriver.java:997)\r\n\tat com.pathway.selenium.factory.SeleniumFunctions.switchToFrame(SeleniumFunctions.java:373)\r\n\tat com.pathway.scripts.Add_In_Patient_Stay.enters_value_for_Facility_field_of_In_Patient_Stay_page(Add_In_Patient_Stay.java:148)\r\n\tat ✽.And enters value for Facility field of In-Patient Stay page(In_Patient_Stay.feature:18)\r\n",
+              "status": "failed"
+            },
+            "line": 18,
+            "name": "enters value for Facility field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.enters_value_for_Facility_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 19,
+            "name": "selects value for Type of Admission field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.selects_value_for_Type_of_Admission_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 20,
+            "name": "enters value for Admit Date field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.enters_value_for_Admit_Date_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 21,
+            "name": "enters value for Discharge Date field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.enters_value_for_Discharge_Date_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 22,
+            "name": "enters value for Discharge Notification Date field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.enters_value_for_Discharge_Notification_Date_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 23,
+            "name": "selects value for Discharge To field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.selects_value_for_Discharge_To_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 24,
+            "name": "clicks on Cancel button on In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.clicks_on_Cancel_button_on_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 25,
+            "name": "validates that In-Patient Stay tab is displayed",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_in_patient_stay_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 26,
+            "name": "user clicks on Show More link",
+            "match": {
+              "location": "Common_Utility_Page.user_clicks_on_Show_More_link()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 27,
+            "name": "validates that new In-Patient Stay record is not created",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_new_In_Patient_Stay_record_is_not_created()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "comments": [
+              {
+                "line": 28,
+                "value": "# Saving In-Patient Stay record after providing values to fields and clicking on Save button"
+              }
+            ],
+            "line": 29,
+            "name": "user clicks on Add In-Patient Stay button",
+            "match": {
+              "location": "Add_In_Patient_Stay.user_clicks_on_add_In_patient_stay_button()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 30,
+            "name": "validates that In-Patient Stay page is displayed",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_In_Patient_Stay_page_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 31,
+            "name": "user selects value for Status By field",
+            "match": {
+              "location": "Add_In_Patient_Stay.user_selects_value_for_Status_By_field()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 32,
+            "name": "enters value for Facility field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.enters_value_for_Facility_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 33,
+            "name": "selects value for Type of Admission field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.selects_value_for_Type_of_Admission_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 34,
+            "name": "enters value for Admit Date field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.enters_value_for_Admit_Date_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 35,
+            "name": "enters value for Discharge Date field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.enters_value_for_Discharge_Date_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 36,
+            "name": "enters value for Discharge Notification Date field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.enters_value_for_Discharge_Notification_Date_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 37,
+            "name": "selects value for Discharge To field of In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.selects_value_for_Discharge_To_field_of_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 38,
+            "name": "clicks on Save button on In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.clicks_on_Save_button_on_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 39,
+            "name": "validates that In-Patient Stay tab is displayed",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_in_patient_stay_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 40,
+            "name": "user clicks on Show More link",
+            "match": {
+              "location": "Common_Utility_Page.user_clicks_on_Show_More_link()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 41,
+            "name": "validates that new In-Patient Stay record is created",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_new_In_Patient_Stay_record_is_created()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 42,
+            "name": "validates newly added In-Patient Stay record",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_newly_added_In_Patient_Stay_record()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "comments": [
+              {
+                "line": 43,
+                "value": "# Saving In-Patient Stay record after providing values to fields and clicking on \"Save \u0026 New\" button"
+              }
+            ],
+            "line": 44,
+            "name": "user clicks on Add In-Patient Stay button",
+            "match": {
+              "location": "Add_In_Patient_Stay.user_clicks_on_add_In_patient_stay_button()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 45,
+            "name": "validates that In-Patient Stay page is displayed",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_In_Patient_Stay_page_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 46,
+            "name": "user selects value for Status By field for \"Save \u0026 New\" button",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Save \u0026 New",
+                  "offset": 44
+                }
+              ],
+              "location": "Add_In_Patient_Stay.user_selects_value_for_Status_By_field_for_button(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 47,
+            "name": "enters value for Facility field of In-Patient Stay page for \"Save \u0026 New\" button",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Save \u0026 New",
+                  "offset": 61
+                }
+              ],
+              "location": "Add_In_Patient_Stay.enters_value_for_Facility_field_of_In_Patient_Stay_page_for_button(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 48,
+            "name": "selects value for Type of Admission field of In-Patient Stay page for \"Save \u0026 New\" button",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Save \u0026 New",
+                  "offset": 71
+                }
+              ],
+              "location": "Add_In_Patient_Stay.selects_value_for_Type_of_Admission_field_of_In_Patient_Stay_page_for_button(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 49,
+            "name": "enters value for Admit Date field of In-Patient Stay page for \"Save \u0026 New\" button",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Save \u0026 New",
+                  "offset": 63
+                }
+              ],
+              "location": "Add_In_Patient_Stay.enters_value_for_Admit_Date_field_of_In_Patient_Stay_page_for_button(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 50,
+            "name": "enters value for Discharge Date field of In-Patient Stay page for \"Save \u0026 New\" button",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Save \u0026 New",
+                  "offset": 67
+                }
+              ],
+              "location": "Add_In_Patient_Stay.enters_value_for_Discharge_Date_field_of_In_Patient_Stay_page_for_button(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 51,
+            "name": "enters value for Discharge Notification Date field of In-Patient Stay page for \"Save \u0026 New\" button",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Save \u0026 New",
+                  "offset": 80
+                }
+              ],
+              "location": "Add_In_Patient_Stay.enters_value_for_Discharge_Notification_Date_field_of_In_Patient_Stay_page_for_button(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 52,
+            "name": "selects value for Discharge To field of In-Patient Stay page for \"Save \u0026 New\" button",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Save \u0026 New",
+                  "offset": 66
+                }
+              ],
+              "location": "Add_In_Patient_Stay.selects_value_for_Discharge_To_field_of_In_Patient_Stay_page_for_button(String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 53,
+            "name": "clicks on Save New button on In-Patient Stay page",
+            "match": {
+              "location": "Add_In_Patient_Stay.clicks_on_Save_New_button_on_In_Patient_Stay_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 54,
+            "name": "validates that new In-Patient Stay form appears with fields are available",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_new_In_Patient_Stay_form_appears_with_fields_are_available()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 55,
+            "name": "validates that In-Patient Stay tab is displayed",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_in_patient_stay_tab_is_displayed()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 56,
+            "name": "user clicks on Show More link",
+            "match": {
+              "location": "Common_Utility_Page.user_clicks_on_Show_More_link()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 57,
+            "name": "validates that new In-Patient Stay record is created with Save\u0026New button",
+            "match": {
+              "location": "Add_In_Patient_Stay.validates_that_new_In_Patient_Stay_record_is_created_with_Save_New_button()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 58,
+            "name": "validates newly added In-Patient Stay record for \"Save \u0026 New\" button",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Save \u0026 New",
+                  "offset": 50
+                }
+              ],
+              "location": "Add_In_Patient_Stay.validates_newly_added_In_Patient_Stay_record_for_button(String)"
+            },
+            "keyword": "And "
+          }
+        ]
+      }
+    ],
+    "name": "Add record In-Patient Stay Page",
+    "description": "",
+    "id": "add-record-in-patient-stay-page",
+    "keyword": "Feature",
+    "uri": "In_Patient_Stay.feature",
+    "tags": [
+      {
+        "line": 4,
+        "name": "@SmokeTest"
+      }
+    ]
+  },
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "# Created By: Persistent Automation Team"
+      },
+      {
+        "line": 2,
+        "value": "# Created On: 11/23/2016"
+      },
+      {
+        "line": 3,
+        "value": "# Modified On: 12/22/2016"
+      }
+    ],
+    "line": 5,
+    "elements": [
+      {
+        "line": 7,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 2000092061,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 756123042,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1738113685,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5674806773,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "user clicks on Orders tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Order_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 5089309057,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "validates that Orders tab is displayed",
+            "match": {
+              "location": "Order_Page.user_should_see_the_orders_on_ui()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 14,
+        "name": "To add a new order of type DME and validates that a new order gets added.",
+        "description": "",
+        "id": "dme-order;to-add-a-new-order-of-type-dme-and-validates-that-a-new-order-gets-added.",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1893278424,
+              "status": "passed"
+            },
+            "comments": [
+              {
+                "line": 15,
+                "value": "# Cancelling DME Order after adding"
+              }
+            ],
+            "line": 16,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 805150294,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1499226970,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5722375674,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "user clicks on Orders tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Order_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 5072748410,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "validates that Orders tab is displayed",
+            "match": {
+              "location": "Order_Page.user_should_see_the_orders_on_ui()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 231368223,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "user adds Order type \"DME\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DME",
+                  "offset": 22
+                }
+              ],
+              "location": "Order_Page.user_adds_Order_type(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2153476237,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "validates that DME order page is displayed",
+            "match": {
+              "location": "Orders_DME_Page.validates_that_DME_order_page_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 31413,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "user enters value for Entered By field",
+            "match": {
+              "location": "Orders_DME_Page.user_enters_value_for_Entered_By_field()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 5253145223,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "enters value for ORDERED field of DME order page",
+            "match": {
+              "location": "Orders_DME_Page.enters_value_for_ORDERED_field_of_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 160829579,
+              "error_message": "org.openqa.selenium.NoSuchFrameException: No frame element found by name or id searchFrame\nBuild info: version: \u00272.53.1\u0027, revision: \u0027a36b8b1cd5757287168e54b817830adce9b0158d\u0027, time: \u00272016-06-30 19:26:09\u0027\nSystem info: host: \u0027NGD22918\u0027, ip: \u002710.222.46.6\u0027, os.name: \u0027Windows 7\u0027, os.arch: \u0027amd64\u0027, os.version: \u00276.1\u0027, java.version: \u00271.8.0_91\u0027\nDriver info: driver.version: unknown\r\n\tat org.openqa.selenium.remote.RemoteWebDriver$RemoteTargetLocator.frame(RemoteWebDriver.java:997)\r\n\tat com.pathway.selenium.factory.SeleniumFunctions.switchToFrame(SeleniumFunctions.java:373)\r\n\tat com.pathway.scripts.Orders_DME_Page.enters_value_for_ORDERING_PROVIDER_field_of_DME_order_page(Orders_DME_Page.java:121)\r\n\tat ✽.And enters value for ORDERING PROVIDER field of DME order page(Orders_DME.feature:25)\r\n",
+              "status": "failed"
+            },
+            "line": 25,
+            "name": "enters value for ORDERING PROVIDER field of DME order page",
+            "match": {
+              "location": "Orders_DME_Page.enters_value_for_ORDERING_PROVIDER_field_of_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 26,
+            "name": "enters value for VENDER/PROVIDER of DME order page",
+            "match": {
+              "location": "Orders_DME_Page.enters_value_for_VENDER_PROVIDER_of_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 27,
+            "name": "enters value for TELEPHONIC DIAGNOSIS of DME order page",
+            "match": {
+              "location": "Orders_DME_Page.enters_value_for_TELEPHONIC_DIAGNOSIS_of_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 28,
+            "name": "enters value for VENDOR/PROVIDER PHONE of DME order page",
+            "match": {
+              "location": "Orders_DME_Page.enters_value_for_VENDOR_PROVIDER_PHONE_of_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 29,
+            "name": "clicks on Cancel button on DME order page",
+            "match": {
+              "location": "Orders_DME_Page.clicks_on_View_Cancel_button_on_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 30,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 31,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 32,
+            "name": "user clicks on Orders tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Order_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 33,
+            "name": "validates that Orders tab is displayed",
+            "match": {
+              "location": "Order_Page.user_should_see_the_orders_on_ui()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 34,
+            "name": "validates that new DME Order is not created",
+            "match": {
+              "location": "Orders_DME_Page.validates_that_new_DME_Order_is_not_created()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "comments": [
+              {
+                "line": 35,
+                "value": "# Saving DME Order after adding"
+              }
+            ],
+            "line": 36,
+            "name": "user adds Order type \"DME\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DME",
+                  "offset": 22
+                }
+              ],
+              "location": "Order_Page.user_adds_Order_type(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 37,
+            "name": "validates that DME order page is displayed",
+            "match": {
+              "location": "Orders_DME_Page.validates_that_DME_order_page_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 38,
+            "name": "user enters value for Entered By field",
+            "match": {
+              "location": "Orders_DME_Page.user_enters_value_for_Entered_By_field()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 39,
+            "name": "enters value for ORDERED field of DME order page",
+            "match": {
+              "location": "Orders_DME_Page.enters_value_for_ORDERED_field_of_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 40,
+            "name": "enters value for ORDERING PROVIDER field of DME order page",
+            "match": {
+              "location": "Orders_DME_Page.enters_value_for_ORDERING_PROVIDER_field_of_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 41,
+            "name": "enters value for VENDER/PROVIDER of DME order page",
+            "match": {
+              "location": "Orders_DME_Page.enters_value_for_VENDER_PROVIDER_of_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 42,
+            "name": "enters value for TELEPHONIC DIAGNOSIS of DME order page",
+            "match": {
+              "location": "Orders_DME_Page.enters_value_for_TELEPHONIC_DIAGNOSIS_of_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 43,
+            "name": "enters value for VENDOR/PROVIDER PHONE of DME order page",
+            "match": {
+              "location": "Orders_DME_Page.enters_value_for_VENDOR_PROVIDER_PHONE_of_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 44,
+            "name": "uploads file for DME order on DME order page",
+            "match": {
+              "location": "Orders_DME_Page.uploads_file_for_DME_order_on_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 45,
+            "name": "clicks on Save button on DME order page",
+            "match": {
+              "location": "Orders_DME_Page.clicks_on_Save_button_on_DME_order_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 46,
+            "name": "user clicks on Orders tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Order_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 47,
+            "name": "validates that Orders tab is displayed",
+            "match": {
+              "location": "Order_Page.user_should_see_the_orders_on_ui()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "skipped"
+            },
+            "line": 48,
+            "name": "validates that new DME Order is created successfully",
+            "match": {
+              "location": "Orders_DME_Page.validates_that_new_DME_Order_is_created_successfully()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 7,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 1936102160,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 880002103,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1456938804,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 6247316790,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "user clicks on Orders tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Order_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 5067817259,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "validates that Orders tab is displayed",
+            "match": {
+              "location": "Order_Page.user_should_see_the_orders_on_ui()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 50,
+        "name": "To view DME order and validates user provided values on Consumer Page",
+        "description": "",
+        "id": "dme-order;to-view-dme-order-and-validates-user-provided-values-on-consumer-page",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1945598398,
+              "status": "passed"
+            },
+            "line": 51,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1047316045,
+              "status": "passed"
+            },
+            "line": 52,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3067793932,
+              "status": "passed"
+            },
+            "line": 53,
+            "name": "clicks on Consumer tab",
+            "match": {
+              "location": "Engagement_Page.clicks_on_Consumer_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 8232433451,
+              "status": "passed"
+            },
+            "line": 54,
+            "name": "user clicks on Orders tab on Consumer details page",
+            "match": {
+              "location": "Orders_DME_Page.user_clicks_on_Orders_tab_on_Consumer_details_page()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 11751464961,
+              "status": "passed"
+            },
+            "line": 55,
+            "name": "clicks on View link for Record type \"DME\" and Approve type \"Yes\" of Consumer",
+            "match": {
+              "arguments": [
+                {
+                  "val": "DME",
+                  "offset": 37
+                },
+                {
+                  "val": "Yes",
+                  "offset": 60
+                }
+              ],
+              "location": "Order_Page.clicks_on_View_link_for_Consumer(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 5053566525,
+              "status": "passed"
+            },
+            "line": 56,
+            "name": "validates that DME order page is displayed on Consumer details page",
+            "match": {
+              "location": "Orders_DME_Page.validates_that_DME_order_page_is_displayed_on_Consumer_details_page()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 72907962,
+              "status": "passed"
+            },
+            "line": 57,
+            "name": "validate that value for Ordering Provider of DME order page on Consumer details page",
+            "match": {
+              "location": "Orders_DME_Page.validate_that_value_for_Ordering_Provider_of_DME_order_page_on_Consumer_details_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 30812314,
+              "status": "passed"
+            },
+            "line": 58,
+            "name": "validate that value for Vendor/Provider of DME order page on Consumer details page",
+            "match": {
+              "location": "Orders_DME_Page.validate_that_value_for_Vendor_Provider_of_DME_order_page_on_Consumer_details_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 33262183,
+              "status": "passed"
+            },
+            "line": 59,
+            "name": "validate that value for Telephonic Diagnosis of DME order page on Consumer details page",
+            "match": {
+              "location": "Orders_DME_Page.validate_that_value_for_Telephonic_Diagnosis_of_DME_order_page_on_Consumer_details_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 28327921,
+              "status": "passed"
+            },
+            "line": 60,
+            "name": "validate that value for Vendor/Provider Phone of DME order page on Consumer details page",
+            "match": {
+              "location": "Orders_DME_Page.validate_that_value_for_Vendor_Provider_Phone_of_DME_order_page_on_Consumer_details_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 3110483620,
+              "status": "passed"
+            },
+            "line": 61,
+            "name": "validate that new file has been uploaded on DME order page on Consumer details page",
+            "match": {
+              "location": "Orders_DME_Page.validate_that_new_file_has_been_uploaded_on_DME_order_page_on_Consumer_details_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 18660,
+              "status": "passed"
+            },
+            "line": 62,
+            "name": "clicks on Cancel button on DME order page on Consumer details page",
+            "match": {
+              "location": "Orders_DME_Page.clicks_on_Cancel_button_on_DME_order_page_on_Consumer_details_page()"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "line": 49,
+            "name": "@Test"
+          }
+        ]
+      }
+    ],
+    "name": "DME Order",
+    "description": "",
+    "id": "dme-order",
+    "keyword": "Feature",
+    "uri": "Orders_DME.feature",
+    "tags": [
+      {
+        "line": 4,
+        "name": "@SmokeTest"
+      }
+    ]
+  },
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "#Created By : Persistent Automation Team"
+      },
+      {
+        "line": 2,
+        "value": "#Created on: 11/28/2016"
+      },
+      {
+        "line": 3,
+        "value": "#Modified on:12/22/2016"
+      }
+    ],
+    "line": 6,
+    "elements": [
+      {
+        "line": 8,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 1988089347,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 769374482,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1502459045,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 6259199141,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "user clicks on Orders tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Order_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 5072724462,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "validates that Orders tab is displayed",
+            "match": {
+              "location": "Order_Page.user_should_see_the_orders_on_ui()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 15,
+        "name": "To add a new order of type Hospital and validates that a new order gets added.",
+        "description": "",
+        "id": "hospital-order;to-add-a-new-order-of-type-hospital-and-validates-that-a-new-order-gets-added.",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 258181809,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "user adds Order type \"Hospital Transfer\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Hospital Transfer",
+                  "offset": 22
+                }
+              ],
+              "location": "Order_Page.user_adds_Order_type(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2494135024,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "validates that Hospital Transfer form is displayed",
+            "match": {
+              "location": "Order_Hospital_Transfer_Page.validates_that_Hospital_Transfer_form_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2472302663,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "clicks on Cancel button on Hospital Transfer form",
+            "match": {
+              "location": "Order_Hospital_Transfer_Page.clicks_on_Cancel_button_on_Hospital_Transfer_form()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5708556629,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "user clicks on Orders tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Order_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5086697771,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "validates that Orders tab is displayed",
+            "match": {
+              "location": "Order_Page.user_should_see_the_orders_on_ui()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 155080455,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "validates that new Hospital Order is not created",
+            "match": {
+              "location": "Order_Hospital_Transfer_Page.validates_that_new_Hospital_Order_is_not_created()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 225220067,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "user adds Order type \"Hospital Transfer\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Hospital Transfer",
+                  "offset": 22
+                }
+              ],
+              "location": "Order_Page.user_adds_Order_type(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 2213055936,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "validates that Hospital Transfer form is displayed",
+            "match": {
+              "location": "Order_Hospital_Transfer_Page.validates_that_Hospital_Transfer_form_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 133299101,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "user enters value for Fax field",
+            "match": {
+              "location": "Order_Hospital_Transfer_Page.user_enters_value_for_Fax_field()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 4120701725,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "clicks on Save button on Hospital Transfer form",
+            "match": {
+              "location": "Order_Hospital_Transfer_Page.clicks_on_Save_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5725640093,
+              "status": "passed"
+            },
+            "line": 27,
+            "name": "user clicks on Orders tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Order_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5083155302,
+              "status": "passed"
+            },
+            "line": 28,
+            "name": "validates that Orders tab is displayed",
+            "match": {
+              "location": "Order_Page.user_should_see_the_orders_on_ui()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 176041972,
+              "status": "passed"
+            },
+            "line": 29,
+            "name": "validate Order is created of type Hospital Transfer",
+            "match": {
+              "location": "Order_Hospital_Transfer_Page.validate_Order_is_created_of_type_Hospital_Transfer()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 4562961838,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "clicks on View link for Record type \"Hospital Transfer\" and Approve type \"\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "Hospital Transfer",
+                  "offset": 37
+                },
+                {
+                  "val": "",
+                  "offset": 74
+                }
+              ],
+              "location": "Order_Page.clicks_on_View_link_for_order(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 50254520,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "validates values provided by user on add page for Hospital Transfer",
+            "match": {
+              "location": "Order_Hospital_Transfer_Page.validates_values_provided_by_user_on_add_page()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Hospital Order",
+    "description": "",
+    "id": "hospital-order",
+    "keyword": "Feature",
+    "uri": "Orders_Hospital_Transfer.feature",
+    "tags": [
+      {
+        "line": 5,
+        "name": "@SmokeTest"
+      }
+    ]
+  },
+  {
+    "comments": [
+      {
+        "line": 1,
+        "value": "#Created By: Persistent Automation Team"
+      },
+      {
+        "line": 2,
+        "value": "#Created on:11/30/2016"
+      },
+      {
+        "line": 3,
+        "value": "#Modified on :12/22/2016"
+      }
+    ],
+    "line": 5,
+    "elements": [
+      {
+        "line": 7,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 2017006954,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 740534629,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1760600111,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5227328753,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "user clicks on Surveys tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Surveys_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 4136966286,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "validates that Surveys tab is displayed",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_that_Surveys_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 14,
+        "name": "To \u0027Save\u0027 Add Survey of type CAGE Survey.",
+        "description": "",
+        "id": "add\u0026view-engagement-details-cage-survey-and-view-consumer-cage-survey;to-\u0027save\u0027-add-survey-of-type-cage-survey.",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 7761577011,
+              "status": "passed"
+            },
+            "comments": [
+              {
+                "line": 15,
+                "value": "# User clicks on Add Survey button"
+              }
+            ],
+            "line": 16,
+            "name": "user adds Survey type \"CAGE Survey\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "CAGE Survey",
+                  "offset": 23
+                }
+              ],
+              "location": "Survey_Page.user_clicks_on_Add_Survey_button(String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 45988319,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "validates that CAGE Survey form is displayed",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_that_CAGE_Survey_form_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 88382230,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "selects date for CAGE Survey",
+            "match": {
+              "location": "Survey_Cage_Add_View.selects_date_for_CAGE_Survey()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 68364024,
+              "status": "passed"
+            },
+            "comments": [
+              {
+                "line": 19,
+                "value": "# Two positive responses are considered a positive test and indicate further assessment is warranted"
+              }
+            ],
+            "line": 20,
+            "name": "selects Have you felt you should cut down on your drinking? as Yes",
+            "match": {
+              "location": "Survey_Cage_Add_View.selects_Have_you_felt_you_should_cut_down_on_your_drinking_as_Yes()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 63573451,
+              "status": "passed"
+            },
+            "line": 21,
+            "name": "Select Have others annoyed you by criticizing your drinking? as Yes",
+            "match": {
+              "location": "Survey_Cage_Add_View.select_Have_others_annoyed_you_by_criticizing_your_drinking_as_Yes()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 62887662,
+              "status": "passed"
+            },
+            "line": 22,
+            "name": "selects Have you ever felt guilty about your drinking? as Yes",
+            "match": {
+              "location": "Survey_Cage_Add_View.selects_Have_you_ever_felt_guilty_about_your_drinking_as_Yes()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 70857125,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "Select Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover? as Yes",
+            "match": {
+              "location": "Survey_Cage_Add_View.select_Have_you_ever_had_a_drink_first_thing_in_the_morning_to_steady_your_nerves_or_get_rid_of_a_hangover_as_Yes()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 10169829436,
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "Click on Calculate Score Button",
+            "match": {
+              "location": "Survey_Cage_Add_View.click_on_Calculate_Score_Button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 78812592,
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "clicks on Save button for CAGE Survey",
+            "match": {
+              "location": "Survey_Cage_Add_View.clicks_on_Save_button_for_CAGE_Survey()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5236095971,
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "user clicks on Surveys tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Surveys_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 4095933067,
+              "status": "passed"
+            },
+            "line": 27,
+            "name": "validates that Surveys tab is displayed",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_that_Surveys_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 5174675992,
+              "status": "passed"
+            },
+            "line": 28,
+            "name": "validates that new \"CAGE Survey\" Survey is created",
+            "match": {
+              "arguments": [
+                {
+                  "val": "CAGE Survey",
+                  "offset": 20
+                }
+              ],
+              "location": "Survey_Page.validates_that_new_Survey_is_created(String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2401017270,
+              "status": "passed"
+            },
+            "line": 29,
+            "name": "validate that Add Survey Status for type \"CAGE Survey\" is \"In Progress\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "CAGE Survey",
+                  "offset": 42
+                },
+                {
+                  "val": "In Progress",
+                  "offset": 59
+                }
+              ],
+              "location": "Survey_Page.validate_that_Add_Survey_Status_for_type_is(String,String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1087959561,
+              "status": "passed"
+            },
+            "line": 30,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1930628908,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5230149664,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "user clicks on Surveys tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Surveys_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 4033936154,
+              "status": "passed"
+            },
+            "line": 33,
+            "name": "validates that Surveys tab is displayed",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_that_Surveys_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 11142573585,
+              "status": "passed"
+            },
+            "line": 34,
+            "name": "clicks on View link for Record type \"CAGE Survey\" and status \"In Progress\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "CAGE Survey",
+                  "offset": 37
+                },
+                {
+                  "val": "In Progress",
+                  "offset": 62
+                }
+              ],
+              "location": "Survey_Cage_Add_View.clicks_on_View_link_for_Record_type_and_status(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 49171563,
+              "status": "passed"
+            },
+            "line": 35,
+            "name": "validates that CAGE Survey details page displayed",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_that_CAGE_Survey_details_page_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 10124357714,
+              "status": "passed"
+            },
+            "line": 36,
+            "name": "validates Consumer field",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Consumer_field()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 10852577,
+              "status": "passed"
+            },
+            "line": 37,
+            "name": "validates Gender field",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Gender_field()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 37782484,
+              "status": "passed"
+            },
+            "line": 38,
+            "name": "validates Updated Date field",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Updated_Date_field()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 31128927,
+              "status": "passed"
+            },
+            "line": 39,
+            "name": "validates that Refused radio button as No is selected",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_that_Refused_radio_button_as_No_is_selected()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 29275586,
+              "status": "passed"
+            },
+            "line": 40,
+            "name": "validates Have you felt you should cut down on your drinking? as Yes is selected",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Have_you_felt_you_should_cut_down_on_your_drinking_as_Yes_is_selected()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 16502176,
+              "status": "passed"
+            },
+            "line": 41,
+            "name": "validates Have others annoyed you by criticizing your drinking? as Yes is selected",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Have_others_annoyed_you_by_criticizing_your_drinking_as_Yes_is_selected()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 36329108,
+              "status": "passed"
+            },
+            "line": 42,
+            "name": "validates Have you ever felt guilty about your drinking? as Yes is selected",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Have_you_ever_felt_guilty_about_your_drinking_as_Yes_is_selected()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 38053067,
+              "status": "passed"
+            },
+            "line": 43,
+            "name": "validates Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover? as Yes is selected",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Have_you_ever_had_a_drink_first_thing_in_the_morning_to_steady_your_nerves_or_get_rid_of_a_hangover_as_Yes_is_selected()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 23473278,
+              "status": "passed"
+            },
+            "line": 44,
+            "name": "validates Updated Total Score",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Updated_Total_Score()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 2282457197,
+              "status": "passed"
+            },
+            "line": 45,
+            "name": "user clicks on Cancel button",
+            "match": {
+              "location": "Survey_Cage_Add_View.user_clicks_on_Cancel_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 4092198702,
+              "status": "passed"
+            },
+            "line": 46,
+            "name": "validates that Surveys tab is displayed",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_that_Surveys_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 7,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 2030810758,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "user is logged in with valid credentials",
+            "match": {
+              "location": "Login_Page.user_is_logged_in_with_valid_credentails()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1089032564,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1768925375,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "clicks on Engagement id",
+            "match": {
+              "location": "Engagement_Page.user_clicks_on_engagement_id()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 4671445628,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "user clicks on Surveys tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Surveys_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 4084513196,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "validates that Surveys tab is displayed",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_that_Surveys_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 48,
+        "name": "View Consumer-CAGE Survey",
+        "description": "",
+        "id": "add\u0026view-engagement-details-cage-survey-and-view-consumer-cage-survey;view-consumer-cage-survey",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1057422807,
+              "status": "passed"
+            },
+            "line": 49,
+            "name": "navigates to Engagement tab",
+            "match": {
+              "location": "Home_Page.navigate_to_engagement_tab()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 12919461271,
+              "status": "passed"
+            },
+            "line": 50,
+            "name": "clicks on  Consumer Name",
+            "match": {
+              "location": "Survey_Cage_Add_View.clicks_on_Consumer_Name()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 7416242726,
+              "status": "passed"
+            },
+            "line": 51,
+            "name": "user clicks on Surveys tab",
+            "match": {
+              "location": "Engagement_Details_Page.user_clicks_on_Surveys_tab()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2290312828,
+              "status": "passed"
+            },
+            "line": 52,
+            "name": "user clicks on Show More link in Surveys Page.",
+            "match": {
+              "location": "Survey_Cage_Add_View.user_clicks_on_Show_More_link_in_Surveys_Page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 11251674119,
+              "status": "passed"
+            },
+            "line": 53,
+            "name": "clicks on View link for Record type \"CAGE Survey\" and status \"In Progress\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "CAGE Survey",
+                  "offset": 37
+                },
+                {
+                  "val": "In Progress",
+                  "offset": 62
+                }
+              ],
+              "location": "Survey_Cage_Add_View.clicks_on_View_link_for_Record_type_and_status(String,String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 48295122,
+              "status": "passed"
+            },
+            "line": 54,
+            "name": "validates that CAGE Survey details page displayed",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_that_CAGE_Survey_details_page_displayed()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 10123856046,
+              "status": "passed"
+            },
+            "line": 55,
+            "name": "validates Consumer field",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Consumer_field()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 10813390,
+              "status": "passed"
+            },
+            "line": 56,
+            "name": "validates Gender field",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Gender_field()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 11080553,
+              "status": "passed"
+            },
+            "line": 57,
+            "name": "validates Date field",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Date_field()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 30498187,
+              "status": "passed"
+            },
+            "line": 58,
+            "name": "validates Have you felt you should cut down on your drinking? as Yes is selected",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Have_you_felt_you_should_cut_down_on_your_drinking_as_Yes_is_selected()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 16295351,
+              "status": "passed"
+            },
+            "line": 59,
+            "name": "validates Have others annoyed you by criticizing your drinking? as Yes is selected",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Have_others_annoyed_you_by_criticizing_your_drinking_as_Yes_is_selected()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 32261957,
+              "status": "passed"
+            },
+            "line": 60,
+            "name": "validates Have you ever felt guilty about your drinking? as Yes is selected",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Have_you_ever_felt_guilty_about_your_drinking_as_Yes_is_selected()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 36256952,
+              "status": "passed"
+            },
+            "line": 61,
+            "name": "validates Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover? as Yes is selected",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Have_you_ever_had_a_drink_first_thing_in_the_morning_to_steady_your_nerves_or_get_rid_of_a_hangover_as_Yes_is_selected()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 26578459,
+              "status": "passed"
+            },
+            "line": 62,
+            "name": "validates Updated Total Score while adding Cage Survey.",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_Updated_Total_Score_while_adding_Cage_Survey()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 2534614945,
+              "status": "passed"
+            },
+            "line": 63,
+            "name": "user clicks on Cancel button",
+            "match": {
+              "location": "Survey_Cage_Add_View.user_clicks_on_Cancel_button()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 22943930,
+              "status": "passed"
+            },
+            "line": 64,
+            "name": "validates that Survey tab is displayed",
+            "match": {
+              "location": "Survey_Cage_Add_View.validates_that_Survey_tab_is_displayed()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Add\u0026View Engagement details-CAGE Survey and view Consumer-CAGE Survey",
+    "description": "",
+    "id": "add\u0026view-engagement-details-cage-survey-and-view-consumer-cage-survey",
+    "keyword": "Feature",
+    "uri": "Surveys_Cage.feature",
+    "tags": [
+      {
+        "line": 4,
+        "name": "@SmokeTest"
+      }
+    ]
+  }
+]

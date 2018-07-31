@@ -1,0 +1,34 @@
+#Created By : Persistent Automation Team
+#Created on: 11/28/2016
+#Modified on:12/22/2016
+
+@SmokeTest
+Feature: Hospital Order
+
+Background:
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+    And clicks on Engagement id
+    When user clicks on Orders tab
+    Then validates that Orders tab is displayed
+  
+  Scenario: To add a new order of type Hospital and validates that a new order gets added.
+
+    When user adds Order type "Hospital Transfer"
+    Then validates that Hospital Transfer form is displayed
+    And clicks on Cancel button on Hospital Transfer form
+    And user clicks on Orders tab
+		And validates that Orders tab is displayed
+    Then validates that new Hospital Order is not created
+
+    When user adds Order type "Hospital Transfer"
+    Then validates that Hospital Transfer form is displayed
+    When user enters value for Fax field
+    And clicks on Save button on Hospital Transfer form
+    And user clicks on Orders tab
+		And validates that Orders tab is displayed
+    Then validate Order is created of type Hospital Transfer
+    
+    When clicks on View link for Record type "Hospital Transfer" and Approve type ""
+    Then validates values provided by user on add page for Hospital Transfer
+    

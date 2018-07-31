@@ -1,0 +1,12 @@
+#Created By : Persistent Automation Team
+#Created on: 12/23/2016
+#Modified on:
+
+@SmokeTest
+Feature: CreateEngagement
+
+ Scenario: Create a new Engagement
+Given user is logged in with valid credentials
+When user creates new engagement id 
+
+

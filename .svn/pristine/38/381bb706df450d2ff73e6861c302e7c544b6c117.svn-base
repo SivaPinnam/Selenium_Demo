@@ -1,0 +1,95 @@
+# Created By: Persistent Automation Team
+# Created On: 12/05/2016
+# Modified On: 12/08/2016 
+
+Feature: Add & Edit In-Patient Stay Page
+
+   @SmokeTest
+  Scenario: To add new record in In-Patient Stay and validates that a new record gets added.
+    # Cancelling In-Patient Stay record after providing values to fields
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+    And clicks on Engagement id
+    When user clicks on In-Patient Stay tab
+    Then validates that In-Patient Stay tab is displayed
+    And user clicks on Show More link
+    When user clicks on Add In-Patient Stay button
+    Then validates that In-Patient Stay page is displayed
+    When user selects value for Status By field
+    And enters value for Facility field of In-Patient Stay page
+    And selects value for Type of Admission field of In-Patient Stay page
+    And enters value for Admit ICD Code field of In-Patient Stay page
+    And enters value for Admit DX field of In-Patient Stay page
+    And enters value for Admit Date field of In-Patient Stay page
+    And enters value for Discharge Date field of In-Patient Stay page
+    And enters value for Discharge Notification Date field of In-Patient Stay page
+    And selects value for Discharge To field of In-Patient Stay page
+    And clicks on Cancel button on In-Patient Stay page
+    Then validates that In-Patient Stay tab is displayed
+    And user clicks on Show More link
+    And validates that new In-Patient Stay record is not created
+    # Saving In-Patient Stay record after providing values to fields and clicking on Save button
+    When user clicks on Add In-Patient Stay button
+    Then validates that In-Patient Stay page is displayed
+    When user selects value for Status By field
+    And enters value for Facility field of In-Patient Stay page
+    And selects value for Type of Admission field of In-Patient Stay page
+    And enters value for Admit ICD Code field of In-Patient Stay page
+    And enters value for Admit DX field of In-Patient Stay page
+    And enters value for Admit Date field of In-Patient Stay page
+    And enters value for Discharge Date field of In-Patient Stay page
+    And enters value for Discharge Notification Date field of In-Patient Stay page
+    And selects value for Discharge To field of In-Patient Stay page
+    And clicks on Save button on In-Patient Stay page
+    Then validates that In-Patient Stay tab is displayed
+    And user clicks on Show More link
+    And validates that new In-Patient Stay record is  created
+    # Saving In-Patient Stay record after providing values to fields and clicking on "Save & New" button
+    When user clicks on Add In-Patient Stay button
+    Then validates that In-Patient Stay page is displayed
+    When user selects value for Status By field
+    And enters value for Facility field of In-Patient Stay page
+    And selects value for Type of Admission field of In-Patient Stay page
+    And enters value for Admit ICD Code field of In-Patient Stay page
+    And enters value for Admit DX field of In-Patient Stay page
+    And enters value for Admit Date field of In-Patient Stay page
+    And enters value for Discharge Date field of In-Patient Stay page
+    And enters value for Discharge Notification Date field of In-Patient Stay page
+    And selects value for Discharge To field of In-Patient Stay page
+    And clicks on Save New button on In-Patient Stay page
+    Then validates that new In-Patient Stay form appears with fields are available
+    And validates that In-Patient Stay tab is displayed
+    And user clicks on Show More link
+    And validates that new In-Patient Stay record is created with Save&New button
+    When validates newly added In-Patient Stay record
+
+  @SmokeTest
+  Scenario: To edit existing record in In-Patient Stay and validates that a record gets updated.
+    # Editing In-Patient Stay record after providing values to fields and clicking on Save button
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+    And clicks on Engagement id
+    When user clicks on In-Patient Stay tab
+    Then validates that In-Patient Stay tab is displayed
+    And user clicks on Show More link
+    When user is on Edit In-Patient Stay page
+    When user selects new value for Status By field
+    And enters new value for Admit ICD Code field of In-Patient Stay page
+    And enters new value for Admit Date field of In-Patient Stay page
+    And enters new value for Discharge Date field of In-Patient Stay page
+    And enters new value for Discharge Notification Date field of In-Patient Stay page
+    And clicks on Save button on In-Patient Stay page
+    Then validates that In-Patient Stay tab is displayed
+    And user clicks on Show More link
+    And validates that In-Patient Stay record count is not changed
+    # Editing In-Patient Stay record after providing values to fields and clicking on "Save & New" button
+    When user is on Edit In-Patient Stay page
+    Then validates that In-Patient Stay page is displayed
+    And enters new value for Admit DX field of In-Patient Stay page to validate "Save & New" button option
+    And selects new value for Discharge To field of In-Patient Stay page to validate "Save & New" button option
+    And clicks on Save New button on In-Patient Stay page
+    Then validates that new In-Patient Stay form appears with fields with default values
+    And validates that In-Patient Stay tab is displayed
+    And user clicks on Show More link
+    And validates that In-Patient Stay record count is not changed
+    Then validates that In-Patient Stay record is updated

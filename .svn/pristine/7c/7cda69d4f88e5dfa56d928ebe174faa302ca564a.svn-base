@@ -1,0 +1,2231 @@
+package com.pathway.scripts;
+
+
+
+
+import java.awt.Robot;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.server.commands.SeleniumCoreCommand;
+import org.openqa.selenium.support.ui.Select;
+//import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import com.thoughtworks.selenium.Selenium;
+import com.thoughtworks.selenium.webdriven.commands.KeyEvent;
+
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+
+
+
+
+public class EngagementRelatedList extends SeleniumFunctions {
+	
+	private static WebDriver driver;
+	static String EngagementNo1="";
+	static String X=""; 
+private static String todayex1="";
+private static String todaydup1="";
+	
+//Locators :-	
+By username_field = By.xpath("//*[@id='username']"); 
+By password_field = By.xpath("//*[@id='password']");
+By login_button = By.xpath("//*[@id='Login']");
+
+//Data
+String excel_file = "files//data.xlsx";
+String sheet_name = "LoginDetails";
+String url = Excel.readFromExcel(excel_file, sheet_name, 1, 1); 
+String username = Excel.readFromExcel(excel_file, sheet_name, 2, 1); 
+String password = Excel.readFromExcel(excel_file, sheet_name, 3, 1);
+	
+		
+	
+	
+	
+	@When("^Existing engagement present$")
+	public void existing_engagement_present() throws Throwable {
+		
+		
+		getUrl(url);
+		if(! isElementExist(new Home_Page().username_lable)){
+			enter(username_field, username);
+			enter(password_field, password);
+			click(login_button);	
+		}
+		new Home_Page().verify_user_is_on_home_page();
+		System.out.println("User is on Home Page ");
+	wait(3);
+	    SmokeTestCase A=new SmokeTestCase();
+	    
+	    
+	  //Login with Provider and create soap note
+	    
+	    click(By.id("userNav-arrow"));
+	  		
+	    wait(2);
+	  	
+	  		int setup=getElementSize(By.xpath("//div[3]/a[1][@title='Setup']")) ;
+	  		if (setup>0){
+	  			
+	  			click(By.xpath("//div[3]/a[1][@title='Setup']"));
+	  		}else{
+	  		
+	  		click(By.xpath("//div[3]/a[2][@title='Setup']"));
+	  		}
+	  		 
+	  		wait(5);
+	  		
+	  		 click(By.xpath("//div[25]/a[1]/img[@title='Expand - Manage Users - Level 1']"));
+	  		 
+	  		
+	  		 click(By.linkText("Profiles"));
+	  		  
+	  		 wait(3);
+	  		 
+	  		   click(By.linkText("P"));
+	  		 
+	  		   wait(2);
+	  		   
+	  		   click(By.linkText("Provider (PRO)"));
+	  		   
+	  		   wait(3);
+	  		  
+	  		   click(By.xpath("//input[@value='Assigned Users']"));
+	  			
+	  			 wait(1);
+	  			
+	  			 click(By.linkText("P"));
+	  			   
+	  			   wait(2);
+	  			
+	  			   click(By.linkText("Provider"));
+	  			 
+	  			   wait(2);
+	  			 
+	  			   click(By.xpath("//input[@title='Login']"));
+	  				
+	  				 wait(3);
+	  				 
+	  		
+	  			//EngagementNo1="00000252161219";
+	  			EngagementNo1=A.EngagementNo;	
+	  				  				
+	  					
+	  					click(By.className("allTabsArrow"));
+	  					 
+	  					 click(By.linkText("Engagements"));
+	  					
+	  					click(By.xpath("//input[@name='go']"));
+	  					
+	  					 wait(3);
+	  					
+	  					
+	  					int count = findElements(By.linkText(EngagementNo1)).size(); 
+	  					
+	  					if (count==1){
+	  						
+	  						click(By.linkText(EngagementNo1));
+	  						
+	  					}else{
+	  						
+	  						click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div[1]/form/div[3]/div[4]/div/div/div/div[1]/div[1]/div[1]/div/table/thead/tr/td[4]/div"));
+	  						
+	  						wait(3);
+	  						
+	  						 click(By.linkText(EngagementNo1));
+	  					}
+	  					
+	  					
+	  					   
+	  					  
+	  					   wait(5);
+	  		
+		   
+		  /* ArrayList<String> tabseng = new ArrayList<String> (driver.getWindowHandles());
+		   //if(tabseng.size()>1){
+		    driver.switchTo().window(tabseng.get(0));
+		   driver.close();
+		 driver.switchTo().window(tabseng.get(1));*/
+	}
+
+	
+
+	@Then("^Create Clinical Note$")
+	public void create_Clinical_Note() throws Throwable {
+		
+		wait(10);
+		
+		  
+		   click(By.linkText("Home"));
+		 
+		   click(By.id("userNav-arrow"));
+		   
+	  		
+	  		 wait(3);
+	  		 
+	  		 click(By.xpath("//div[3]/a[4][@title='Logout']"));
+		  
+		    wait(3);
+		
+		
+		
+		
+		click(By.className("allTabsArrow"));
+		
+		 click(By.linkText("Engagements"));
+		  
+		    click(By.linkText(EngagementNo1));
+		
+		   wait(5);
+		
+		click(By.linkText("Clinical Note"));
+		  
+		   wait(3);
+		   
+		  
+		   click(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']"));
+		   
+		  
+		   wait(3);
+		  
+			selectByVisibleText(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div[2]/div[1]/div[4]/div/div/table/tbody/tr[2]/td[1]/select"),"Care Plan");
+		
+		   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div[2]/div[1]/div[4]/div/div/table/tbody/tr[2]/td[2]/a[1]/img"));
+		 
+		   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div[2]/div[1]/div[5]/div/div/textarea"),"test123");
+
+		   click(By.xpath("//input[@value='Electronically Sign']"));
+		   
+		 
+		   wait(5);
+		  
+		   click(By.linkText("View"));
+		 
+		   getWindowHandle1();
+		   
+	
+		   wait(2);
+		 
+		   click(By.xpath("//input[@value='Cancel']"));
+		   
+		   wait(3);
+		  
+		   click(By.linkText("Edit"));
+		   
+		   getWindowHandle1();
+		  
+		   wait(3);
+		   
+		  
+		   click(By.xpath("//input[@value='Cancel']"));
+	     
+	}
+
+	@Then("^Create Risk Level$")
+	public void create_Risk_Level() throws Throwable {
+	   
+		
+		wait(2);
+		
+		 click(By.className("allTabsArrow"));
+		
+		 click(By.linkText("Engagements"));
+		   
+		    click(By.linkText(EngagementNo1));
+		
+		   wait(5);
+		   
+		 
+		 click(By.linkText("Risk Level"));
+		
+		 wait(2);
+		
+		 click(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']"));
+		  
+		    wait(2);
+				   
+		  
+		   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div/form/div[1]/div[5]/div/div/div/fieldset/table/tbody/tr/td[1]/label"));
+		  
+			selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div/form/div[1]/div[9]/div/div/select"),1);
+			
+			
+			wait(2);
+			
+			
+			 click(By.xpath("//input[@value='Save']"));
+					
+			
+			wait(3);
+			
+			
+			click(By.linkText("View"));
+			  
+							  
+							
+							   wait(3);
+							 
+							 
+							   WebElement webElementRlcan = findElement(By.xpath("//input[@value='Cancel']"));
+							   webElementRlcan.sendKeys(Keys.TAB);
+							   webElementRlcan.sendKeys(Keys.ENTER);
+		
+			 				  
+			 				   wait(3);
+							    
+							   click(By.partialLinkText("Edit"));
+			
+							   
+							 
+							   wait(3);
+							  
+							   click(By.xpath("//input[@value='Cancel']"));
+	     
+	}
+
+	@Then("^Create Problem List$")
+	public void create_Problem_List() throws Throwable {
+		
+		wait(2);
+		
+		click(By.className("allTabsArrow"));
+		
+		 click(By.linkText("Engagements"));
+		 
+		    click(By.linkText(EngagementNo1));
+		   
+		   wait(5);
+	  
+	    click(By.linkText("Problem List"));
+			 
+			   wait(2);
+			   
+			
+			   click(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']"));
+			  
+			   wait(2);
+			 
+			   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div[5]/span/div/div/input"),"Testing34");
+			   		   
+			 
+			   click(By.xpath("//input[@value='Save']"));
+				
+				wait(5);
+				
+				
+				click(By.partialLinkText("View"));
+				
+								   wait(3);
+								
+								   click(By.xpath("//input[@value='Cancel']"));
+			
+								   wait(3);
+								  
+								   click(By.linkText("Edit"));
+				//driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/span/a")).click();
+								   
+								 
+								   wait(3);
+								   
+								   click(By.xpath("//input[@value='Cancel']"));
+			//driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/center/span/input[3]")).click(); 
+ 
+	     
+	}
+
+	@Then("^Create Care Plan$")
+	public void create_Care_Plan() throws Throwable {
+		
+		wait(2);
+		
+		click(By.className("allTabsArrow"));
+		
+		 click(By.linkText("Engagements"));
+		   
+		    click(By.linkText(EngagementNo1));
+		  
+		   wait(5);
+		
+		WebElement webElementCP = findElement(By.linkText("Care Plan"));
+			webElementCP.sendKeys(Keys.TAB);
+			webElementCP.sendKeys(Keys.ENTER);
+	
+			   wait(2);
+			  
+			   click(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']"));
+			 
+			   
+			   wait(2);
+			   
+			   click(By.xpath("//input[@value='Save']"));
+			 
+			   wait(3);
+			   
+			  
+			   click(By.linkText("View"));
+			  
+			   wait(2);
+			    
+			   click(By.xpath("//input[@value='Cancel']"));
+			   
+			   wait(3);
+ 
+			 click(By.linkText("Edit"));
+			 
+			 wait(3);
+			 
+			click(By.xpath("//input[@value='Cancel']"));
+			   
+			   
+			   
+				/*driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a")).click();  
+											 							 				  
+								   Thread.sleep(2000);
+			 driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div/form[1]/span[5]/div/div/input[2]")).click();
+								   Thread.sleep(2000);
+				driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/span/a")).click();
+															   
+								   Thread.sleep(2000);
+			driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div/form[1]/span[5]/div/div/input[2]")).click(); */
+ 
+	     
+	}
+
+	@Then("^Create Advanced Care Plan$")
+	public void create_Advanced_Care_Plan() throws Throwable {
+			/*Thread.sleep(2000);
+			driver.findElement(By.className("allTabsArrow")).click();
+			 driver.findElement(By.linkText("Engagements")).click(); 
+			    driver.findElement(By.linkText(EngagementNo1)).click(); 
+			   Thread.sleep(5000);
+		WebElement webElementACP = driver.findElement(By.linkText("Advance Care Plan"));//You can use xpath, ID or name whatever you like
+		webElementACP.sendKeys(Keys.TAB);
+		webElementACP.sendKeys(Keys.ENTER);
+ //driver.findElement(By.linkText("Advance Care Plan")).click(); 
+		   Thread.sleep(2000);
+		   driver.findElement(By.xpath("//div/a[@class='slds-button slds-button--brand']")).click();
+		   
+		   
+		   //driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span[2]/center/span/div/a")).click();
+		   Thread.sleep(3000);
+		   driver.findElement(By.xpath("//div[1]/span[1][@class='section-drawers--state closed']")).click();
+		   Thread.sleep(1000);
+		   Calendar cal = Calendar.getInstance();
+		   int todayDate = cal.get(Calendar.DAY_OF_MONTH);
+		   if(todayDate<10){
+			 todayDate=Integer.valueOf("0"+todayDate); 
+		   }
+		   int tomorrowDate = todayDate+1;
+		   int yesterdaydate=todayDate-4;
+		   int yesterdaydatedup=todayDate-3;
+		   int month1=cal.get(Calendar.MONTH);
+		   int month2=month1+1;
+		   int Year1=cal.get(Calendar.YEAR);
+		   String today=String.valueOf(yesterdaydate);
+		   String today1=month2 +"/"+yesterdaydate+"/"+Year1;
+		   String todaydup=month2 +"/"+yesterdaydatedup+"/"+Year1;
+		   String todayex=month2 +"/"+todayDate+"/"+Year1;
+		driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div/form/span[2]/div/div/div/div/div[1]/div[2]/div[5]/div[2]/div[1]/div[1]/div/div[1]/input")).sendKeys(today1);
+		
+		driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/span[3]/div/div[1]/div[13]/div/div/input")).sendKeys("Testing123");
+		
+		driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div/form/span[2]/div/div/div/div/div[1]/div[2]/div[6]/div[2]/div/div[1]/div/div[1]/input")).sendKeys(todaydup);
+		
+		driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div/form/span[2]/div/div/div/div/div[1]/div[2]/div[7]/div[2]/div[1]/div[1]/div/div[1]/input")).sendKeys(todayex);
+		 
+		Select ACPReview = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/span[3]/div/div[3]/div[23]/div/div/select")));
+		ACPReview.selectByIndex(1);
+		driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/span[3]/div/div[3]/div[25]/div/div/textarea")).sendKeys("testing789");;
+		driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/span[3]/div/center/span/input[1]")).click();
+		 Thread.sleep(3000);
+		
+		 driver.findElement(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']")).click(); 
+		 //driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span[1]/center/span/div/input")).click();
+		 Thread.sleep(2000);
+		 driver.findElement(By.xpath("//input[@value='Cancel']")).click();
+		 //driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/span[3]/div/center/span/input[2]")).click();
+		 Thread.sleep(2000);   */
+	     
+	}
+
+	@Then("^Create Health Maintenance$")
+	public void create_Health_Maintenance() throws Throwable {
+		
+		click(By.className("allTabsArrow"));
+		 
+		 click(By.linkText("Engagements"));
+		    
+		 click(By.linkText(EngagementNo1));
+		   
+		   wait(5);
+		
+		WebElement webElementHM = findElement(By.linkText("Health Maintenance"));
+		webElementHM.sendKeys(Keys.TAB);
+		webElementHM.sendKeys(Keys.ENTER);
+
+		   wait(2);
+		 
+		   click(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']"));
+		 
+		   wait(3);
+		 
+		   click(By.xpath("//input[@value='Save and Submit for Approval']"));
+		   
+		   
+		   wait(3);
+		 
+		   click(By.xpath("//div/input[@class='slds-button slds-button--brand btnColor']"));
+		 
+		   wait(3);
+		
+		   click(By.xpath("//input[@value='Cancel']"));
+		  
+		   
+		   wait(2);
+
+	     
+	}
+
+	@Then("^Create Clinical Indicator$")
+	public void create_Clinical_Indicator() throws Throwable {
+		
+		click(By.className("allTabsArrow"));
+		
+		 click(By.linkText("Engagements"));
+		    
+		    click(By.linkText(EngagementNo1));
+		
+		 wait(5);
+		
+		 WebElement webElementCI = findElement(By.linkText("Clinical Indicators"));
+		   webElementCI.sendKeys(Keys.TAB);
+		   webElementCI.sendKeys(Keys.ENTER);
+
+		   wait(2);
+		  
+		   click(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']"));
+		   
+		   
+		   wait(3);
+		   
+		   click(By.xpath("//button[@class='slds-button slds-button--brand btnColor']"));
+		  
+		   wait(3);
+		   
+		 
+		   click(By.linkText("View"));
+		 
+		   wait(2);
+		 	
+		   click(By.xpath("//button[@class='slds-button slds-button--neutral']"));
+		   
+		   wait(3);
+		   
+		
+		   click(By.partialLinkText("Edit"));
+		 
+		 wait(3);
+		
+		 click(By.xpath("//button[@class='slds-button slds-button--neutral']"));
+		 
+		
+		 wait(2);
+		 
+		   /*driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a")).click();
+		   Thread.sleep(3000);
+		   driver.findElement(By.xpath("html/body/div[3]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td[2]/center/button")).click();
+		   Thread.sleep(3000);
+		   
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a[2]")).click();
+		   Thread.sleep(3000);
+		   driver.findElement(By.xpath("html/body/div[3]/div/div/div/div/div/div/div/div[1]/table/tbody/tr/td[2]/center/button")).click();*/
+		    
+	     
+	}
+
+	@Then("^Create Medication$")
+	public void create_Medication() throws Throwable {
+		
+		click(By.className("allTabsArrow"));
+		
+		 click(By.linkText("Engagements"));
+		  
+		    click(By.linkText(EngagementNo1));
+		
+		 wait(5);
+		
+		 click(By.partialLinkText("Medications"));
+//
+		   
+		   wait(2);
+		
+		   click(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']"));
+		 
+		   
+		   wait(3);
+		   
+		 
+		   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/form/div[2]/div[1]/div[3]/div[2]/div/div/span/span/input"),"Diabetic Diagnosis");
+		   
+		  
+		   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/form/div[2]/div[1]/div[4]/div[1]/div/div/input"),"4");
+		   
+		 
+		   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/form/div[2]/div[1]/div[3]/div[1]/div/span/div/span/div/table/tbody/tr/td[1]/select"),0);
+		   
+		 
+		   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/form/div[2]/div[1]/div[3]/div[1]/div/span/div/span/div/table/tbody/tr/td[2]/div[1]/div/a/img"));
+		   
+		 
+		   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/form/div[2]/div[1]/div[4]/div[3]/div/div/select"),1);
+		 
+		   click(By.xpath("//input[@value='Save']"));
+		   
+		   wait(4);
+		   		  
+		   
+		  
+		   click(By.linkText("View"));
+		 
+		   wait(2);
+		
+		   click(By.xpath("//input[@value='Cancel']"));
+		
+		   wait(3);
+		
+		   click(By.linkText("Edit"));
+		 
+		 wait(3);
+		
+		 click(By.xpath("//input[@value='Cancel']"));
+		
+		 wait(2);
+		 try {
+			
+			 click(By.xpath("//input[@value='Cancel']"));
+			  
+			 wait(2);
+			 
+			} catch (UnhandledAlertException f) {
+				try {
+					
+					String alertText = switchToAlertAndGetText();
+					System.out.println("Alert data: " + alertText);
+					
+					switchToAlertAndAccept();
+				} catch (NoAlertPresentException e) {
+					e.printStackTrace();
+				}
+			}
+		  
+		wait(2);
+		
+		   
+		  /* driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a")).click();
+		   Thread.sleep(3000);
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div/form/div[2]/div[1]/div[9]/div/center/span/span/center/input")).click();
+		   Thread.sleep(3000);
+		   
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a[2]")).click();
+		   //html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a[2]
+		   Thread.sleep(3000);
+		   //driver.navigate().back();
+		   try {
+			   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div/form/div[2]/div[1]/div[9]/div/center/span/span/center/span/input")).click();
+			   								
+			   acceptAlertIfAvailable(3000);
+			} catch (UnhandledAlertException f) {
+			    try {
+			        Alert alert = driver.switchTo().alert();
+			        String alertText = alert.getText();
+			        System.out.println("Alert data: " + alertText);
+			        alert.accept();
+			    } catch (NoAlertPresentException e) {
+			        e.printStackTrace();
+			    }
+			}
+		   //driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div/form/div[2]/div[1]/div[9]/div/center/span/span/center/span/input")).click();
+		   Thread.sleep(2000);  */   
+	}
+
+	@Then("^Create Health History$")
+	public void create_Health_History() throws Throwable {
+		
+		click(By.className("allTabsArrow"));
+		
+		 click(By.linkText("Engagements"));
+		  
+		    click(By.linkText(EngagementNo1));
+	
+		 wait(5);
+		
+		 click(By.partialLinkText("Health History"));
+		  				   
+		   
+		   wait(2);
+		  
+		   click(By.xpath("//input[@value='Add PMH']"));
+		  
+		   
+		   try {
+				
+				click(By.xpath("//input[@value='Save and Submit for Approval']"));
+				
+				if (isElementExist(By.xpath("//input[@value='OK']")));
+				{				
+					click(By.xpath("//input[@value='OK']"));
+					
+					wait(8);
+				}
+				acceptAlertIfAvailable1(3);
+			} catch (UnhandledAlertException f) {
+				try {
+					
+					String alertText = switchToAlertAndGetText();
+					System.out.println("Alert data: " + alertText);
+					
+					switchToAlertAndAccept();
+				} catch (NoAlertPresentException e) {
+					e.printStackTrace();
+				}
+			}
+		   
+		  
+		   wait(5);
+		  
+		   click(By.linkText("View"));
+		   
+		   wait(2);
+		  
+		   click(By.xpath("//input[@value='Cancel']"));
+		
+		   wait(3);
+		
+		 click(By.partialLinkText("Edit"));
+		
+		 wait(3);
+		
+		 click(By.xpath("//input[@value='Cancel']"));
+		   
+		 wait(2);
+		    
+		   
+		  /* driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a")).click();
+		   Thread.sleep(3000);
+		   driver.findElement(By.xpath("html/body/form/div[2]/div/div/div/div[1]/center[2]/input")).click();
+		   Thread.sleep(3000);
+		   
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/span[2]/a")).click();
+		   Thread.sleep(3000);
+		   driver.findElement(By.xpath("html/body/form/div[2]/div/div/div/div[1]/center[2]/div/input[3]")).click();
+		   Thread.sleep(2000); */ 
+	     
+	}
+
+	private void acceptAlertIfAvailable1(int i) {
+		
+		
+	}
+	@Then("^Create Medication Verification$")
+	public void create_Medication_Verification() throws Throwable {
+		
+		click(By.className("allTabsArrow"));
+		
+		 click(By.linkText("Engagements"));
+		  
+		    click(By.linkText(EngagementNo1));
+		
+		 wait(5);
+		
+		 click(By.partialLinkText("Medication Verification"));
+		 
+		   wait(2);
+		
+		   click(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']"));
+		
+		   wait(2);
+		   
+		   
+		
+			   if(isElementExist(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div[4]/div/table/tbody/tr[1]/td[2]/select")));//findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div[4]/div/table/tbody/tr[1]/td[2]/select")).isDisplayed())
+			   {
+			
+			   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div[4]/div/table/tbody/tr[1]/td[2]/select"),1);
+		   }
+		   
+	
+		   click(By.xpath("//input[@value='Save']"));
+		 
+		   wait(4);
+		   
+		   
+		   
+		  
+		   wait(5);
+	
+		   click(By.linkText("View"));
+		 
+		   wait(2);
+		   			   
+		  
+		   navigateBack();
+			wait(3);
+	
+		 click(By.linkText("Edit"));
+		 
+		 wait(3);
+	
+		 click(By.xpath("//input[@value='Cancel']"));
+		  
+		 wait(2);
+		 
+		   /*driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a")).click();
+		   Thread.sleep(3000);
+		   driver.navigate().back();
+		   //driver.findElement(By.xpath("html/body/form/div[2]/div/div/div/div[1]/center[2]/input")).click();
+		   Thread.sleep(3000);
+		   
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/span/a")).click();
+		   Thread.sleep(3000);
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[4]/div/div[1]/div/center/input[2]")).click();
+		   Thread.sleep(2000);*/
+		 
+	     
+	}
+
+	@Then("^Create Lab Results$")
+	public void create_Lab_Results() throws Throwable {
+		/*driver.findElement(By.className("allTabsArrow")).click();
+		 driver.findElement(By.linkText("Engagements")).click(); 
+		    driver.findElement(By.linkText(EngagementNo1)).click(); 
+		 Thread.sleep(5000);
+		 WebElement webElementLR = driver.findElement(By.linkText("Lab Results"));//You can use xpath, ID or name whatever you like
+		   webElementLR.sendKeys(Keys.TAB);
+		   webElementLR.sendKeys(Keys.ENTER);
+		   Thread.sleep(2000);
+		   driver.findElement(By.xpath("//input[@value='Add Single Lab']")).click();
+		   //driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/center/span/div/input[1]")).click();
+		   
+				   Thread.sleep(3000);
+				   WebElement webElementorderchk = driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form[1]/div[3]/div/div/div/div[1]/div[4]/span/div/input"));//You can use xpath, ID or name whatever you like
+				   webElementorderchk.sendKeys(Keys.TAB);
+				   webElementorderchk.sendKeys(Keys.ENTER);	   
+				  //driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form[1]/div[3]/div/div/div/div[1]/div[4]/span/div/input")).click();
+		  
+				   
+				   
+				   Calendar cal2 = Calendar.getInstance();
+				   int todayDate2 = cal2.get(Calendar.DAY_OF_MONTH);
+				   if(todayDate2<10){
+					 todayDate2=Integer.valueOf("0"+todayDate2); 
+				   }
+				   int tomorrowDate2 = todayDate2+1;
+				   int yesterdaydate2=todayDate2-1;
+				   
+				   int yesterdaydatedup2=todayDate2-2;
+				   int month12=cal2.get(Calendar.MONTH);
+				   int month22=month12+1;
+				   int Year12=cal2.get(Calendar.YEAR);
+				   String today12=String.valueOf(yesterdaydate2);
+				   if ((todayDate2==1)||(todayDate2==2)){
+					   yesterdaydate2 = 30;
+					   yesterdaydatedup2 = 30;
+					   today12=month12 +"/"+yesterdaydate2+"/"+Year12;
+					   String todaydup1=month12 +"/"+yesterdaydatedup2+"/"+Year12;
+				   } else {
+				   today12=month22 +"/"+yesterdaydate2+"/"+Year12;
+				  todaydup1=month22 +"/"+yesterdaydatedup2+"/"+Year12;
+				   String todayex1=month22 +"/"+todayDate2+"/"+Year12;
+				   
+				   }
+				   
+				   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form[1]/div[3]/div/div/div/div[1]/div[5]/div/div/div/div/input")).sendKeys(todaydup1);   
+		   
+		   
+				   Select DoseFreq1 = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form[1]/div[3]/div/div/div/div[1]/div[6]/span/div/div/select")));
+				   DoseFreq1.selectByIndex(1); 
+		   
+				   //driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form[1]/div[4]/div/div/div/div[1]/div[2]/center/span/span/input[1]")).click();
+				   driver.findElement(By.xpath("//input[@value='Save and Submit']")).click();
+				   Thread.sleep(3000);
+				   
+				   //Edit and view
+		   
+				   driver.findElement(By.linkText("View")).click();
+				   Thread.sleep(2000);
+				   driver.findElement(By.xpath("//input[@value='Cancel']")).click();				   
+				   Thread.sleep(3000);
+				 driver.findElement(By.linkText("Edit")).click(); 
+				 Thread.sleep(3000);
+				 driver.findElement(By.xpath("//input[@value='Cancel']")).click();
+				 Thread.sleep(2000); */
+				 
+		  /* driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr[1]/td[1]/a")).click();
+		   Thread.sleep(3000);
+		   //driver.navigate().back();
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form[1]/div[4]/div/div/div/div[1]/div[2]/center/span/span/input[2]")).click();
+		   Thread.sleep(3000);
+		   
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/div/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr[1]/td[1]/span/a")).click();
+		   Thread.sleep(3000);
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form[1]/div[4]/div/div/div/div[1]/div[2]/center/span/span/input[4]")).click();
+		   Thread.sleep(2000); */ 
+	     
+	}
+
+	@Then("^Create Order$")
+	public void create_Order() throws Throwable {
+		
+		click(By.className("allTabsArrow"));
+		
+		click(By.linkText("Engagements"));
+		  
+		click(By.linkText(EngagementNo1));
+		
+		 wait(5);
+		
+		 click(By.partialLinkText("Orders"));
+		
+		   wait(3);
+		   
+		   click(By.xpath("//input[@value='Add Order']"));
+		   
+		   		
+		   wait(3);
+		 
+		   selectByVisibleText(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[3]/div[9]/div/div/span/table/tbody/tr[2]/td[1]/span/select"),"Cane-Quad");
+		 
+		   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[3]/div[9]/div/div/span/table/tbody/tr[2]/td[2]/a[1]/img"));
+		   
+		 
+		   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[3]/div[12]/div/div/input"),"7529843793");
+		   
+		  
+		   
+		 
+		 enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[3]/div[13]/div/div/div/span/input"),"Suresh Gottipati");
+		
+		   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[3]/div[19]/div/div/input"),"Test123");
+		  
+		   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[3]/div[20]/div/div/input"),"7529843793");
+		 
+		   click(By.xpath("//input[@value='Save']"));
+		  
+		   wait(5);
+		
+		   click(By.linkText("Orders"));
+		   
+		   wait(3);
+		  
+		   click(By.linkText("View"));
+		
+		   wait(2);
+		  
+		   click(By.xpath("//input[@value='Cancel']"));
+		
+		   wait(5);
+		 
+		   click(By.linkText("Orders"));
+		  
+		   wait(3);
+		
+		 click(By.linkText("Edit"));
+		
+		 wait(3);
+		
+		 click(By.xpath("//input[@value='Cancel']"));
+		
+		 wait(2);
+	     
+	}
+
+	@Then("^Create Communication$")
+	public void create_Communication() throws Throwable {
+		
+		click(By.className("allTabsArrow"));
+		
+		 click(By.linkText("Engagements"));
+		  
+		    click(By.linkText(EngagementNo1));
+		
+		 wait(5);
+		
+
+		 click(By.partialLinkText("Communication"));
+		  				   
+		
+		   wait(2);
+		
+		   click(By.xpath("//input[@value='Add On Call Communication']"));
+		
+		   
+		   wait(2);
+		   
+		
+		  click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td/div/form/div[2]/div[1]/div[23]/div[1]/div/div/fieldset/table/tbody/tr/td[1]/input"));
+	
+		  
+		 
+		
+		  wait(2);
+		  try {
+			 
+			  click(By.xpath("//input[@value='Save']"));
+			 
+				   if (findElement(By.xpath("//input[@value='OK']")).isDisplayed()){
+				
+					   click(By.xpath("//input[@value='OK']"));
+		 
+		   wait(1);
+		   }
+			  
+			  wait(2);
+			   
+			} catch (UnhandledAlertException f) {
+				try {
+					
+					String alertText = switchToAlertAndGetText();				
+					System.out.println("Alert data: " + alertText);
+					
+					switchToAlertAndAccept();
+				} catch (NoAlertPresentException e) {
+					e.printStackTrace();
+				}
+			}
+		  
+		  
+		  
+		   //ViewEdit
+		  
+		   wait(5);
+		
+		   click(By.linkText("View"));
+		  
+		   wait(2);
+		
+		   click(By.xpath("//input[@value='Cancel']"));
+		  
+		   wait(3);
+		
+		 click(By.linkText("Edit"));
+		 
+		 Thread.sleep(3000);
+		 wait(3);
+		 try {
+			
+			 click(By.xpath("//input[@value='Cancel']"));
+			 
+			 
+			 wait(2);
+			 
+				 if(isElementExist(By.xpath("//input[@value='OK']"))); 
+				 {
+					
+					click(By.xpath("//input[@value='OK']"));
+			  	
+			   wait(1);
+			   }
+			  
+			} catch (UnhandledAlertException f) {
+				try {
+					
+					String alertText = switchToAlertAndGetText();
+					System.out.println("Alert data: " + alertText);
+					
+					switchToAlertAndAccept();
+				} catch (NoAlertPresentException e) {
+					e.printStackTrace();
+				}
+			}
+
+			wait(3);
+
+		}
+
+	@Then("^Create Survey$")
+	public void create_Survey() throws Throwable {
+		
+		
+		click(By.className("allTabsArrow"));
+		 
+		 click(By.linkText("Engagements"));
+		
+		    click(By.linkText(EngagementNo1));
+		  
+		   wait(5);
+		
+		 WebElement webElementsur =findElement(By.linkText("Surveys"));
+		 webElementsur.sendKeys(Keys.TAB);
+		 webElementsur.sendKeys(Keys.ENTER);	   
+		  				   
+		   
+		   wait(2);
+		  
+		   click(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']"));
+		
+		   
+		   wait(2);
+		   
+		 
+		   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/span[2]/div[2]/div[1]/center/div/div/select"),1);
+		   
+		   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/span[2]/div[2]/div[2]/input[1]"));
+		 
+		   
+		   click(By.xpath("//input[@value='Save']"));
+		   
+		   wait(5);
+		 
+		   click(By.linkText("Surveys"));
+		   
+		   wait(5);
+		   
+		   //ViewEdit
+		 
+		 
+		   click(By.linkText("View"));
+		   
+		   wait(2);
+		 
+		   click(By.xpath("//input[@value='Cancel']"));
+		  
+		   wait(5);
+		 
+		   click(By.linkText("Surveys"));
+		  
+		   wait(3);
+		
+		 click(By.linkText("Edit"));
+		 
+		 wait(3);
+		
+		 click(By.xpath("//input[@value='Cancel']"));
+		
+	
+		 wait(2);
+		 
+			//Contact	Not working as relationship is not available
+			/* WebElement webElementcon = driver.findElement(By.linkText("Contact"));//You can use xpath, ID or name whatever you like
+			 webElementcon.sendKeys(Keys.TAB);
+			 webElementcon.sendKeys(Keys.ENTER);	   
+			  				   
+			   Thread.sleep(2000);
+			   driver.findElement(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']")).click();
+			
+			   Thread.sleep(5000);
+			   Select SelCon = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div[5]/div/div/div/select")));
+			   SelCon.selectByIndex(1);
+			   
+			   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/center/input[1]")).click();
+			   Thread.sleep(2000);
+			   
+			   
+			 //ViewEdit
+				 
+			   driver.findElement(By.linkText("View")).click();
+			   Thread.sleep(2000);
+			   driver.findElement(By.xpath("//input[@value='Cancel']")).click();				   
+			   Thread.sleep(3000);
+			 driver.findElement(By.linkText("Edit")).click();  
+			 Thread.sleep(3000);
+			 driver.findElement(By.xpath("//input[@value='Cancel']")).click();
+			
+			 Thread.sleep(2000);  */
+			
+	     
+	}
+
+	@Then("^Create Care Team$")
+	public void create_Care_Team() throws Throwable {
+		
+		click(By.className("allTabsArrow"));		
+		
+		click(By.linkText("Engagements"));
+		
+		click(By.linkText(EngagementNo1));
+		wait(5);
+		
+		WebElement webElementcon = findElement(By.linkText("Care Team"));
+		webElementcon.sendKeys(Keys.TAB);
+		webElementcon.sendKeys(Keys.ENTER);
+
+		wait(2);
+		
+		click(By.xpath("//input[@value='Add New Care Team']"));
+		
+		enter(By.xpath(
+				"html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div[1]/div/div[2]/table/tbody/tr[2]/td[1]/div/span/input"),
+						"Suresh Gottipati");
+
+		wait(2);
+	
+		selectByIndex(By.xpath(
+				"html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div[1]/div/div[2]/table/tbody/tr[2]/td[2]/span/select"), 
+				4);
+		
+		wait(2);
+
+		
+		click(By.xpath("//input[@value='Save']"));
+		wait(3);
+		
+		Integer Careteamsize = findElements(By.xpath("//input[@value='Ok']")).size();
+		if (Careteamsize > 0) {
+			
+			click(By.xpath("//input[@value='Ok']"));
+			wait(1);
+		}
+	
+		wait(2);
+		 {
+		try {
+		
+			String alertText = switchToAlertAndGetText();
+			System.out.println("Alert data: " + alertText);
+			
+			switchToAlertAndAccept();
+		} catch (NoAlertPresentException e) {
+			e.printStackTrace();
+		}
+
+		wait(2);
+		
+		click(By.linkText("View"));
+		wait(2);
+		
+		click(By.xpath("//input[@value='Cancel']"));
+		wait(3);
+	
+		click(By.partialLinkText("Edit"));
+		wait(3);
+		
+		click(By.xpath("//input[@value='Cancel']"));
+
+		wait(2);
+		 }
+
+	}
+
+		  				   
+		   @Then("^Create DST$")
+			public void create_DST() throws Throwable {
+				
+				click(By.className("allTabsArrow"));
+				
+				click(By.linkText("Engagements"));
+				
+				click(By.linkText(EngagementNo1));
+				wait(5);
+				
+				WebElement webElementDST = findElement(By.linkText("Decision Support Tool"));// You
+																		
+				webElementDST.sendKeys(Keys.TAB);
+				webElementDST.sendKeys(Keys.ENTER);
+
+				wait(2);
+				
+				click(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']"));
+				
+
+				wait(2);
+				
+				selectByIndex(By.xpath(
+						"html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/span[2]/div[2]/div[1]/center/div/div/select"), 1);
+
+			
+				click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/span[2]/div[2]/div[2]/input[1]"));
+				wait(1);
+				
+				click(By.xpath("//input[@value='Save']"));
+
+				
+				Integer Careteamsize1 = findElements(By.xpath("//input[@value='OK']")).size();
+				if (Careteamsize1 > 0) {
+					
+					click(By.xpath("//input[@value='OK']"));
+					wait(1);
+				}
+
+				wait(5);
+				
+				click(By.linkText("View"));
+				wait(2);
+				
+				click(By.xpath("//input[@value='Cancel']"));
+				wait(3);
+				
+				click(By.partialLinkText("Edit"));
+				wait(3);
+				
+				click(By.xpath("//input[@value='Cancel']"));
+
+				wait(2);
+
+			}
+		   
+		  
+
+	@Then("^Create On Reach Call Attempt$")
+	public void create_On_Reach_Call_Attempt() throws Throwable {
+	
+		click(By.className("allTabsArrow"));
+		
+		 click(By.linkText("Engagements"));
+		   
+		    click(By.linkText(EngagementNo1));
+		
+		 wait(5);
+		 
+		
+		WebElement webElementoutreach = findElement(By.linkText("Outreach Call Attempts"));
+		webElementoutreach.sendKeys(Keys.TAB);
+		webElementoutreach.sendKeys(Keys.ENTER);	   
+		  				   
+		 
+		   wait(2);
+		 
+		   click(By.xpath("//input[@value='Log Call Attempt']"));
+		   
+		  
+		 
+		   wait(2);
+		
+		   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[2]/div/div[2]/table/tbody/tr[3]/td/textarea"),"Test123");
+		   				   
+		
+		   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[2]/div/div[2]/table/tbody/tr[4]/td/select"),1);
+		 
+		   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[2]/div/div[2]/table/tbody/tr[5]/td/span/select"),1);
+		
+		   click(By.xpath("//input[@value='Save']"));
+		 
+		   wait(5);
+		 
+		   click(By.linkText("Outreach Call Attempt"));
+		
+		   wait(4);
+		   
+		   //ViewEdit
+		 
+		   click(By.linkText("View"));
+		 
+		   wait(2);
+		  
+		   click(By.xpath("//input[@value='Cancel']"));
+		
+		   wait(5);
+		
+		   click(By.linkText("Outreach Call Attempt"));
+		 
+		   wait(3);
+		 
+		 click(By.linkText("Edit"));
+		
+		 wait(3);
+		
+		 click(By.xpath("//input[@value='Cancel']"));
+		
+		
+		 wait(2);
+		   
+	     
+	}
+
+
+	
+	
+	@Then("^Create SOAP note$")
+	public void create_SOAP_note() throws Throwable {
+		
+			   
+		
+		
+		//###########################################################################################
+		
+		
+		click(By.linkText("SOAP Note"));
+
+		   wait(3);
+
+		   
+		  
+		   click(By.xpath("//div/a[@class='slds-button slds-button--brand']"));
+		 
+		   wait(3);
+		
+		   															
+
+			selectByVisibleText(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[1]/div[2]/div[2]/div[5]/div/div/select"),"New");
+			
+			
+			    enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[1]/div[2]/div[2]/div[6]/div/div/div/span/input"),"Nursing Facility");
+			  	
+			  
+			    enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[1]/div[3]/div[2]/div[1]/div/div/textarea"),"test123");
+			  
+			    enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[1]/div[3]/div[2]/div[2]/div/div/textarea"),"test123");
+			  
+			    wait(2);
+			 
+			    click(By.xpath("//input[@value='Save']"));
+			    
+			    
+			    
+			    wait(1);
+			  
+			    
+			   
+			    
+			    click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/nav/span/ul/li[2]/a"));
+			     wait(5);
+			  
+			    click(By.xpath("//div[2]/span[1][@class='section-drawers--state closed']"));
+			    
+				  
+				   wait(3);
+				   	
+				   
+				   //ROS
+				    
+				  
+				    click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/nav/span/ul/li[2]/a"));
+				    Thread.sleep(5000);
+				    wait(5);
+				  
+				    click(By.xpath("//div[2]/span[1][@class='section-drawers--state closed']"));
+				   
+					   wait(3);
+					   
+					   
+				    
+				
+				    selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[1]/div[2]/div[1]/div/div/select"),1);
+				   
+				    wait(6);
+				  
+				    selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[1]/div[2]/div[2]/span/div/div/select"),1);
+				    
+				    
+				    wait(5);
+				
+				  click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[1]/div[2]/span/fieldset/fieldset/div[1]/div/input"));
+				  											                     
+			
+				  wait(7);
+
+				    wait(2);
+				  
+				   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[2]/div[2]/span/fieldset/fieldset/div/div/input"));
+				  
+				     wait(7);
+				     							
+				 
+				     selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[2]/div[2]/span/fieldset/fieldset/span/div/div/select"),1);
+				  
+				     wait(7);
+				    
+				    ; 
+				     selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[2]/div[2]/span/fieldset/fieldset/div[1]/div/select"),1);
+				  
+				     wait(2);
+		
+				     selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[3]/div[2]/span/fieldset/fieldset/div[1]/div/select"),1);
+				    
+				    
+				    click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[3]/div[2]/span/fieldset/fieldset/div[1]/div/input"));
+				   
+				    wait(5);
+				    
+				    
+				  
+				   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[4]/div[2]/span/fieldset/fieldset/div[1]/div/input"));
+				  
+				   wait(5);
+				    
+				  			    
+				  
+				   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[4]/div[2]/span/fieldset/fieldset/div[2]/div/input"));
+				  
+				   wait(5);
+				     
+				    
+				  
+				    click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[5]/div[2]/span/fieldset/fieldset/div[1]/div/input"));
+
+				    wait(5);
+				    
+				     
+				  
+				   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[5]/div[2]/span/fieldset/fieldset/div[1]/div/input"));
+				   
+				   wait(5);
+				     
+				  
+				  
+				   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[6]/div[2]/span/fieldset/fieldset/div[1]/div/input"));
+				  
+				   wait(5);
+				    
+				  		  	    
+				
+				   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[6]/div[2]/span/fieldset/fieldset/div[1]/div/input"));
+				  
+				   wait(5);
+				     
+				    
+				
+				   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[7]/div[2]/span/fieldset/fieldset/div[1]/div/input"));
+				  
+				    wait(5);
+				     //endocryne
+				  
+				   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[7]/div[2]/span/fieldset/fieldset/div[1]/div/input"));
+				  
+				   wait(5);
+				    
+				 
+				   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[8]/div[2]/span/div[1]/div/fieldset/table/tbody/tr/td[2]/input"));
+				 
+				   wait(5);
+				    
+
+				   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[8]/div[2]/span/fieldset/fieldset/div[1]/div/input"));
+
+				    wait(5);
+				    
+				   
+				  
+				    selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[8]/div[2]/span/fieldset/div[2]/div/select"),1);
+				  
+				    wait(2);
+				 
+				     selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[8]/div[2]/span/fieldset/div[3]/div/select"),1);
+				     
+				     wait(2);
+				    
+				 
+				  enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[5]/div[2]/div/div/textarea"),"Testing123");
+				  
+				  wait(5);
+				
+				 click(By.xpath("//button[@class='slds-button slds-button--brand']"));
+				   
+				 wait(1);
+				   
+				   
+				   
+				   
+				   
+				   
+				   
+				   
+				   
+				   	
+				  //PE
+					   
+				 		wait(3);
+					  
+					    click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/nav/span/ul/li[3]/a"));
+					  
+					    wait(7);
+					  
+					    click(By.xpath("//div[2]/span[1][@class='section-drawers--state closed']"));
+					   
+						  
+						   wait(3);
+					   
+					
+
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[1]/div[2]/span/div[1]/div/select"),1);
+						  
+						   wait(3);
+						  
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[1]/div[2]/span/div[2]/div/select"),1);
+						  
+						   wait(3);
+						  
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[1]/div/div/select"),1);
+						   
+						   wait(5);
+						   
+						
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[1]/div/input"),"6");
+						  
+						   wait(3);
+						   
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[1]/div/input"),"9");
+						 
+						   wait(3);
+						
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[3]/div/input"),"150");
+						  
+						   wait(5);
+						 
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[4]/div/select"),1);
+						   
+						   wait(5);
+
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[4]/div/select"),1);
+						  
+						   wait(2);
+						   
+						   //Urine Dipstick
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[2]/div[2]/div/span/label[1]/span[1]"));
+						  
+						   wait(5);
+
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[2]/div[2]/span/div[1]/div/select"),2);
+						   
+						   //GEneral Appearance
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[3]/div[2]/div/div/label[1]/span[1]"));
+						  
+						   wait(5);
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[3]/div[2]/span/div/div[1]/div/input"));
+						 
+						   wait(3);
+						
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[3]/div[2]/span/span/div/div/textarea"),"Test");
+						   
+						    wait(3);
+						   
+						   
+						   //constitutional
+						   
+						
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[7]/div/input"),"100");
+						   
+						   wait(3);
+					
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[9]/div/input"),"1");
+						 
+						   wait(2);
+						  
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[9]/div/input"),"100");
+						
+						   wait(3);
+						 /* if (driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[10]/div/input")).isEnabled()){
+							   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[10]/div/input")).sendKeys("1");
+							   Thread.sleep(3000);
+							   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[9]/div/input")).sendKeys("1");
+							   Thread.sleep(3000);
+							   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[9]/div/input")).sendKeys("100");
+							   Thread.sleep(3000);
+							   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[10]/div/input")).sendKeys("100");
+							   Thread.sleep(3000);   
+						   }*/
+						   
+						 
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[10]/div/input"),"1");
+						 
+						   wait(3);
+						
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[10]/div/input"),"100");
+
+						   wait(3);
+						  
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[13]/div/input"),"1");
+						  
+						   
+						   
+						   wait(3);
+						  
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[13]/div/input"),"100");
+						  
+						   wait(3);
+						  
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[14]/div/input"),"1");
+						  
+						   wait(3);
+						   
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[14]/div/input"),"100");
+
+						   wait(3);
+						  
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[18]/div/input"),"100");
+						   
+						   wait(3);
+						  
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[1]/div[2]/span[2]/div[19]/div/input"),"100");
+						   
+						   wait(3);
+						   
+						   //Heent ears
+						
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[4]/div[2]/span[1]/div/label[1]/span[1]"));
+						  
+						   wait(5);
+						
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[4]/div[2]/span[2]/div[2]/div/select"),1);
+
+						   wait(3);
+						   
+						   //Heent neck
+						 
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[5]/div[2]/span[1]/div/label[1]/span[1]"));
+						 
+						   wait(5);
+						
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[5]/div[2]/span[2]/div[2]/div/select"),1);
+						   Thread.sleep(2000);
+						   
+						   //Blood Glucose
+						
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[2]/div[2]/div[1]/div/select"),1);
+
+						   wait(3);
+						   
+						   //Cardiovascular
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[6]/div[2]/span[1]/div/label[1]/span[1]"));
+						  
+						   wait(5);
+						 
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[6]/div[2]/span[2]/div[2]/div/select"),1);
+						  
+						   wait(2);
+						   
+						   //Heent Eyes
+						 
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[3]/div[2]/span[1]/div/label[1]/span[1]"));
+
+						   wait(5);
+						  
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[3]/div[2]/span[2]/div[2]/div/select"),1);
+						  
+						   wait(2);
+						   
+						   //Heent nose
+						 
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[4]/div[2]/span[1]/div/label[1]/span[1]"));
+
+						   wait(5);
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[4]/div[2]/span[2]/div[2]/div/input"));
+						  
+						   wait(2);
+						   
+						   //Respiratory
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[5]/div[2]/span[1]/div/label[1]/span[1]"));
+						  
+						   wait(5);
+						 
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[5]/div[2]/span[2]/div[2]/div/input"));
+						  
+						   wait(2);
+						   
+						   //Genitourinary
+						 
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[7]/div[2]/div/span/div/label[1]/span[1]"));
+						  
+						   wait(5);
+						
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[7]/div[2]/span[1]/div[2]/div/input"));
+						 
+						   wait(2);
+						  
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[7]/div[2]/span[2]/div/div/textarea"),"Testfm");
+						 
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[7]/div[2]/span[3]/div/div/textarea"),"TestM");
+						   
+						   
+						   //Muskulo
+						 
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[8]/div[2]/span[1]/div/label[1]/span[1]"));
+						   
+						   wait(5);
+						 
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[8]/div[2]/span[2]/div[2]/div/input"));
+						   
+						   wait(3);
+						   
+						   //Gastro
+						 
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[6]/div[2]/span[1]/div/label[1]/span[1]"));
+						  
+						   wait(5);
+						   
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[6]/div[2]/span[2]/div[2]/div/input"));
+						   
+						   wait(2);
+						   
+						  //Poste pulses
+						  
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[8]/div[2]/span[2]/div[18]/div/select"),1);
+						   
+						  
+						   wait(3);
+						   
+						   //pedal pulses
+						 
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[8]/div[2]/span[2]/div[21]/div/select"),1);
+						   wait(3);
+
+						   
+						   //HOmodialysis
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[7]/div[2]/span/div[2]/div/input"));
+						
+						   wait(3);
+						   
+						   //Monofilament
+						  
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[8]/div[2]/span/div[1]/div/select"),1);
+						  
+						   wait(3);
+						   
+					
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[9]/div[2]/span/div[1]/div/select"),1);
+						   
+						   wait(3);
+						   
+
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[9]/div[2]/span/div[1]/div/select"),1);
+						  
+						   wait(3);
+						   
+						   //Neurology
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[10]/div[2]/span[1]/div/label[1]/span[1]"));
+						  
+						   wait(5);
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[10]/div[2]/span[2]/div[2]/div/input"));
+						   
+						   wait(3);
+						   //Foot exam
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[10]/div[2]/span/div[2]/div/input"));
+
+						   wait(3);
+						   
+						   selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[4]/div[10]/div[2]/span[2]/div[7]/div/select"),1);
+						   wait(3);
+						  
+						   
+						   //Psychological
+						  
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[11]/div[2]/span[1]/div/label[1]/span[1]"));
+						   
+						   wait(5);
+						 
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[3]/div[11]/div[2]/span[2]/div[2]/div/input"));
+						   
+						   wait(3);
+						   
+						   //Skin Abnorm
+						   
+						   click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[5]/div[2]/span/div/label[2]/span[1]"));
+						   
+						   
+						   wait(3);
+						  /* driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[5]/div[2]/span/div[2]/div/div/div/div[1]/a")).click();
+						   Thread.sleep(3000);
+						   
+						   ArrayList<String> tabseng = new ArrayList<String> (driver.getWindowHandles());
+						   //if(tabseng.size()>1){
+						    driver.switchTo().window(tabseng.get(1));
+						  // driver.close();
+						 //driver.switchTo().window(tabseng.get(1));
+						   Select Abnortype = new Select(driver.findElement(By.xpath("html/body/form/div[1]/div/div/div/div[1]/div/table/tbody/tr/td[1]/select")));
+						   Abnortype.selectByIndex(1);
+						   Thread.sleep(3000);
+						   Select Location = new Select(driver.findElement(By.xpath("html/body/form/div[1]/div/div/div/div[1]/div/table/tbody/tr/td[2]/span/select")));
+						   Location.selectByIndex(1);
+						   Thread.sleep(3000);
+						   Select Status = new Select(driver.findElement(By.xpath("html/body/form/div[1]/div/div/div/div[1]/div/table/tbody/tr/td[8]/select")));
+						   Status.selectByIndex(1);
+						   Thread.sleep(3000);
+						   
+						   driver.findElement(By.xpath("html/body/form/div[2]/input[1]")).click();
+						   Thread.sleep(5000);
+						   driver.switchTo().window(tabseng.get(0));*/
+						   
+						   //Add notes
+						
+						   enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div/div[6]/div[2]/div/div/textarea"),"TestingSoapnote");
+						  wait(3);
+						
+						   click(By.xpath("//input[@value='Save']"));
+						   
+						   
+						    wait(5);
+					
+				   	
+				   	
+				   	
+						    //A&P
+						    
+						    click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/nav/span/ul/li[4]/a"));
+						  
+						    wait(7);
+						  
+						    click(By.xpath("//div[2]/span[1][@class='section-drawers--state closed']"));
+							
+							 wait(3);
+							 
+							
+								switchToFrame("anpframe");
+								
+							
+							   click(By.xpath("html/body/form/span/div/input"));
+							  
+							   wait(2);
+							   
+							   selectByIndex(By.xpath("html/body/form/div[1]/div/div/div/div[1]/div/div[2]/div/div/div/select"),1);
+							 
+							   wait(2);
+							
+							  enter(By.xpath("html/body/form/div[1]/div/div/div/div[1]/div/div[3]/div/div/div/textarea"),"Testing123");
+							 
+							   wait(2);
+							
+							   enter(By.xpath("html/body/form/div[1]/div/div/div/div[1]/div/div[5]/div/div/div/span/input"),"H59.123");
+							  
+							   wait(2);
+							   
+							
+							   enter(By.xpath("html/body/form/div[1]/div/div/div/div[1]/div/div[4]/div/div/div/input"),"1");
+							   
+							   wait(2);
+							
+							   enter(By.xpath("html/body/form/div[1]/div/div/div/div[1]/div/div[18]/div/div/div/textarea"),"Plantesting");
+							  
+							    wait(2);
+							  
+							   	click(By.xpath("html/body/form/div[1]/div/div/div/div[1]/div/div[26]/input[2]"));
+							   	Thread.sleep(3000);
+							   	wait(3);
+							  
+							   	switchToDefaultContent();
+				   	
+				   	
+				   	
+				   	
+				   	
+				   	
+			
+			  			    
+			    
+				    
+				 
+				  //Sign and Submit
+				   	
+				   	click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[1]/span/div/div[5]/form/input[2]"));
+	   				 	
+	   				 wait(1);
+	   				 
+					//Finish
+	   				 
+	   				 click(By.xpath("//input[@value='Next']"));
+	   				 
+	   				 wait(5);
+	   				
+	   				 click(By.xpath("//input[@value='Finish']"));
+				  
+				    
+			
+	   
+	}
+	
+	
+	
+
+	
+	
+	
+	
+	
+}
+
+
+/*	//Soap NOTE
+
+driver.findElement(By.linkText("SOAP Note")).click(); 
+   Thread.sleep(3000);
+
+   driver.findElement(By.xpath("//div/a[@class='slds-button slds-button--brand']")).click();
+   Thread.sleep(3000);
+   Select sel1del= new Select(driver.findElement(By.id("pgSoap:Consumer_Info:j_id121:ciformid:Consumer_New_or_Established__c")));
+	 
+	sel1del.selectByVisibleText("New");
+	
+	Select sel1 = new Select(driver.findElement(By.xpath("html/body/div[2]/div[2]/div[2]/div/div/span/form/div[2]/div[5]/div/div/select")));
+	  sel1.selectByIndex(1);
+	    													
+	    Select sel2 = new Select(driver.findElement(By.xpath("html/body/div[2]/div[2]/div[2]/div/div/span/form/div[2]/div[9]/div/div/select")));
+	    sel2.selectByIndex(2);
+	    driver.findElement(By.xpath("html/body/div[2]/div[2]/div[2]/div/div/span/form/div[2]/div[6]/div/div/div/span/input")).sendKeys("Nursing Facility");
+	  	
+	    driver.findElement(By.xpath("html/body/div[2]/div[2]/div[2]/div/div/span/form/div[3]/div[1]/div/div/textarea")).sendKeys("test123");
+	    driver.findElement(By.xpath("html/body/div[2]/div[2]/div[2]/div/div/span/form/div[3]/div[3]/div/div/textarea")).sendKeys("test123");
+	   // driver.findElement(By.xpath("html/body/div[2]/div[3]/ul/li/span[1]/div[1]/button[1]")).click();
+	    Thread.sleep(2000);
+	
+	    //ROS
+	    
+	    driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/nav/span/ul/li[2]/a")).click();
+	    driver.findElement(By.linkText("Expand All")).click(); 
+		   Thread.sleep(2000);
+		   
+		   
+	    
+	    Select ROSPain = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[2]/div[1]/div[2]/div[1]/div/div/select")));
+	    ROSPain.selectByIndex(1);
+	    Thread.sleep(4000);
+	    Select ROSVPS = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[2]/div[1]/div[2]/div[2]/span/div/div/select")));
+	    ROSVPS.selectByIndex(1);
+	   
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[1]/div[2]/span/fieldset/div/div/input")).click();
+	    Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[2]/div[2]/span/fieldset/div/div/input")).click();
+	     Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[2]/div[2]/div[2]/span/fieldset/div/div/input")).click();
+	    Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[2]/div[3]/div[2]/span/fieldset/div/div/input")).click();
+	   			    Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[3]/div[2]/span/fieldset/div/div/input")).click();
+	     Thread.sleep(3000);
+	    
+	    driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[2]/div[4]/div[2]/span/fieldset/div/div/input")).click();
+	   			    Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[4]/div[2]/span/fieldset/div/div/input")).click();
+	     Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[2]/div[5]/div[2]/span/fieldset/div/div/input")).click();
+	  	    Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[5]/div[2]/span/fieldset/div/div/input")).click();
+	     Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[2]/div[6]/div[2]/span/fieldset/div/div/input")).click();
+	     Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[6]/div[2]/span/fieldset/div/div/input")).click();
+	      Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[2]/div[7]/div[2]/span/fieldset/div/div/input")).click();
+	    Thread.sleep(3000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[7]/div[2]/span/fieldset/div/div/input")).click();
+	    Thread.sleep(5000);
+	    
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[2]/div[8]/div[2]/div[1]/div/input")).click();
+	   Thread.sleep(3000);
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[2]/div[8]/div[2]/div[2]/div/input")).click();
+	    Thread.sleep(5000);
+	   			    
+	   
+	   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[3]/div[8]/div[2]/span/fieldset/div/div/input")).click();
+	    Thread.sleep(3000);
+	   
+	  driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/div[2]/div[4]/div[2]/div/div/textarea")).sendKeys("Testing123");
+	  Thread.sleep(2000); 
+	    
+	    //driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[2]/ul/li/div[4]/button[1]")).click();
+	    Thread.sleep(2000);
+	    
+	    
+	//PE
+	    driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/nav/span/ul/li[3]/a")).click();
+	    driver.findElement(By.linkText("Expand All")).click(); 
+		   Thread.sleep(2000);
+	
+	
+		   Select PE1 = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[2]/div[1]/div[2]/span/div[1]/div/select")));
+		   PE1.selectByIndex(1);
+		   Select PE2 = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[2]/div[1]/div[2]/span/div[2]/div/select")));
+		   PE2.selectByIndex(1);
+		   
+		   Select PE3 = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[1]/div/div/select")));
+		   PE3.selectByIndex(1);
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[1]/div/input")).sendKeys("Testing123");
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[3]/div/input")).sendKeys("Testing123");
+		   
+		   Select PE4 = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[4]/div/select")));
+		   PE4.selectByIndex(1);
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[9]/div/input")).sendKeys("Testing123");
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[10]/div/input")).sendKeys("Testing123");
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[13]/div/input")).sendKeys("Testing123");
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[1]/div/span[2]/span[2]/div/form/span/div[2]/div[3]/div[1]/div[2]/span[2]/div[14]/div/input")).sendKeys("Testing123");
+		   
+		   //driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[2]/ul/li/div[2]/button[1]")).click();
+		    Thread.sleep(2000);*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+				
+//Authorization		View edit are not from engagement and could not find link up with engagement
+		/*WebElement webElementcon = driver.findElement(By.linkText("Authorization"));//You can use xpath, ID or name whatever you like
+		 webElementcon.sendKeys(Keys.TAB);
+		 webElementcon.sendKeys(Keys.ENTER);	   
+		  				   
+		   Thread.sleep(2000);
+		   driver.findElement(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']")).click();
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div[2]/div[3]/table/tbody/tr[23]/td[2]/div/span/input")).sendKeys("testContact_26_08_23_47");	   
+		
+		   driver.findElement(By.xpath("//input[@value=' Save ']")).click();*/
+		
+		  /* Thread.sleep(3000);
+		   driver.findElement(By.linkText("View")).click();
+		   Thread.sleep(2000);
+		   driver.findElement(By.xpath("//input[@value='Cancel']")).click();				   
+		   Thread.sleep(3000);
+		 driver.findElement(By.linkText("Edit")).click();  
+		 Thread.sleep(3000);
+		 driver.findElement(By.xpath("//input[@value='Cancel']")).click();*/
+		
+		  
+		
+//In-Patient Stay	View edit are not from engagement and could not find link up with engagement
+		
+		/*WebElement webElementcon = driver.findElement(By.linkText("In-Patient Stay"));//You can use xpath, ID or name whatever you like
+		 webElementcon.sendKeys(Keys.TAB);
+		 webElementcon.sendKeys(Keys.ENTER);	   
+		  				   
+		   Thread.sleep(2000);
+		   driver.findElement(By.xpath("//input[@value='Add In-Patient Stay']")).click();
+		   
+		   //driver.findElement(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']")).click();
+		   Thread.sleep(2000);
+		   Select Inpatstay1= new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div/div[1]/div[2]/div[3]/div/div/select")));
+		   Inpatstay1.selectByIndex(1); 
+		   
+		   
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div/div[1]/div[2]/div[4]/div/div/span/input")).sendKeys("testContact_26_08_23_47");
+		   Select Inpatstay2= new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div/div[1]/div[3]/div[1]/div/div/select")));
+		   Inpatstay2.selectByIndex(1); 
+		   
+		   Calendar cal2 = Calendar.getInstance();
+		   int todayDate2 = cal2.get(Calendar.DAY_OF_MONTH);
+		   if(todayDate2<10){
+			 todayDate2=Integer.valueOf("0"+todayDate2); 
+		   }
+		   int tomorrowDate2 = todayDate2+1;
+		   int yesterdaydate2=todayDate2-1;
+		   
+		   int yesterdaydatedup2=todayDate2-2;
+		   int month12=cal2.get(Calendar.MONTH);
+		   int month22=month12+1;
+		   int Year12=cal2.get(Calendar.YEAR);
+		   String today12=String.valueOf(yesterdaydate2);
+		   if ((todayDate2==1)||(todayDate2==2)){
+			   yesterdaydate2 = 30;
+			   yesterdaydatedup2 = 30;
+			   today12=month12 +"/"+yesterdaydate2+"/"+Year12;
+			   String todaydup1=month12 +"/"+yesterdaydatedup2+"/"+Year12;
+		   } else {
+		   today12=month22 +"/"+yesterdaydate2+"/"+Year12;
+		   todaydup1=month22 +"/"+yesterdaydatedup2+"/"+Year12;
+		   String todayex1=month22 +"/"+todayDate2+"/"+Year12;
+		   
+		   }
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div/div[1]/div[3]/div[5]/div/div/span/input")).sendKeys(today12);
+		   
+		   driver.findElement(By.xpath("//input[@value='Cancel']")).click();
+		   
+		   
+		   Thread.sleep(3000);
+		   driver.findElement(By.linkText("View")).click();
+		   Thread.sleep(2000);
+		   driver.findElement(By.xpath("//input[@value='Cancel']")).click();				   
+		   Thread.sleep(3000);
+		 driver.findElement(By.linkText("Edit")).click();  
+		 Thread.sleep(3000);
+		 driver.findElement(By.xpath("//input[@value='Cancel']")).click();
+		
+		 Thread.sleep(2000); */
+		
+		
+		
+
+		   
+//Patient Visit/Contact Schedule  page moving to home page so view and edit not available as no link with engagement
+		
+	/*	WebElement webElementcon = driver.findElement(By.linkText("Patient Visit/Contact Schedule"));//You can use xpath, ID or name whatever you like
+		 webElementcon.sendKeys(Keys.TAB);
+		 webElementcon.sendKeys(Keys.ENTER);	   
+		  				   
+		   Thread.sleep(2000);
+		   driver.findElement(By.xpath("//input[@value='New Visit']")).click();
+		   Thread.sleep(2000);
+		   //driver.findElement(By.xpath("//div/a[@class='slds-button slds-button--brand btnColor']")).click();
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div/div[2]/table/tbody/tr[1]/td/input")).sendKeys("Send Letter");
+		   
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div/div[2]/table/tbody/tr[3]/td/div/div[2]/span/input")).sendKeys("Clinical Support (CS)");
+		   
+		   driver.findElement(By.xpath("//input[@value='Save']")).click();
+		   Thread.sleep(3000);
+		   
+		   //ViewEdit
+		   driver.findElement(By.linkText("View")).click();
+		   Thread.sleep(2000);
+		   driver.findElement(By.xpath("//input[@value='Cancel']")).click();				   
+		   Thread.sleep(3000);
+		 driver.findElement(By.linkText("Edit")).click();  
+		 Thread.sleep(3000);
+		 driver.findElement(By.xpath("//input[@value='Cancel']")).click();
+		
+		 Thread.sleep(2000);  */
+		   
+		   
+
+
+	

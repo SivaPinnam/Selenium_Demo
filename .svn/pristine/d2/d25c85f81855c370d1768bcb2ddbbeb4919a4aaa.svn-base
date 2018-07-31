@@ -1,0 +1,15 @@
+#Created By : Persistent Automation Team
+#Created on: 12/23/2016
+#Modified on:
+
+#@SmokeTest
+Feature: CreateClient
+
+ Scenario: Create a new Engagement
+Given user is logged in with valid credentials
+When user creates new Client
+When user create new Clinical Prgram 
+When user create new Client Clinical Program
+When user create Campaign 
+
+

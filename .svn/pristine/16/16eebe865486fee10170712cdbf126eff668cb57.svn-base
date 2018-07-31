@@ -1,0 +1,39 @@
+#Created By : Persistent Automation Team
+#Created on: 12/6/2016
+#Modified on:12/22/2016
+
+@SmokeTest
+Feature: Fall Risk
+
+  Scenario: To add a new Fall Risk and validates that note gets added.
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+    And clicks on Engagement id
+    When user clicks on Fall Risk tab
+    Then validates that Fall Risk tab is displayed
+    When User clicks on Add Fall Risk button
+    Then validates that Fall Risk form is displayed
+    And clicks on Cancel button on Fall Risk form
+    Then validates that user should land on Fall Risk list page
+    Then validates that new Fall Risk is not created
+    When User clicks on Add Fall Risk button
+    Then validates that Fall Risk form is displayed
+    And clicks on Save button on Fall Risk Page
+    Then validates that user should gets validation message on Fall Risk Page
+    And selects value for Mental Status on Fall Risk Page
+    And selects value for Mobility Status on Fall Risk Page
+    And selects value for Elimination Status on Fall Risk Page
+    And clicks on Save button on Fall Risk Page
+    Then validate Confirmation message on Fall Risk Page
+    Then validate that Fall Risk is created
+
+    When clicks on View link for Fall Risk
+    Then validates that Fall Risk form is displayed for View
+    Then verify all the fields are disabled on View Fall Risk page
+    And validates that fields on View form for Fall Risk
+    And clicks on Cancel button on Fall Risk form
+    Then validates that user should land on Fall Risk list page
+    And close current tab for Fall Risk
+
+
+   

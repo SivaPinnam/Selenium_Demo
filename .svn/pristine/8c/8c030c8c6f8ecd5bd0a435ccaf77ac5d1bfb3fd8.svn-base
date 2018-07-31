@@ -1,0 +1,61 @@
+# Created By: Persistent Automation Team
+# Created On: 11/23/2016
+# Modified On: 01/12/2017
+@SmokeTest
+Feature: DME Order
+
+Background:
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+    And clicks on Engagement id
+    When user clicks on Orders tab
+    Then validates that Orders tab is displayed
+
+  Scenario: To add a new order of type DME and validates that a new order gets added.
+    # Cancelling DME Order after adding
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+    And clicks on Engagement id
+    When user clicks on Orders tab
+    Then validates that Orders tab is displayed
+    When user adds Order type "DME"
+    Then validates that DME order page is displayed
+    When user enters value for Entered By field
+    And enters value for ORDERED field of DME order page
+    And enters value for ORDERING PROVIDER field of DME order page
+    And enters value for VENDER/PROVIDER of DME order page
+    And enters value for TELEPHONIC DIAGNOSIS of DME order page
+    And enters value for VENDOR/PROVIDER PHONE of DME order page
+    And clicks on Cancel button on DME order page
+    And navigates to Engagement tab
+    And clicks on Engagement id
+    When user clicks on Orders tab
+    Then validates that Orders tab is displayed
+    Then validates that new DME Order is not created
+    # Saving DME Order after adding
+    When user adds Order type "DME"
+    Then validates that DME order page is displayed
+    When user enters value for Entered By field
+    And enters value for ORDERED field of DME order page
+    And enters value for ORDERING PROVIDER field of DME order page
+    And enters value for VENDER/PROVIDER of DME order page
+    And enters value for TELEPHONIC DIAGNOSIS of DME order page
+    And enters value for VENDOR/PROVIDER PHONE of DME order page
+    And uploads file for DME order on DME order page
+    And clicks on Save button on DME order page
+    When user clicks on Orders tab
+    Then validates that Orders tab is displayed
+    Then validates that new DME Order is created successfully
+  Scenario: To view DME order and validates user provided values on Consumer Page
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+    And clicks on Consumer tab
+    When user clicks on Orders tab on Consumer details page
+    When clicks on View link for Record type "DME" and Approve type "Yes" of Consumer
+    Then validates that DME order page is displayed on Consumer details page
+    And validate that value for Ordering Provider of DME order page on Consumer details page
+    And validate that value for Vendor/Provider of DME order page on Consumer details page
+    And validate that value for Telephonic Diagnosis of DME order page on Consumer details page
+    And validate that value for Vendor/Provider Phone of DME order page on Consumer details page
+    And validate that new file has been uploaded on DME order page on Consumer details page
+    Then clicks on Cancel button on DME order page on Consumer details page

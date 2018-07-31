@@ -1,0 +1,491 @@
+/*Created By: Persistent Automation Team
+Created On: 12/05/2016
+Modified On: 12/22/2016 
+*/
+
+package com.pathway.scripts;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import com.thoughtworks.selenium.Wait.WaitTimedOutException;
+
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Add_In_Patient_Stay_Page extends SeleniumFunctions {
+
+	// locators
+	By in_patient_stay_tab = By.xpath("//*[contains(@href,'#InpatientStays')]");
+	By add_In_patient_stay_button = By.xpath("//*[contains(@value,'Add In-Patient Stay')]");
+	By page_text_in_patient_stay_form = By.xpath("//*[contains(@class,'slds-text-heading--large')]");
+	By facility_lookup = By.xpath("//img[@title='Facility Lookup (New Window)']");
+	By facility_text = By.xpath("//img[@title='Facility Lookup (New Window)']//preceding::input[1]");
+	By admit_date_calender = By.xpath("//*[@id='Page:frm:pb1:admitDate']");
+	By discharge_date_calender = By.xpath("//*[@id='Page:frm:pb1:DischargeDate']");
+	By discharge_notification_date_calender = By.xpath("//*[@id='Page:frm:pb1:DND']");
+	By discharge_to_dropdown = By.xpath("//*[@id='Page:frm:pb1:DT']");
+	By patient_stay_list = By.xpath("//*[contains(@class,'list _dataTable popuptableJQ dataTable no-footer')]");
+	By cancel_button_in_patient_stay = By.xpath("//*[contains(@value,'Cancel')]");
+	By save_button_in_patient_stay = By.xpath("//*[contains(@value,'Save')]");
+	By save_new_button_in_patient_stay = By.xpath("//*[contains(@value,'Save & New')]");
+	By search_field = By.xpath(".//*[@id='lksrch']");
+	By go_button = By.xpath(".//*[contains(@class,'btn')]");
+	By row_count = By.xpath(".//*[contains(@class,'dataTables_info')]");
+	By add_in_stay_list = By.xpath(".//*[contains(@class,'list _dataTable dataTable no-footer')]");
+	By back_to_related_list = By.linkText("<< Back to Related list");
+	By view_link = By.linkText("View");
+	By spinnerImg = By.xpath("//*[@class='spinner']");
+	By admit_type=By.xpath("//div[contains(.,'Admit Type')]");
+	By admit_type_filter = By.xpath("//*[contains (@aria-label, 'Admit Type')]");
+	//For Stage Environment 
+	By status_dropdown = By.xpath("//*[contains(text(),'Facility')]//preceding::select[1]");
+	By type_of_admission_dropdown = By.xpath("//*[contains(text(),'Facility')]//following::select[1]");
+	//**End Stage Environment
+	
+	//** For QA Environment
+	//By status_dropdown = By.xpath("//*[contains(@id,'Page:frm:pb1:j_id78')]");
+	//By type_of_admission_dropdown = By.xpath("//*[contains(@id,'Page:frm:pb1:j_id83')]");
+	//** End QA Environment
+
+	// data
+	String excel_file = "files//In-Patient Stay.xlsx";
+	String sheet_name = "Add_In-Patient Stay";
+
+	// Data for Add Order with Save Button
+	String status_in_patient_stay = Excel.readFromExcel(excel_file, sheet_name, 1, 0);
+	String facility_in_patient_stay = Excel.readFromExcel(excel_file, sheet_name, 1, 1);
+	String type_of_admission_in_patient_stay = Excel.readFromExcel(excel_file, sheet_name, 1, 2);
+	String discharge_to_field_in_patient_stay = Excel.readFromExcel(excel_file, sheet_name, 1, 3);
+	String admit_date = Excel.readFromExcel(excel_file, sheet_name, 1, 4);
+	String discharge_date = Excel.readFromExcel(excel_file, sheet_name, 1, 5);
+	String discharge_notification_date = Excel.readFromExcel(excel_file, sheet_name, 1, 6);
+
+	// Data for Add Order with Save & New Button
+	String status_in_patient_stay_save_and_new = Excel.readFromExcel(excel_file, sheet_name, 4, 0);
+	String facility_in_patient_stay_save_and_new = Excel.readFromExcel(excel_file, sheet_name, 4, 1);
+	String type_of_admission_in_patient_stay_save_and_new = Excel.readFromExcel(excel_file, sheet_name, 4, 2);
+	String discharge_to_field_in_patient_stay_save_and_new = Excel.readFromExcel(excel_file, sheet_name, 4, 3);
+	String admit_date_save_and_new = Excel.readFromExcel(excel_file, sheet_name, 4, 4);
+	String discharge_date_save_and_new = Excel.readFromExcel(excel_file, sheet_name, 4, 5);
+	String discharge_notification_date_save_and_new = Excel.readFromExcel(excel_file, sheet_name, 4, 6);
+
+	// Fields for Save & New Form
+	By input_facility_text = By.xpath("//*[contains(@class,'lookupInput slds-input')]");
+	By status_dropdown_text = By.xpath("//*[contains(text(),'Facility')]//preceding::select[1]/option[1]");
+	By type_of_admission_dropdown_text = By.xpath("//*[contains(text(),'Facility')]//following::select[1]/option[1]");
+	By discharge_to_dropdown_text = By.xpath("//*[@id='Page:frm:pb1:DT']/option[1]");
+
+	// view page
+	By status_dropdown_view = By.xpath("//*[contains(@for,'Status')]//following::span[1]");
+	By facility_in_patient_stay_view = By.xpath("//label[text()='Facility']//following::span[1]");
+	By type_of_admission_in_patient_stay_view = By.xpath("//*[contains(@for,'TOA')]//following::span[1]");
+	By admit_icd_code_view = By.xpath("//label[text()='Admit ICD Code']//following::span[1]");
+	By admit_dx_view = By.xpath("//*[contains(@for, 'AdmitDx')]//following::span[1]");
+	By admit_date_view = By.xpath("//label[text()='Admit Date']//following::span[1]");
+	By discharge_date_view = By.xpath("//*[contains(@for, 'DischargeDate')]//following::span[1]");
+	By discharge_notification_date_view = By.xpath("//*[contains(@for, 'DND')]//following::span[1]");
+	By discharge_to_view = By.xpath("//*[contains(@for, 'DT')]//following::span[1]");
+
+	// class variable
+	int countAfterCancel;
+	int countBeforeAdd;
+	int countAfterSave;
+	int countAfterNewSave;
+	int count;
+	String dropDownFirstValue = "--None--";
+
+	@When("^user clicks on In-Patient Stay tab$")
+	public void user_clicks_on_in_patient_stay_tab() {
+		wait(3);
+		click(in_patient_stay_tab);
+	}
+
+	@Then("^validates that In-Patient Stay tab is displayed$")
+	public void validates_that_in_patient_stay_tab_is_displayed() {
+		wait(5);
+		waitForElementToDisappear(spinnerImg);
+		verifyElementExists("Add In-Patient Stay button is visible.", add_In_patient_stay_button);
+		System.out.println("User is on the Add In-Patient Stay page");
+	}
+
+	@When("^user clicks on Add In-Patient Stay button$")
+	public void user_clicks_on_add_In_patient_stay_button() {
+		wait(5);
+		String calculatedCountBeforeAdd = getText(row_count);
+		countBeforeAdd = Integer
+				.parseInt(calculatedCountBeforeAdd.substring(calculatedCountBeforeAdd.lastIndexOf("of") + 3));
+		System.out.println("before row count " + countBeforeAdd);
+		click(add_In_patient_stay_button);
+	}
+
+	@Then("^validates that In-Patient Stay page is displayed$")
+	public void validates_that_In_Patient_Stay_page_is_displayed() {
+
+		verifyValues("In-Patient Stay form is displayed.", "In-Patient Stay", getText(page_text_in_patient_stay_form));
+	}
+
+	@When("^user selects value for Status By field$")
+	public void user_selects_value_for_Status_By_field() {
+		selectByVisibleText(status_dropdown, status_in_patient_stay);
+		System.out.println("Values are " + status_in_patient_stay);
+	}
+
+	@When("^enters value for Facility field of In-Patient Stay page$")
+	public void enters_value_for_Facility_field_of_In_Patient_Stay_page() {
+		click(facility_lookup);
+		String parentHandle = getWindowHandle();
+		for (String childHandle : getWindowHandles()) {
+			if (!parentHandle.equals(childHandle)) {
+				switchToWindow(childHandle);
+				switchToFrame("searchFrame");
+				enter(search_field, facility_in_patient_stay);
+				click(go_button);
+				driver.switchTo().defaultContent();
+				switchToFrame("resultsFrame");
+				driver.findElement(By.partialLinkText(facility_in_patient_stay)).click();
+				switchToWindow(parentHandle);
+			}
+		}
+		facility_in_patient_stay = findElement(facility_text).getAttribute("value");
+		System.out.println("Entered value for Facility");
+
+	}
+
+	@When("^selects value for Type of Admission field of In-Patient Stay page$")
+	public void selects_value_for_Type_of_Admission_field_of_In_Patient_Stay_page() {
+
+		selectByVisibleText(type_of_admission_dropdown, type_of_admission_in_patient_stay);
+		System.out.println("Values are " + type_of_admission_in_patient_stay);
+	}
+
+	@When("^enters value for Admit Date field of In-Patient Stay page$")
+	public void enters_value_for_Admit_Date_field_of_In_Patient_Stay_page() {
+
+		// Create object of SimpleDateFormat class and decide the format
+		DateFormat dateFormat = new SimpleDateFormat(admit_date);
+		Date date = new Date();
+		// Now format the date
+		String admit_date = dateFormat.format(date);
+		enter(admit_date_calender, admit_date);
+		// Print the Date
+		System.out.println("Admit date is " + admit_date);
+	}
+
+	@When("^enters value for Discharge Date field of In-Patient Stay page$")
+	public void enters_value_for_Discharge_Date_field_of_In_Patient_Stay_page() {
+
+		// Create object of SimpleDateFormat class and decide the format
+		DateFormat dateFormat = new SimpleDateFormat(discharge_date);
+		Date date = new Date();
+		// Now format the date
+		String discharge_date = dateFormat.format(date);
+		enter(discharge_date_calender, discharge_date);
+		// Print the Date
+		System.out.println("Discharge date is " + discharge_date);
+	}
+
+	@When("^enters value for Discharge Notification Date field of In-Patient Stay page$")
+	public void enters_value_for_Discharge_Notification_Date_field_of_In_Patient_Stay_page() {
+
+		// Create object of SimpleDateFormat class and decide the format
+		DateFormat dateFormat = new SimpleDateFormat(discharge_notification_date);
+		Date date = new Date();
+		// Now format the date
+		String discharge_notification_date = dateFormat.format(date);
+		enter(discharge_notification_date_calender, discharge_notification_date);
+		// Print the Date
+		System.out.println("Discharge Notification Date " + discharge_notification_date);
+	}
+
+	@When("^selects value for Discharge To field of In-Patient Stay page$")
+	public void selects_value_for_Discharge_To_field_of_In_Patient_Stay_page() {
+
+		selectByVisibleText(discharge_to_dropdown, discharge_to_field_in_patient_stay);
+		System.out.println("Values are " + discharge_to_field_in_patient_stay);
+	}
+
+	@When("^clicks on Cancel button on In-Patient Stay page$")
+	public void clicks_on_Cancel_button_on_In_Patient_Stay_page() {
+
+		click(cancel_button_in_patient_stay);
+	}
+
+	@When("^clicks on Save button on In-Patient Stay page$")
+	public void clicks_on_Save_button_on_In_Patient_Stay_page() {
+
+		click(save_button_in_patient_stay);
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 2);
+			wait.until(ExpectedConditions.alertIsPresent());
+			Alert alert = driver.switchTo().alert();
+			System.out.println("Alert text is " + alert);
+			alert.accept();
+		} catch (Exception e) {
+			// exception handling
+		}
+	}
+
+	@When("^clicks on Save New button on In-Patient Stay page$")
+	public void clicks_on_Save_New_button_on_In_Patient_Stay_page() {
+
+		click(save_new_button_in_patient_stay);
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 2);
+			wait.until(ExpectedConditions.alertIsPresent());
+			Alert alert = driver.switchTo().alert();
+			System.out.println("Alert text is " + alert);
+			alert.accept();
+		} catch (Exception e) {
+			// exception handling
+		}
+	}
+
+	@Then("^validates that new In-Patient Stay form appears with fields are available$")
+	public void validates_that_new_In_Patient_Stay_form_appears_with_fields_are_available() {
+
+		verifyValues("Status dropdown list value has not been changed", dropDownFirstValue.replaceAll("-", ""),
+				getText(status_dropdown_text).replaceAll("-", ""));
+		verifyValues("Facility value has not been changed", "", getText(input_facility_text));
+		verifyValues("Type of Admission value has not been changed", dropDownFirstValue.replaceAll("-", ""),
+				getText(type_of_admission_dropdown_text).replaceAll("-", ""));
+		verifyValues("Admit Date value has not been changed", "", getText(admit_date_calender));
+		verifyValues(" Discharge Date value has not been changed", "", getText(discharge_date_calender));
+		verifyValues("Discharge Notification Date value has not been changed", "",
+				getText(discharge_notification_date_calender));
+		verifyValues("Discharge To value has not been changed", dropDownFirstValue.replaceAll("-", ""),
+				getText(discharge_to_dropdown_text).replaceAll("-", ""));
+		click(cancel_button_in_patient_stay);
+	}
+
+	@Then("^validates that new In-Patient Stay record is not created$")
+	public void validates_that_new_In_Patient_Stay_record_is_not_created() {
+
+		String calculatedCountAfterCancel = getText(row_count);
+		countAfterCancel = Integer
+				.parseInt(calculatedCountAfterCancel.substring(calculatedCountAfterCancel.lastIndexOf("of") + 3));
+		System.out.println("before row count " + countBeforeAdd);
+		System.out.println("Previous Order count in order table is: " + countBeforeAdd);
+		System.out.println("After Cancel, Order count in order table is: " + countAfterCancel);
+		verifyValues("New In-Patient Stay record created after Cancel operation", countAfterCancel, countBeforeAdd);
+		System.out.println("Record has not been added");
+
+	}
+
+	@Then("^validates that new In-Patient Stay record is created$")
+	public void validates_that_new_In_Patient_Stay_record_is_created() {
+		String calculatedCountAfterSave = getText(row_count);
+		countAfterSave = Integer
+				.parseInt(calculatedCountAfterSave.substring(calculatedCountAfterSave.lastIndexOf("of") + 3));
+		System.out.println("Previous Order count in order table is: " + countBeforeAdd);
+		System.out.println("After Save, Order count in order table is: " + countAfterSave);
+		countBeforeAdd++;
+		verifyValues("New In-Patient Stay record is not created successfully", countAfterSave, countBeforeAdd);
+		System.out.println("In-Patient Stay record  Created Successfully after clicking on Save button");
+
+	}
+
+	@When("^user selects value for Status By field for \"([^\"]*)\" button$")
+	public void user_selects_value_for_Status_By_field_for_button(String arg1) {
+
+		selectByVisibleText(status_dropdown, status_in_patient_stay_save_and_new);
+		System.out.println("Values are " + status_in_patient_stay_save_and_new);
+	}
+
+	@When("^enters value for Facility field of In-Patient Stay page for \"([^\"]*)\" button$")
+	public void enters_value_for_Facility_field_of_In_Patient_Stay_page_for_button(String arg1) {
+		click(facility_lookup);
+		String parentHandle = getWindowHandle();
+		for (String childHandle : getWindowHandles()) {
+			if (!parentHandle.equals(childHandle)) {
+				switchToWindow(childHandle);
+				switchToFrame("searchFrame");
+				enter(search_field, facility_in_patient_stay_save_and_new);
+				click(go_button);
+				driver.switchTo().defaultContent();
+				switchToFrame("resultsFrame");
+				driver.findElement(By.linkText(facility_in_patient_stay_save_and_new)).click();
+				switchToWindow(parentHandle);
+			}
+		}
+		System.out.println("Entered value for Facility");
+	}
+
+	@When("^selects value for Type of Admission field of In-Patient Stay page for \"([^\"]*)\" button$")
+	public void selects_value_for_Type_of_Admission_field_of_In_Patient_Stay_page_for_button(String arg1) {
+
+		selectByVisibleText(type_of_admission_dropdown, type_of_admission_in_patient_stay_save_and_new);
+		System.out.println("Values are " + type_of_admission_in_patient_stay_save_and_new);
+	}
+
+	@When("^enters value for Admit Date field of In-Patient Stay page for \"([^\"]*)\" button$")
+	public void enters_value_for_Admit_Date_field_of_In_Patient_Stay_page_for_button(String arg1) {
+
+		// Create object of SimpleDateFormat class and decide the format
+		DateFormat dateFormat = new SimpleDateFormat(admit_date_save_and_new);
+		Date date = new Date();
+		// Now format the date
+		String admit_date_save_and_new = dateFormat.format(date);
+		enter(admit_date_calender, admit_date_save_and_new);
+		// Print the Date
+		System.out.println("Admit date is " + admit_date_save_and_new);
+
+	}
+
+	@When("^enters value for Discharge Date field of In-Patient Stay page for \"([^\"]*)\" button$")
+	public void enters_value_for_Discharge_Date_field_of_In_Patient_Stay_page_for_button(String arg1) {
+
+		// Create object of SimpleDateFormat class and decide the format
+		DateFormat dateFormat = new SimpleDateFormat(discharge_date_save_and_new);
+		Date date = new Date();
+		// Now format the date
+		String discharge_date_save_and_new = dateFormat.format(date);
+		enter(discharge_date_calender, discharge_date_save_and_new);
+		// Print the Date
+		System.out.println("Discharge date is " + discharge_date_save_and_new);
+
+	}
+
+	@When("^enters value for Discharge Notification Date field of In-Patient Stay page for \"([^\"]*)\" button$")
+	public void enters_value_for_Discharge_Notification_Date_field_of_In_Patient_Stay_page_for_button(String arg1) {
+
+		// Create object of SimpleDateFormat class and decide the format
+		DateFormat dateFormat = new SimpleDateFormat(discharge_notification_date_save_and_new);
+		Date date = new Date();
+		// Now format the date
+		String discharge_notification_date_save_and_new = dateFormat.format(date);
+		enter(discharge_notification_date_calender, discharge_notification_date_save_and_new);
+		// Print the Date
+		System.out.println("Discharge Notification Date " + discharge_notification_date_save_and_new);
+	}
+
+	@When("^selects value for Discharge To field of In-Patient Stay page for \"([^\"]*)\" button$")
+	public void selects_value_for_Discharge_To_field_of_In_Patient_Stay_page_for_button(String arg1) {
+
+		selectByVisibleText(discharge_to_dropdown, discharge_to_field_in_patient_stay_save_and_new);
+		System.out.println("Values are " + discharge_to_field_in_patient_stay_save_and_new);
+	}
+
+	@Then("^validates that new In-Patient Stay record is created with Save&New button$")
+	public void validates_that_new_In_Patient_Stay_record_is_created_with_Save_New_button() {
+
+		String calculatedCountAfterNewSave = getText(row_count);
+		countAfterNewSave = Integer
+				.parseInt(calculatedCountAfterNewSave.substring(calculatedCountAfterNewSave.lastIndexOf("of") + 3));
+		System.out.println("Previous Order count in order table is: " + countAfterSave);
+		System.out.println("After Save, Order count in order table is: " + calculatedCountAfterNewSave);
+		countAfterSave++;
+		verifyValues("New In-Patient Stay record is not created successfully", countAfterNewSave, countAfterSave);
+		System.out.println("In-Patient Stay record  Created Successfully after clicking on Save&New button");
+
+	}
+
+	@Then("^validates newly added In-Patient Stay record$")
+	public void validates_newly_added_In_Patient_Stay_record() {
+
+		click(back_to_related_list);
+		wait(3);
+		WebElement table = findElement(add_in_stay_list);
+		List<WebElement> rows = table.findElements(By.tagName("td"));
+		for (int i = 0; i < rows.size();) {
+			String OrderEngagementTabDetail = rows.get(i).getText();
+			System.out.println(OrderEngagementTabDetail);
+			if (OrderEngagementTabDetail.contains("ViewEdit")) {
+				click(view_link);
+				break;
+			}
+
+		}
+
+		verifyValues("Status dropdown list value has not been changed", status_in_patient_stay,
+				getText(status_dropdown_view));
+		verifyValues("Facility value has not been changed", facility_in_patient_stay,
+				getText(facility_in_patient_stay_view));
+		verifyValues("Type of Admission value has not been changed", type_of_admission_in_patient_stay,
+				getText(type_of_admission_in_patient_stay_view));
+		verifyValues("Admit Date value has not been changed", admit_date, getText(admit_date_view));
+		verifyValues(" Discharge Date value has not been changed", discharge_date, getText(discharge_date_view));
+		verifyValues("Discharge Notification Date value has not been changed", discharge_notification_date,
+				getText(discharge_notification_date_view));
+		verifyValues("Discharge To value has not been changed", discharge_to_field_in_patient_stay,
+				getText(discharge_to_view));
+
+		click(cancel_button_in_patient_stay);
+
+	}
+
+	@Then("^validates newly added In-Patient Stay record for \"([^\"]*)\" button$")
+	public void validates_newly_added_In_Patient_Stay_record_for_button(String arg1) {
+		click(back_to_related_list);
+		wait(3);
+		click(admit_type_filter);
+		WebElement table = findElement(add_in_stay_list);
+		List<WebElement> rows = table.findElements(By.tagName("td"));
+		for (int i = 0; i < rows.size();) {
+			String OrderEngagementTabDetail = rows.get(i).getText();
+			System.out.println(OrderEngagementTabDetail);
+			if (OrderEngagementTabDetail.contains("ViewEdit")) {
+				click(view_link);
+				break;
+			}
+
+		}
+
+		
+		verifyValues("Status dropdown list value has not been changed", status_in_patient_stay_save_and_new,
+				getText(status_dropdown_view));
+		verifyValues("Facility value has not been changed", facility_in_patient_stay_save_and_new,
+				getText(facility_in_patient_stay_view));
+		verifyValues("Type of Admission value has not been changed", type_of_admission_in_patient_stay_save_and_new,
+				getText(type_of_admission_in_patient_stay_view));
+		verifyValues("Admit Date value has not been changed", admit_date_save_and_new, getText(admit_date_view));
+		verifyValues(" Discharge Date value has not been changed", discharge_date_save_and_new,
+				getText(discharge_date_view));
+		verifyValues("Discharge Notification Date value has not been changed", discharge_notification_date_save_and_new,
+				getText(discharge_notification_date_view));
+		verifyValues("Discharge To value has not been changed", discharge_to_field_in_patient_stay_save_and_new,
+				getText(discharge_to_view));
+
+		click(cancel_button_in_patient_stay);
+
+	}
+	
+	
+	public int get_row_number_of_patients_record(String type_of_admission_in_patient_stay_save_and_new) {
+		wait(3);
+		waitForElementtoBeVisible(add_in_stay_list);
+		WebElement table = findElement(add_in_stay_list);
+		List<WebElement> all_rows = table.findElements(By.tagName("tr"));
+		int count = -1;
+		for (int i = 0; i < all_rows.size(); i++) {
+			String record = all_rows.get(i).findElements(By.tagName("td")).get(0).getText();
+			System.out.println("Record is" + record);
+			if (record.contains(type_of_admission_in_patient_stay_save_and_new)) {
+				count = i;
+				return count;
+			}
+		}
+		return count;
+	}
+
+	@When("^user clicks on View link of In-Patient Stay")
+	public void user_clicks_on_View_link_of_In_Patient_Stay() {
+    	int count = get_row_number_of_patients_record(type_of_admission_in_patient_stay_save_and_new);
+		System.out.println(count);
+		getElementList(view_link).get(count).click();
+		wait(3);
+	}
+
+
+}

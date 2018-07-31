@@ -1,0 +1,63 @@
+#Created By: Persistent Automation Team
+#Created on:11/30/2016
+#Modified on :12/22/2016
+@SmokeTest
+Feature: Add & View Engagement details - CAGE Survey and view Consumer-CAGE Survey
+
+  Background: 
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+
+  Scenario: To 'Save' Add Survey of type CAGE Survey.
+  	And clicks on Engagement id
+    When user clicks on Surveys tab
+    Then validates that Surveys tab is displayed
+    # User clicks on Add Survey button
+    When user adds Survey type "CAGE Survey"
+    Then validates that CAGE Survey form is displayed
+    And selects date for CAGE Survey
+    # Two positive responses are considered a positive test and indicate further assessment is warranted
+    And selects Have you felt you should cut down on your drinking? as Yes
+    And Select Have others annoyed you by criticizing your drinking? as Yes
+    And selects Have you ever felt guilty about your drinking? as Yes
+    And Select Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover? as Yes
+    And Click on Calculate Score Button
+    And clicks on Save button for CAGE Survey
+    And user clicks on Surveys tab
+    Then validates that Surveys tab is displayed
+    Then validates that new "CAGE Survey" Survey is created
+    Then validate that Add Survey Status for type "CAGE Survey" is "In Progress"
+    When navigates to Engagement tab
+    And clicks on Engagement id
+    And user clicks on Surveys tab
+    Then validates that Surveys tab is displayed
+    When clicks on View link for Record type "CAGE Survey" and status "In Progress"
+    Then validates that CAGE Survey details page displayed
+    Then validates Consumer field
+    Then validates Gender field
+    Then validates Updated Date field
+    Then validates that Refused radio button as No is selected
+    And validates Have you felt you should cut down on your drinking? as Yes is selected
+    And validates Have others annoyed you by criticizing your drinking? as Yes is selected
+    And validates Have you ever felt guilty about your drinking? as Yes is selected
+    And validates Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover? as Yes is selected
+    Then validates Updated Total Score
+    And user clicks on Cancel button
+    Then validates that Surveys tab is displayed
+
+  Scenario: View Consumer-CAGE Survey
+    And clicks on Consumer tab
+    And user clicks on Surveys tab
+    And user clicks on Show More link in Surveys Page.
+    When clicks on View link for Record type "CAGE Survey" and status "In Progress"
+    Then validates that CAGE Survey details page displayed
+    Then validates Consumer field
+    Then validates Gender field
+    Then validates Date field
+    And validates Have you felt you should cut down on your drinking? as Yes is selected
+    And validates Have others annoyed you by criticizing your drinking? as Yes is selected
+    And validates Have you ever felt guilty about your drinking? as Yes is selected
+    And validates Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover? as Yes is selected
+    And validates Updated Total Score while adding Cage Survey.
+    And user clicks on Cancel button
+    Then validates that Survey tab is displayed

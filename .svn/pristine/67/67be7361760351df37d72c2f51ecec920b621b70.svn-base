@@ -1,0 +1,358 @@
+/*#Created By : Persistent Automation Team
+#Created on: 12/6/2016
+#Modified on:12/16/2016*/
+
+package com.pathway.scripts;
+
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Fall_Risk_Page extends SeleniumFunctions {
+
+	// Locators :-
+	By engagements_tab = By.linkText("Engagements");
+	By fall_risk_tab = By.xpath("//a[text()='Fall Risk']");
+	By add_fall_risk_button = By
+			.xpath("//a[@class='slds-button slds-button--brand btnColor' and text()='Add Fall Risk' ]");
+	By fall_risk_assessment_text = By.xpath("//h1[@class='slds-text-heading--medium']");
+	By fall_risk_text = By.xpath("//h2[text()='Fall Risk']");
+	By validation_text = By.xpath("//h4[text()='Error:']");
+	By mental_status_field_edit = By.xpath("//*[@id='j_id0:frm']//tr[3]//select");
+	By mobility_status_field_edit = By.xpath("//*[@id='j_id0:frm']//tr[4]//select");
+	By elimination_status_field_edit = By.xpath("//*[@id='j_id0:frm']//tr[5]//select");
+	By mental_status_field_disoriented = By
+			.xpath("//select[@name='j_id0:frm:j_id58:0:j_id60:2:j_id76']/option[text() = 'Disoriented']");
+	By disable_mental_status_field = By.xpath(".//*[@id='j_id0:frm:j_id58:0:j_id60:2:j_id75']/select");
+	By disable_mental_status_field_index = By.xpath(".//*[@id='j_id0:frm:j_id58:0:j_id60:2:j_id75']/select/option[4]");
+	By medical_or_other_reasons_checkbox = By.xpath(".//input[@id='j_id0:frm:j_id58:0:j_id60:0:j_id95:0:PStatus']");
+	By reason_not_assessed_textarea = By.xpath(".//textarea");
+	By mobility_status_field =By.xpath("//*[@id='j_id0:frm']//tr[4]//select");
+	By elimination_status_field =By.xpath("//*[@id='j_id0:frm']//tr[5]//select");
+	By disable_mobility_status_field = By.xpath(".//*[@id='j_id0:frm:j_id58:0:j_id60:3:j_id75']/select");
+	By disable_elimination_status_field = By.xpath(".//*[@id='j_id0:frm:j_id58:0:j_id60:4:j_id75']/select");
+	By cancel_button = By.xpath("//input[@type='submit' and @value='Cancel']");
+	By save_button = By.xpath("//input[@type='button' and @value='Save']");
+	By fallrisk_related_list = By
+			.xpath("//*[contains(@class,'list _dataTable')]");
+	By default_record = By.xpath("//span/div/div/table/tbody");
+	By back_to_related_list_link = By.xpath("//a[text()='<< Back to Related list']");
+	By selected_mental_status =By.xpath("//*[@id='j_id0:frm']//tr[3]//select");
+	By selected_mobility_status =By.xpath("//*[@id='j_id0:frm']//tr[4]//select");
+	By selected_elimination_status =By.xpath("//*[@id='j_id0:frm']//tr[5]//select");
+	By name_filter = By.xpath("//*[text()='Name']");
+	By edit_link = By.linkText("Edit");
+	By view_link = By.linkText("View");
+
+	// Data :-
+	String excel_file = "files//Fall_Risk.xlsx";
+	String sheet_name = "Sheet1";
+	String mental_Status = Excel.readFromExcel(excel_file, sheet_name, 1, 0);
+	String mobility_Status = Excel.readFromExcel(excel_file, sheet_name, 1, 1);
+	String elimination_Status = Excel.readFromExcel(excel_file, sheet_name, 1, 2);
+	String var_fall_risk_type = Excel.readFromExcel(excel_file, sheet_name, 1, 3);
+	String disoriented = Excel.readFromExcel(excel_file, sheet_name, 1, 4);
+	String assessment_name = Excel.readFromExcel(excel_file, sheet_name, 1, 5);
+
+	int record_Count;
+	int record_count_beforeAdd = 0;
+	String parent_handle;
+	int EXPECTED_ROW_COUNT = 1;
+
+	@When("^user clicks on Fall Risk tab$")
+	public void user_clicks_on_Fall_Risk_tab() {
+		wait(4);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		click(fall_risk_tab);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		waitForElementtoBeVisible(fall_risk_text);
+		click(engagements_tab);
+		new Engagement_Page().user_clicks_on_engagement_id();
+		wait(4);
+		click(fall_risk_tab);
+		wait(4);
+		new Common_Utility_Page().user_clicks_on_Show_More_link();
+		waitForElementtoBeVisible(back_to_related_list_link);
+		record_count_beforeAdd = get_FallRisk_Count(var_fall_risk_type);
+		wait(2);
+	}
+
+	@Then("^validates that Fall Risk tab is displayed$")
+	public void validates_that_Fall_Risk_tab_is_displayed() {
+		verifyelementText("Fall Risk tab is not displayed", fall_risk_text, "Fall Risk");
+
+	}
+
+	@When("^User clicks on Add Fall Risk button$")
+	public void user_clicks_on_Add_Fall_Risk_button() {
+		click(add_fall_risk_button);
+
+	}
+
+	public int get_FallRisk_Count(String var_fall_risk_type) {
+		record_Count = 0;
+		wait(5);
+		waitForElementtoBeVisible(fallrisk_related_list);
+		WebElement table = findElement(fallrisk_related_list);
+		List<WebElement> allRows = table.findElements(By.tagName("tr"));
+		if (allRows.size() > 0)
+			record_Count = allRows.size() - 1;
+		return record_Count;
+	}
+
+	@Then("^validates that Fall Risk form is displayed$")
+	public void validates_that_Fall_Risk_form_is_displayed() {
+		wait(2);
+		verifyelementText("Fall Risk form is not displayed", fall_risk_assessment_text, "Fall Risk Assessment");
+	}
+
+	@Then("^validates that user should land on Fall Risk list page$")
+	public void validates_that_user_should_land_on_Fall_Risk_list_page() {
+		wait(2);
+		verifyelementText("Fall Risk tab is not displayed", fall_risk_text, "Fall Risk");
+
+	}
+
+	@Then("^clicks on Cancel button on Fall Risk form$")
+	public void clicks_on_Cancel_button_on_Fall_Risk_form() {
+		click(cancel_button);
+
+	}
+
+	@Then("^clicks on Save button on Fall Risk Page$")
+	public void clicks_on_Save_button_on_Fall_Risk_Page() {
+		wait(2);
+		click(save_button);
+
+	}
+
+	@Then("^selects value for Mental Status on Fall Risk Page$")
+	public void enters_value_for_Mental_Status_on_Fall_Risk_Page() {
+		selectByVisibleText(mental_status_field_edit, mental_Status);
+
+	}
+
+	@Then("^selects value for Mobility Status on Fall Risk Page$")
+	public void enters_value_for_Mobility_Status_on_Fall_Risk_Page() {
+		selectByVisibleText(mobility_status_field, mobility_Status);
+
+	}
+
+	@Then("^selects value for Elimination Status on Fall Risk Page$")
+	public void enters_value_for_Elimination_Status_on_Fall_Risk_Page() {
+		selectByVisibleText(elimination_status_field, elimination_Status);
+
+	}
+
+	@Then("^validates that user should gets validation message on Fall Risk Page$")
+	public void validates_user_gets_validation_message_on_Fall_Risk_Page() {
+		verifyelementText("Validation message is not displayed", validation_text, "Error:");
+	}
+
+	@Then("^validate Confirmation message on Fall Risk Page$")
+	public void validate_Confirmation_message_on_Fall_Risk_Page() {
+		String alert_msg = switchToAlertAndGetText();
+		verifyValues("Confirmation message is not displayed successfully",
+				"Please Complete Fall Precautions if Appropriate.", alert_msg);
+		switchToAlertAndAccept();
+	}
+
+	@Then("^validate that Fall Risk is created$")
+	public void validate_that_Fall_Risk_is_created() {
+		new Common_Utility_Page().user_clicks_on_Show_More_link();
+		waitForElementtoBeVisible(back_to_related_list_link);
+		int record_count_afterAdd = get_FallRisk_Count(var_fall_risk_type);
+		System.out.println("Previous Fall Risk Record count in  table: " + record_count_beforeAdd);
+		System.out.println("After Save Fall Risk Reocord table is: " + record_count_afterAdd);
+		verifyValues("New Fall Risk is not created successfully", record_count_afterAdd, record_count_beforeAdd + 1);
+		System.out.println("New Fall Risk is created successfully");
+
+	}
+
+	@Then("^validates that new Fall Risk is not created$")
+	public void validates_that_new_Fall_Risk_is_not_created() {
+		new Common_Utility_Page().user_clicks_on_Show_More_link();
+		waitForElementtoBeVisible(back_to_related_list_link);
+		int record_count_afterCancel = get_FallRisk_Count(var_fall_risk_type);
+		System.out.println("Previous Fall Risk Record count in order table is: " + record_count_beforeAdd);
+		System.out.println("After Cancel, Fall Risk Record count in order table is: " + record_count_afterCancel);
+		verifyValues("New Fall Risk record created after Cancel operation", record_count_afterCancel,
+				record_count_beforeAdd);
+		System.out.println("New Fall Risk is not created after Cancel operation");
+	}
+
+	@When("^clicks on Edit link for Fall Risk$")
+	public void clicks_on_Edit_link_for_Fall_Risk_Record_type() {
+		click(edit_link);
+	}
+
+	public int get_order_number_by_subject(String assessment_name) {
+		wait(3);
+		WebElement table = findElement(fallrisk_related_list);
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		int index = -1;
+		for (int i = 0; i < rows.size(); i++) {
+			String record = rows.get(i).findElements(By.tagName("td")).get(2).getText();
+			System.out.println("Record is********" + record);
+			if (record.equals(assessment_name)) {
+				index = i;
+				break;
+			}
+		}
+		return index;
+	}
+
+	@Then("^validates that Fall Risk form is displayed for Edit$")
+	public void validates_that_Fall_Risk_form_is_displayed_for_Edit() {
+		parent_handle = getWindowHandle();
+		for (String child_window : getWindowHandles()) {
+			if (!parent_handle.equals(child_window)) {
+				switchToWindow(child_window);
+
+			}
+		}
+		verifyelementText("Fall Risk form not displayed ", fall_risk_assessment_text, "Fall Risk Assessment");
+
+	}
+
+	@Then("^validates that fields on edit form$")
+	public void validates_that_fields_on_edit_form() {
+
+		List<WebElement> selected_mental_list = getAllSelectedOptions(mental_status_field_edit);
+		boolean flag = false;
+		if (selected_mental_list.get(0).getText().contentEquals("Alert"))
+			flag = true;
+		verifyValues("Selected mental status is not expected", true, flag);
+
+		List<WebElement> selected_mobility_list = getAllSelectedOptions(mobility_status_field_edit);
+		flag = false;
+		if (selected_mobility_list.get(0).getText().contentEquals("Bed Bound"))
+			flag = true;
+		verifyValues("Selected mobility status is not expected", true, flag);
+
+		List<WebElement> selected_elimination_list = getAllSelectedOptions(elimination_status_field_edit);
+		flag = false;
+		if (selected_elimination_list.get(0).getText().contentEquals("Continent"))
+			flag = true;
+		verifyValues("Selected elimination status is not expected", true, flag);
+
+	}
+
+	@Then("^validates that fields on View form for Fall Risk$")
+	public void validates_that_fields_on_view_form() {
+
+		List<WebElement> selected_mental_list = getAllSelectedOptions(selected_mental_status);
+		boolean flag = false;
+		if (selected_mental_list.get(0).getText().contentEquals("Alert"))
+			flag = true;
+		verifyValues("Selected mental status is not expected", true, flag);
+
+		List<WebElement> selected_mobility_list = getAllSelectedOptions(selected_mobility_status);
+		flag = false;
+		if (selected_mobility_list.get(0).getText().contentEquals("Bed Bound"))
+			flag = true;
+		verifyValues("Selected mobility status is not expected", true, flag);
+
+		List<WebElement> selected_elimination_list = getAllSelectedOptions(selected_elimination_status);
+		flag = false;
+		if (selected_elimination_list.get(0).getText().contentEquals("Continent"))
+			flag = true;
+		verifyValues("Selected elimination status is not expected", true, flag);
+
+	}
+
+	@Then("^selects value for Mental Status as Disoriented on Fall Risk Page$")
+	public void selects_value_for_Mental_Status_as_Disoriented_on_Fall_Risk_Page() {
+		selectByVisibleText(mental_status_field_edit, disoriented);
+	}
+
+	@When("^clicks on View link for Fall Risk$")
+	public void clicks_on_View_link_for_Fall_Risk_Record_type() {
+		click(view_link);
+	}
+
+	@Then("^validates that Fall Risk form is displayed for View$")
+	public void validates_that_Fall_Risk_form_is_displayed_for_View() {
+		wait(3);
+		parent_handle = getWindowHandle();
+		System.out.println("Parent window is " + parent_handle);
+		for (String child_window : getWindowHandles()) {
+			if (!parent_handle.equals(child_window)) {
+				switchToWindow(child_window);
+			}
+		}
+		verifyelementText("Fall Risk form is not displayed successfully", fall_risk_assessment_text,
+				"Fall Risk Assessment");
+
+	}
+
+	@Then("^verify all the fields are disabled on View Fall Risk page$")
+	public void verify_all_the_fields_are_disabled_on_View_Fall_Risk_page() {
+		verifyValues("Mental Status field should disabled", false, isElementEnable(disable_mental_status_field));
+		verifyValues("Mobility Status field should disabled", false, isElementEnable(disable_mobility_status_field));
+		verifyValues("EliminationStatus field should disabled", false,
+				isElementEnable(disable_elimination_status_field));
+		verifyValues("Check box should should disabled", false, isElementEnable(medical_or_other_reasons_checkbox));
+		verifyValues("Reason not assessed textarea should disabled", false,
+				isElementEnable(reason_not_assessed_textarea));
+
+	}
+
+	@Then("^verify fields provided by user on Edit page for on View Fall Risk page$")
+	public void verify_fields_provided_by_user_on_Edit_page() {
+		List<WebElement> selected_mental_list = getAllSelectedOptions(selected_mental_status);
+		boolean flag = false;
+		if (selected_mental_list.get(0).getText().contentEquals(disoriented))
+			flag = true;
+		verifyValues("Selected mental status is not expected", true, flag);
+
+		List<WebElement> selected_mobility_list = getAllSelectedOptions(selected_mobility_status);
+		flag = false;
+		if (selected_mobility_list.get(0).getText().contentEquals("Bed Bound"))
+			flag = true;
+		verifyValues("Selected mobility status is not expected", true, flag);
+
+		List<WebElement> selected_elimination_list = getAllSelectedOptions(selected_elimination_status);
+		flag = false;
+		if (selected_elimination_list.get(0).getText().contentEquals("Continent"))
+			flag = true;
+		verifyValues("Selected elimination status is not expected", true, flag);
+
+	}
+
+	@When("^verify by defaults records for Fall Risk$")
+	public void verify_by_defaults_records() {
+		click(fall_risk_tab);
+		waitForElementtoBePresent(default_record);
+		get_default_records_fall_risk();
+	}
+
+	@When("^close current tab for Fall Risk$")
+	public void close_current_tab_for_Fall_Risk() {
+		closeCurrentTab();
+		switchToWindow(parent_handle);
+	}
+
+	@Then("^clicks on Back to Related list link$")
+	public void cliks_on_Back_to_Related_list_link() {
+		click(back_to_related_list_link);
+
+	}
+
+	public void get_default_records_fall_risk() {
+		WebElement table = findElement(default_record);
+		List<WebElement> allRows = table.findElements(By.tagName("tr"));
+		int cnt = allRows.size();
+		System.out.println("All rows count is: " + cnt);
+		boolean flag = false;
+		if (allRows.size() == EXPECTED_ROW_COUNT)
+			flag = true;
+		verifyValues("Default record size not expected", true, flag);
+
+	}
+
+}

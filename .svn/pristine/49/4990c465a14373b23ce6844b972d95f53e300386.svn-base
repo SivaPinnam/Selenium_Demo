@@ -1,0 +1,123 @@
+/**********
+*  Created By: Persistent Automation Team
+*  Created On: 12/02/2016
+*  Modified On: 12/22/2016
+**********/
+package com.pathway.scripts;
+
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Consumer_View_Orders_DME extends SeleniumFunctions {
+
+	By engagement_list = By.xpath("//*[@id='bodyCell']/div[3]/div[1]/div/div[2]/table");
+	By order_tab = By.xpath("//a[contains(@class, 'cons_Order')]");
+	By user_naval_label = By.xpath(".//*[contains(@id,'userNavLabel')]");
+	By order_list = By.xpath(".//*[contains(@class,'list _dataTable dataTable no-footer')]");
+	
+	By spinnerImg = By.xpath("//*[@class='spinner']");
+
+	// view page
+	By verify_approval_needed_column = By.xpath("//*[@id='pageid:formid']/div[3]/div[6]/div/div/span");
+	By view_ordered = By.xpath("//*[@id='pageid:formid:j_id55:j_id56:j_id73']/select");
+	By view_ordering_provider = By.xpath("//*[@id='pageid:formid']/div[2]/div[13]/div/div/span");
+	By view_telephonic_diagnosis = By.xpath("//*[@id='pageid:formid']/div[2]/div[12]/div/div/span");
+	By view_vender_provider = By.xpath("//*[@id='pageid:formid']/div[2]/div[19]/div/div/span");
+	//Stage
+	//By view_vender_provider_phone = By.xpath("//*[@id='pageid:formid:j_id139']/span");
+	//By file_body = By.id("pageid:formid:j_id183:j_id184:j_id187:j_id189:tb");
+	
+	
+	By view_file_upload = By.xpath("//*[@id='pageid:formid:j_id183:j_id184:j_id187:j_id189:0:j_id270']");
+ 
+	//for QA
+	By view_vender_provider_phone = By.xpath(".//*[@id='pageid:formid:j_id150']");
+	By file_body = By.id("pageid:formid:j_id194:j_id195:j_id198:j_id200:tb");
+	
+	// Data files
+
+	String excel_file = "files//Orders.xlsx";
+	String sheet_name = "DME_Order";
+
+	// Data files attribute
+	String ordered = Excel.readFromExcel(excel_file, sheet_name, 1, 0);
+	String vendor_provider_data = Excel.readFromExcel(excel_file, sheet_name, 1, 1);
+	String telephonic_diagnosis_data = Excel.readFromExcel(excel_file, sheet_name, 1, 2);
+	String vendor_phone = Excel.readFromExcel(excel_file, sheet_name, 1, 3);
+	String file_path_add = Excel.readFromExcel(excel_file, sheet_name, 1, 4);
+
+	@When("^user clicks on Orders tab on Consumer details page$")
+	public void user_clicks_on_Orders_tab_on_Consumer_details_page() {
+		wait(4);
+		waitForElementToDisappear(spinnerImg);
+		click(order_tab);
+		wait(4);
+		waitForElementToDisappear(spinnerImg);
+	}
+
+	@Then("^validates that DME order page is displayed on Consumer details page$")
+	public void validates_that_DME_order_page_is_displayed_on_Consumer_details_page() {
+		wait(5);
+		isElementExist(order_list);
+		System.out.println("Orders lists is displayed");
+	}
+
+	@Then("^validate that value for Ordering Provider of DME order page on Consumer details page$")
+	public void validate_that_value_for_Ordering_Provider_of_DME_order_page_on_Consumer_details_page() {
+		String OrderingProvider = getText(user_naval_label);
+		verifyelementText("Values has not succesfully selected for Ordering Provider of DME order page ",
+				view_ordering_provider, OrderingProvider);
+	}
+
+	@Then("^validate that value for Ordered of DME order page on Consumer details page$")
+	public void validate_that_value_for_Ordered_of_DME_order_page_on_Consumer_details_page() {
+		Select ordered = new Select(findElement(view_ordered));
+		List<WebElement> elementCount1 = ordered.getOptions();
+		for (WebElement webElement : elementCount1) {
+			System.out.println("You have chosen: '" + webElement.getText() + "' for Ordered.");
+		}
+	}
+
+	@Then("^validate that value for Vendor/Provider of DME order page on Consumer details page$")
+	public void validate_that_value_for_Vendor_Provider_of_DME_order_page_on_Consumer_details_page() {
+		verifyelementText("Values has succesfully entered for Vendor/Provider of DME order page ", view_vender_provider,
+				vendor_provider_data);
+	}
+
+	@Then("^validate that value for Telephonic Diagnosis of DME order page on Consumer details page$")
+	public void validate_that_value_for_Telephonic_Diagnosis_of_DME_order_page_on_Consumer_details_page() {
+		verifyelementText("Values has not succesfully entered for Telephonic Diagnosis of DME order page ",
+				view_telephonic_diagnosis, telephonic_diagnosis_data);
+	}
+
+	@Then("^validate that value for Vendor/Provider Phone of DME order page on Consumer details page$")
+	public void validate_that_value_for_Vendor_Provider_Phone_of_DME_order_page_on_Consumer_details_page() {
+		verifyelementText("Values has not succesfully entered for Vendor/Provider Phone of DME order page ",
+				view_vender_provider_phone, vendor_phone);
+	}
+
+	@Then("^validate that new file has been uploaded on DME order page on Consumer details page$")
+	public void validate_that_new_file_has_been_uploaded_on_DME_order_page_on_Consumer_details_page() {
+		WebElement filesBody = findElement(file_body);
+		List<WebElement> rows = filesBody.findElements(By.tagName("tr"));
+		// file name of the uploaded file
+		String fname = rows.get(0).findElements(By.tagName("td")).get(2).getText();
+
+		int fIndex = file_path_add.lastIndexOf("\\");
+		String uploadedFname = file_path_add.substring(fIndex + 1);
+		verifyValues("File has not uploaded", fname, uploadedFname);
+	}
+
+	@Then("^clicks on Cancel button on DME order page on Consumer details page$")
+	public void clicks_on_Cancel_button_on_DME_order_page_on_Consumer_details_page() {
+
+	}
+
+}

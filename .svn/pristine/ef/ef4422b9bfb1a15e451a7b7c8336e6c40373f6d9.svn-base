@@ -1,0 +1,52 @@
+#Created By : Persistent Automation Team
+#Created on: 12/4/2016
+#Modified on:12/19/2016
+@RegressionTest
+Feature: Clinical Note
+
+  Scenario: To add a New Clinical Note and validates that note gets added.
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+    And clicks on Engagement id
+    When user clicks on Clinical Note tab
+    Then validates that Clinical Note tab is displayed
+    When User clicks on Add New Clinical Note button
+    Then validates that Clinical Note form is displayed
+    And clicks on Cancel button on Clinical Note form
+    Then validates that user should land on Engagement detail list page
+    Then validates that new Clinical Note is not created
+   
+    When User clicks on Add New Clinical Note button
+    Then validates that Clinical Note form is displayed
+    And clicks on Electronically Sign button on Clinical Note
+    Then validates that user should gets validation message
+    And enters value for Subject on Clinical Note Page
+    And enters value for Clinical Note on Clinical Note Page
+    And verify the time is captured
+    And clicks on Electronically Sign button on Clinical Note
+    Then validate that Clinical Note is created
+
+  Scenario: To Edit Clinical Note
+    When clicks on Edit link for Clinical Note
+    Then validates that Clinical Note form is displayed for Edit
+    And selects value for status field
+    And validates the values provided on view page
+    And clicks on Electronically Sign button on Clinical Note
+    Then validates that user should land on Engagement detail list page
+    And user clicks on Show More link
+    And close current tab for Clinical Note
+
+  Scenario: To View Clinical Note
+    When clicks on View link for Clinical Note
+    Then validates that Clinical Note form is displayed for View
+    Then validates all the fields on clinical note form
+    And verify the time is captured for View form
+    And clicks on Cancel button on Clinical Note form
+    Then validates that user should land on Engagement detail list page
+
+  Scenario: Show More
+    When verify by defaults records for Clinical Note 
+    And user clicks on Show More link
+    Then more records are displayed successfully
+    And clicks on Back to Related list link
+    Then validates that user should land on Engagement detail list page

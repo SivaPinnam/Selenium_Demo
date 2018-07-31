@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="5" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="11" time="775.904835">
+<testcase classname="Advance Care Plan Feature Validation" name="Add Advance Care Plan" time="130.160887">
+<system-out><![CDATA[Given user is logged in with valid credentials..............................passed
+And navigates to Engagement tab.............................................passed
+When clicks on Engagement id................................................passed
+When user clicks on Advance Care Plan link..................................passed
+And user clicks on Add ACP button...........................................passed
+Then verify Advance Care Plan form displayed................................passed
+When user clicks on expand all link on Advance Care Plan page...............passed
+And user clicks on Full Code radio button...................................passed
+And user clicks yes for Antibiotics.........................................passed
+And user clicks yes for Blood Transfusion...................................passed
+And user clicks yes for Tube Feeding........................................passed
+And user clicks yes for Hospitalization.....................................passed
+And user clicks yes for IV Hydration........................................passed
+And user clicks yes for Surgical Intervention...............................passed
+And user selects value as Will..............................................passed
+And user selects value from Enrollee Primary Goal of Care...................passed
+And user selects value from Family Primary Goal of Care.....................passed
+And user selects value from Mortality Risk Assessment Score.................passed
+And user enters text for Goals of Care......................................passed
+And user clicks on no for Consumer Responsible for Self.....................passed
+And user clicks on Not Applicable checkbox..................................passed
+And user clicks on No for Hospice Appropriate...............................passed
+And user enters date for Date Last Reviewed.................................passed
+And user selects value for Reviewed Care Goals with Interdisciplinary Care Team.passed
+And user enters text for Reviewed with field................................passed
+And user enters date for Update Date........................................passed
+And user enters date for Discussed Date.....................................passed
+And user enters text for Discussed With.....................................passed
+And user enters text for Discussed Notes....................................passed
+And user clicks on Cancel button on Advance Care Plan page..................passed
+Then verify Advance Care Plan cancelled.....................................passed
+When user clicks on Add ACP button..........................................passed
+And user clicks on expand all link on Advance Care Plan page................passed
+Then verify values present in Enrollees Primary Goal of Care dropdown.......passed
+Then verify values present in Familys Primary Goal of Care dropdown.........passed
+Then verify values present in Mortality Risk Assessment dropdown............passed
+When user clicks on Full Code radio button..................................passed
+And user clicks yes for Antibiotics.........................................passed
+And user clicks yes for Blood Transfusion...................................passed
+And user clicks yes for Tube Feeding........................................passed
+And user clicks yes for Hospitalization.....................................passed
+And user clicks yes for IV Hydration........................................passed
+And user clicks yes for Surgical Intervention...............................passed
+And user selects value as Will..............................................passed
+And user selects value from Enrollee Primary Goal of Care...................passed
+And user selects value from Family Primary Goal of Care.....................passed
+And user selects value from Mortality Risk Assessment Score.................passed
+And user enters text for Goals of Care......................................passed
+And user clicks on no for Consumer Responsible for Self.....................passed
+And user clicks on Not Applicable checkbox..................................passed
+And user clicks on No for Hospice Appropriate...............................passed
+And user enters date for Date Last Reviewed.................................passed
+And user selects value for Reviewed Care Goals with Interdisciplinary Care Team.passed
+And user enters text for Reviewed with field................................passed
+And user enters date for Update Date........................................passed
+And user enters date for Discussed Date.....................................passed
+And user enters text for Discussed With.....................................passed
+And user enters text for Discussed Notes....................................passed
+And user clicks on Save button on Advance Care Plan page....................passed
+And user clicks on Update ACP button........................................passed
+And user clicks on expand all link on Advance Care Plan page................passed
+Then verify Advance Care Plan created.......................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Clinical Note" name="To add a New Clinical Note and validates that note gets added." time="92.278855">
+<failure message="java.lang.AssertionError: Element is not visible : By.linkText: Personal Information&#13;&#10;&#9;at org.junit.Assert.fail(Assert.java:88)&#13;&#10;&#9;at com.pathway.selenium.factory.SeleniumFunctions.waitForElementtoBeVisible(SeleniumFunctions.java:489)&#13;&#10;&#9;at com.pathway.selenium.factory.SeleniumFunctions.click(SeleniumFunctions.java:32)&#13;&#10;&#9;at com.pathway.scripts.Clinical_Note_Page.gets_the_timezone_of_the_user(Clinical_Note_Page.java:94)&#13;&#10;&#9;at ✽.When gets the timezone of the user(Clinical_Note.feature:10)&#13;&#10;"><![CDATA[Given user is logged in with valid credentials..............................passed
+When gets the timezone of the user..........................................failed
+And navigates to Engagement tab.............................................skipped
+And clicks on Engagement id.................................................skipped
+When user clicks on Clinical Note tab.......................................skipped
+Then validates that Clinical Note tab is displayed..........................skipped
+When User clicks on Add New Clinical Note button............................skipped
+Then validates that Clinical Note form is displayed.........................skipped
+And clicks on Cancel button on Clinical Note form...........................skipped
+Then validates that user should land on Engagement detail list page.........skipped
+Then validates that new Clinical Note is not created........................skipped
+When User clicks on Add New Clinical Note button............................skipped
+Then validates that Clinical Note form is displayed.........................skipped
+And verify the time is captured.............................................skipped
+And clicks on Electronically Sign button on Clinical Note...................skipped
+Then validates that user should gets validation message.....................skipped
+And enters value for Subject on Clinical Note Page..........................skipped
+And enters value for Clinical Note on Clinical Note Page....................skipped
+And clicks on Electronically Sign button on Clinical Note...................skipped
+Then validate that Clinical Note is created.................................skipped
+When clicks on View link for Clinical Note..................................skipped
+And validates that Clinical Note form is displayed for View.................skipped
+And validates the values provided by user on add page for Clinical Note.....skipped
+And validates signature for Clinical Note...................................skipped
+And clicks on Cancel button on Clinical Note form...........................skipped
+Then validates that user should land on Engagement detail list page.........skipped
+
+StackTrace:
+java.lang.AssertionError: Element is not visible : By.linkText: Personal Information
+	at org.junit.Assert.fail(Assert.java:88)
+	at com.pathway.selenium.factory.SeleniumFunctions.waitForElementtoBeVisible(SeleniumFunctions.java:489)
+	at com.pathway.selenium.factory.SeleniumFunctions.click(SeleniumFunctions.java:32)
+	at com.pathway.scripts.Clinical_Note_Page.gets_the_timezone_of_the_user(Clinical_Note_Page.java:94)
+	at ✽.When gets the timezone of the user(Clinical_Note.feature:10)
+]]></failure>
+</testcase>
+<testcase classname="CreateClient" name="Create a new Engagement" time="153.60843">
+<failure message="java.lang.AssertionError: Element is not present : By.xpath: //*[@class='pageDescription']&#13;&#10;&#9;at org.junit.Assert.fail(Assert.java:88)&#13;&#10;&#9;at com.pathway.selenium.factory.SeleniumFunctions.waitForElementtoBePresent(SeleniumFunctions.java:498)&#13;&#10;&#9;at com.pathway.selenium.factory.SeleniumFunctions.getText(SeleniumFunctions.java:89)&#13;&#10;&#9;at com.pathway.scripts.Create_Client.user_create_new_Client_Clinical_Program(Create_Client.java:223)&#13;&#10;&#9;at ✽.When user create new Client Clinical Program(Engagement/AACreate_Client.feature:12)&#13;&#10;"><![CDATA[Given user is logged in with valid credentials..............................passed
+When user creates new Client................................................passed
+When user create new Clinical Prgram........................................passed
+When user create new Client Clinical Program................................failed
+When user create Campaign...................................................skipped
+
+StackTrace:
+java.lang.AssertionError: Element is not present : By.xpath: //*[@class='pageDescription']
+	at org.junit.Assert.fail(Assert.java:88)
+	at com.pathway.selenium.factory.SeleniumFunctions.waitForElementtoBePresent(SeleniumFunctions.java:498)
+	at com.pathway.selenium.factory.SeleniumFunctions.getText(SeleniumFunctions.java:89)
+	at com.pathway.scripts.Create_Client.user_create_new_Client_Clinical_Program(Create_Client.java:223)
+	at ✽.When user create new Client Clinical Program(Engagement/AACreate_Client.feature:12)
+]]></failure>
+</testcase>
+<testcase classname="CreateEngagement" name="Create a new Engagement" time="10.832519">
+<failure message="org.openqa.selenium.NoSuchFrameException: No frame element found by name or id searchFrame&#10;Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'&#10;System info: host: 'NGD22918', ip: '10.222.46.6', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_91'&#10;Driver info: driver.version: unknown&#13;&#10;&#9;at org.openqa.selenium.remote.RemoteWebDriver$RemoteTargetLocator.frame(RemoteWebDriver.java:997)&#13;&#10;&#9;at com.pathway.selenium.factory.SeleniumFunctions.switchToFrame(SeleniumFunctions.java:373)&#13;&#10;&#9;at com.pathway.scripts.Create_Engagement.createNewEngagementId(Create_Engagement.java:203)&#13;&#10;&#9;at com.pathway.scripts.Create_Engagement.user_creates_new_engagement_id(Create_Engagement.java:173)&#13;&#10;&#9;at ✽.When user creates new engagement id(Engagement/AACreate_Engagement.feature:10)&#13;&#10;"><![CDATA[Given user is logged in with valid credentials..............................passed
+When user creates new engagement id.........................................failed
+
+StackTrace:
+org.openqa.selenium.NoSuchFrameException: No frame element found by name or id searchFrame
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'NGD22918', ip: '10.222.46.6', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_91'
+Driver info: driver.version: unknown
+	at org.openqa.selenium.remote.RemoteWebDriver$RemoteTargetLocator.frame(RemoteWebDriver.java:997)
+	at com.pathway.selenium.factory.SeleniumFunctions.switchToFrame(SeleniumFunctions.java:373)
+	at com.pathway.scripts.Create_Engagement.createNewEngagementId(Create_Engagement.java:203)
+	at com.pathway.scripts.Create_Engagement.user_creates_new_engagement_id(Create_Engagement.java:173)
+	at ✽.When user creates new engagement id(Engagement/AACreate_Engagement.feature:10)
+]]></failure>
+</testcase>
+<testcase classname="Fall Risk" name="To add a new Fall Risk and validates that note gets added." time="70.316133">
+<system-out><![CDATA[Given user is logged in with valid credentials..............................passed
+And navigates to Engagement tab.............................................passed
+And clicks on Engagement id.................................................passed
+When user clicks on Fall Risk tab...........................................passed
+Then validates that Fall Risk tab is displayed..............................passed
+When User clicks on Add Fall Risk button....................................passed
+Then validates that Fall Risk form is displayed.............................passed
+And clicks on Cancel button on Fall Risk form...............................passed
+Then validates that user should land on Fall Risk list page.................passed
+Then validates that new Fall Risk is not created............................passed
+When User clicks on Add Fall Risk button....................................passed
+Then validates that Fall Risk form is displayed.............................passed
+And clicks on Save button on Fall Risk Page.................................passed
+Then validates that user should gets validation message on Fall Risk Page...passed
+And selects value for Mental Status on Fall Risk Page.......................passed
+And selects value for Mobility Status on Fall Risk Page.....................passed
+And selects value for Elimination Status on Fall Risk Page..................passed
+And clicks on Save button on Fall Risk Page.................................passed
+Then validate Confirmation message on Fall Risk Page........................passed
+Then validate that Fall Risk is created.....................................passed
+When clicks on View link for Fall Risk......................................passed
+Then validates that Fall Risk form is displayed for View....................passed
+And validates that fields on View form for Fall Risk........................passed
+And clicks on Cancel button on Fall Risk form...............................passed
+Then validates that user should land on Fall Risk list page.................passed
+And close current tab for Fall Risk.........................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Add record In-Patient Stay Page" name="To add new record in In-Patient Stay and validates that a new record gets added." time="25.768045">
+<failure message="org.openqa.selenium.NoSuchFrameException: No frame element found by name or id searchFrame&#10;Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'&#10;System info: host: 'NGD22918', ip: '10.222.46.6', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_91'&#10;Driver info: driver.version: unknown&#13;&#10;&#9;at org.openqa.selenium.remote.RemoteWebDriver$RemoteTargetLocator.frame(RemoteWebDriver.java:997)&#13;&#10;&#9;at com.pathway.selenium.factory.SeleniumFunctions.switchToFrame(SeleniumFunctions.java:373)&#13;&#10;&#9;at com.pathway.scripts.Add_In_Patient_Stay.enters_value_for_Facility_field_of_In_Patient_Stay_page(Add_In_Patient_Stay.java:148)&#13;&#10;&#9;at ✽.And enters value for Facility field of In-Patient Stay page(In_Patient_Stay.feature:18)&#13;&#10;"><![CDATA[Given user is logged in with valid credentials..............................passed
+And navigates to Engagement tab.............................................passed
+And clicks on Engagement id.................................................passed
+When user clicks on In-Patient Stay tab.....................................passed
+Then validates that In-Patient Stay tab is displayed........................passed
+And user clicks on Show More link...........................................passed
+When user clicks on Add In-Patient Stay button..............................passed
+Then validates that In-Patient Stay page is displayed.......................passed
+When user selects value for Status By field.................................passed
+And enters value for Facility field of In-Patient Stay page.................failed
+And selects value for Type of Admission field of In-Patient Stay page.......skipped
+And enters value for Admit Date field of In-Patient Stay page...............skipped
+And enters value for Discharge Date field of In-Patient Stay page...........skipped
+And enters value for Discharge Notification Date field of In-Patient Stay page.skipped
+And selects value for Discharge To field of In-Patient Stay page............skipped
+And clicks on Cancel button on In-Patient Stay page.........................skipped
+Then validates that In-Patient Stay tab is displayed........................skipped
+And user clicks on Show More link...........................................skipped
+And validates that new In-Patient Stay record is not created................skipped
+When user clicks on Add In-Patient Stay button..............................skipped
+Then validates that In-Patient Stay page is displayed.......................skipped
+When user selects value for Status By field.................................skipped
+And enters value for Facility field of In-Patient Stay page.................skipped
+And selects value for Type of Admission field of In-Patient Stay page.......skipped
+And enters value for Admit Date field of In-Patient Stay page...............skipped
+And enters value for Discharge Date field of In-Patient Stay page...........skipped
+And enters value for Discharge Notification Date field of In-Patient Stay page.skipped
+And selects value for Discharge To field of In-Patient Stay page............skipped
+And clicks on Save button on In-Patient Stay page...........................skipped
+Then validates that In-Patient Stay tab is displayed........................skipped
+And user clicks on Show More link...........................................skipped
+Then validates that new In-Patient Stay record is created...................skipped
+And validates newly added In-Patient Stay record............................skipped
+When user clicks on Add In-Patient Stay button..............................skipped
+Then validates that In-Patient Stay page is displayed.......................skipped
+When user selects value for Status By field for "Save & New" button.........skipped
+And enters value for Facility field of In-Patient Stay page for "Save & New" button.skipped
+And selects value for Type of Admission field of In-Patient Stay page for "Save & New" button.skipped
+And enters value for Admit Date field of In-Patient Stay page for "Save & New" button.skipped
+And enters value for Discharge Date field of In-Patient Stay page for "Save & New" button.skipped
+And enters value for Discharge Notification Date field of In-Patient Stay page for "Save & New" button.skipped
+And selects value for Discharge To field of In-Patient Stay page for "Save & New" button.skipped
+And clicks on Save New button on In-Patient Stay page.......................skipped
+Then validates that new In-Patient Stay form appears with fields are available.skipped
+And validates that In-Patient Stay tab is displayed.........................skipped
+And user clicks on Show More link...........................................skipped
+Then validates that new In-Patient Stay record is created with Save&New button.skipped
+And validates newly added In-Patient Stay record for "Save & New" button....skipped
+
+StackTrace:
+org.openqa.selenium.NoSuchFrameException: No frame element found by name or id searchFrame
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'NGD22918', ip: '10.222.46.6', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_91'
+Driver info: driver.version: unknown
+	at org.openqa.selenium.remote.RemoteWebDriver$RemoteTargetLocator.frame(RemoteWebDriver.java:997)
+	at com.pathway.selenium.factory.SeleniumFunctions.switchToFrame(SeleniumFunctions.java:373)
+	at com.pathway.scripts.Add_In_Patient_Stay.enters_value_for_Facility_field_of_In_Patient_Stay_page(Add_In_Patient_Stay.java:148)
+	at ✽.And enters value for Facility field of In-Patient Stay page(In_Patient_Stay.feature:18)
+]]></failure>
+</testcase>
+<testcase classname="DME Order" name="To add a new order of type DME and validates that a new order gets added." time="38.050075">
+<failure message="org.openqa.selenium.NoSuchFrameException: No frame element found by name or id searchFrame&#10;Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'&#10;System info: host: 'NGD22918', ip: '10.222.46.6', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_91'&#10;Driver info: driver.version: unknown&#13;&#10;&#9;at org.openqa.selenium.remote.RemoteWebDriver$RemoteTargetLocator.frame(RemoteWebDriver.java:997)&#13;&#10;&#9;at com.pathway.selenium.factory.SeleniumFunctions.switchToFrame(SeleniumFunctions.java:373)&#13;&#10;&#9;at com.pathway.scripts.Orders_DME_Page.enters_value_for_ORDERING_PROVIDER_field_of_DME_order_page(Orders_DME_Page.java:121)&#13;&#10;&#9;at ✽.And enters value for ORDERING PROVIDER field of DME order page(Orders_DME.feature:25)&#13;&#10;"><![CDATA[Given user is logged in with valid credentials..............................passed
+And navigates to Engagement tab.............................................passed
+And clicks on Engagement id.................................................passed
+When user clicks on Orders tab..............................................passed
+Then validates that Orders tab is displayed.................................passed
+Given user is logged in with valid credentials..............................passed
+And navigates to Engagement tab.............................................passed
+And clicks on Engagement id.................................................passed
+When user clicks on Orders tab..............................................passed
+Then validates that Orders tab is displayed.................................passed
+When user adds Order type "DME".............................................passed
+Then validates that DME order page is displayed.............................passed
+When user enters value for Entered By field.................................passed
+And enters value for ORDERED field of DME order page........................passed
+And enters value for ORDERING PROVIDER field of DME order page..............failed
+And enters value for VENDER/PROVIDER of DME order page......................skipped
+And enters value for TELEPHONIC DIAGNOSIS of DME order page.................skipped
+And enters value for VENDOR/PROVIDER PHONE of DME order page................skipped
+And clicks on Cancel button on DME order page...............................skipped
+And navigates to Engagement tab.............................................skipped
+And clicks on Engagement id.................................................skipped
+When user clicks on Orders tab..............................................skipped
+Then validates that Orders tab is displayed.................................skipped
+Then validates that new DME Order is not created............................skipped
+When user adds Order type "DME".............................................skipped
+Then validates that DME order page is displayed.............................skipped
+When user enters value for Entered By field.................................skipped
+And enters value for ORDERED field of DME order page........................skipped
+And enters value for ORDERING PROVIDER field of DME order page..............skipped
+And enters value for VENDER/PROVIDER of DME order page......................skipped
+And enters value for TELEPHONIC DIAGNOSIS of DME order page.................skipped
+And enters value for VENDOR/PROVIDER PHONE of DME order page................skipped
+And uploads file for DME order on DME order page............................skipped
+And clicks on Save button on DME order page.................................skipped
+When user clicks on Orders tab..............................................skipped
+Then validates that Orders tab is displayed.................................skipped
+Then validates that new DME Order is created successfully...................skipped
+
+StackTrace:
+org.openqa.selenium.NoSuchFrameException: No frame element found by name or id searchFrame
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'NGD22918', ip: '10.222.46.6', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_91'
+Driver info: driver.version: unknown
+	at org.openqa.selenium.remote.RemoteWebDriver$RemoteTargetLocator.frame(RemoteWebDriver.java:997)
+	at com.pathway.selenium.factory.SeleniumFunctions.switchToFrame(SeleniumFunctions.java:373)
+	at com.pathway.scripts.Orders_DME_Page.enters_value_for_ORDERING_PROVIDER_field_of_DME_order_page(Orders_DME_Page.java:121)
+	at ✽.And enters value for ORDERING PROVIDER field of DME order page(Orders_DME.feature:25)
+]]></failure>
+</testcase>
+<testcase classname="DME Order" name="To view DME order and validates user provided values on Consumer Page" time="49.962163">
+<system-out><![CDATA[Given user is logged in with valid credentials..............................passed
+And navigates to Engagement tab.............................................passed
+And clicks on Engagement id.................................................passed
+When user clicks on Orders tab..............................................passed
+Then validates that Orders tab is displayed.................................passed
+Given user is logged in with valid credentials..............................passed
+And navigates to Engagement tab.............................................passed
+And clicks on Consumer tab..................................................passed
+When user clicks on Orders tab on Consumer details page.....................passed
+When clicks on View link for Record type "DME" and Approve type "Yes" of Consumer.passed
+Then validates that DME order page is displayed on Consumer details page....passed
+And validate that value for Ordering Provider of DME order page on Consumer details page.passed
+And validate that value for Vendor/Provider of DME order page on Consumer details page.passed
+And validate that value for Telephonic Diagnosis of DME order page on Consumer details page.passed
+And validate that value for Vendor/Provider Phone of DME order page on Consumer details page.passed
+And validate that new file has been uploaded on DME order page on Consumer details page.passed
+Then clicks on Cancel button on DME order page on Consumer details page.....passed
+]]></system-out>
+</testcase>
+<testcase classname="Hospital Order" name="To add a new order of type Hospital and validates that a new order gets added." time="54.057131">
+<system-out><![CDATA[Given user is logged in with valid credentials..............................passed
+And navigates to Engagement tab.............................................passed
+And clicks on Engagement id.................................................passed
+When user clicks on Orders tab..............................................passed
+Then validates that Orders tab is displayed.................................passed
+When user adds Order type "Hospital Transfer"...............................passed
+Then validates that Hospital Transfer form is displayed.....................passed
+And clicks on Cancel button on Hospital Transfer form.......................passed
+And user clicks on Orders tab...............................................passed
+And validates that Orders tab is displayed..................................passed
+Then validates that new Hospital Order is not created.......................passed
+When user adds Order type "Hospital Transfer"...............................passed
+Then validates that Hospital Transfer form is displayed.....................passed
+When user enters value for Fax field........................................passed
+And clicks on Save button on Hospital Transfer form.........................passed
+And user clicks on Orders tab...............................................passed
+And validates that Orders tab is displayed..................................passed
+Then validate Order is created of type Hospital Transfer....................passed
+When clicks on View link for Record type "Hospital Transfer" and Approve type "".passed
+Then validates values provided by user on add page for Hospital Transfer....passed
+]]></system-out>
+</testcase>
+<testcase classname="Add&amp;View Engagement details-CAGE Survey and view Consumer-CAGE Survey" name="To 'Save' Add Survey of type CAGE Survey." time="89.397261">
+<system-out><![CDATA[Given user is logged in with valid credentials..............................passed
+And navigates to Engagement tab.............................................passed
+And clicks on Engagement id.................................................passed
+When user clicks on Surveys tab.............................................passed
+Then validates that Surveys tab is displayed................................passed
+When user adds Survey type "CAGE Survey"....................................passed
+Then validates that CAGE Survey form is displayed...........................passed
+And selects date for CAGE Survey............................................passed
+And selects Have you felt you should cut down on your drinking? as Yes......passed
+And Select Have others annoyed you by criticizing your drinking? as Yes.....passed
+And selects Have you ever felt guilty about your drinking? as Yes...........passed
+And Select Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover? as Yes.passed
+And Click on Calculate Score Button.........................................passed
+And clicks on Save button for CAGE Survey...................................passed
+And user clicks on Surveys tab..............................................passed
+Then validates that Surveys tab is displayed................................passed
+Then validates that new "CAGE Survey" Survey is created.....................passed
+Then validate that Add Survey Status for type "CAGE Survey" is "In Progress".passed
+When navigates to Engagement tab............................................passed
+And clicks on Engagement id.................................................passed
+And user clicks on Surveys tab..............................................passed
+Then validates that Surveys tab is displayed................................passed
+When clicks on View link for Record type "CAGE Survey" and status "In Progress".passed
+Then validates that CAGE Survey details page displayed......................passed
+Then validates Consumer field...............................................passed
+Then validates Gender field.................................................passed
+Then validates Updated Date field...........................................passed
+Then validates that Refused radio button as No is selected..................passed
+And validates Have you felt you should cut down on your drinking? as Yes is selected.passed
+And validates Have others annoyed you by criticizing your drinking? as Yes is selected.passed
+And validates Have you ever felt guilty about your drinking? as Yes is selected.passed
+And validates Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover? as Yes is selected.passed
+Then validates Updated Total Score..........................................passed
+And user clicks on Cancel button............................................passed
+Then validates that Surveys tab is displayed................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Add&amp;View Engagement details-CAGE Survey and view Consumer-CAGE Survey" name="View Consumer-CAGE Survey" time="61.473336">
+<system-out><![CDATA[Given user is logged in with valid credentials..............................passed
+And navigates to Engagement tab.............................................passed
+And clicks on Engagement id.................................................passed
+When user clicks on Surveys tab.............................................passed
+Then validates that Surveys tab is displayed................................passed
+When navigates to Engagement tab............................................passed
+And clicks on  Consumer Name................................................passed
+And user clicks on Surveys tab..............................................passed
+And user clicks on Show More link in Surveys Page...........................passed
+When clicks on View link for Record type "CAGE Survey" and status "In Progress".passed
+Then validates that CAGE Survey details page displayed......................passed
+Then validates Consumer field...............................................passed
+Then validates Gender field.................................................passed
+Then validates Date field...................................................passed
+And validates Have you felt you should cut down on your drinking? as Yes is selected.passed
+And validates Have others annoyed you by criticizing your drinking? as Yes is selected.passed
+And validates Have you ever felt guilty about your drinking? as Yes is selected.passed
+And validates Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover? as Yes is selected.passed
+And validates Updated Total Score while adding Cage Survey..................passed
+And user clicks on Cancel button............................................passed
+Then validates that Survey tab is displayed.................................passed
+]]></system-out>
+</testcase>
+</testsuite>

@@ -1,0 +1,20 @@
+# Created By: Persistent Automation Team
+# Created On: 11/27/2016
+# Modified On: 12/08/2016
+
+Feature: View ConsumerDetails DME Order page
+
+  @SmokeTest
+  Scenario: To view DME order and validates user provided values
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+    And clicks on Consumer tab
+    When user clicks on Orders tab on Consumer details page
+    When clicks on View link for Record type "DME" and Approve type "Yes" of Consumer
+    Then validates that DME order page is displayed on Consumer details page
+    And validate that value for Ordering Provider of DME order page on Consumer details page
+    And validate that value for Vendor/Provider of DME order page on Consumer details page
+    And validate that value for Telephonic Diagnosis of DME order page on Consumer details page
+    And validate that value for Vendor/Provider Phone of DME order page on Consumer details page
+    And validate that new file has been uploaded on DME order page on Consumer details page
+    Then clicks on Cancel button on DME order page on Consumer details page

@@ -1,0 +1,71 @@
+#Created By : Persistent Automation Team
+#Created on: 12/6/2016
+#Modified on:15/21/2016
+
+@SmokeTest
+Feature: Advance Care Plan Feature Validation
+Background: 
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab   
+Scenario: Add Advance Care Plan
+    When clicks on Engagement id 
+    When user clicks on Advance Care Plan link
+    And user clicks on Add ACP button
+    Then verify Advance Care Plan form displayed
+    When user clicks on expand all link on Advance Care Plan page
+    And user clicks on Full Code radio button
+    And user clicks yes for Antibiotics
+    And user clicks yes for Blood Transfusion
+    And user clicks yes for Tube Feeding
+    And user clicks yes for Hospitalization
+    And user clicks yes for IV Hydration
+    And user clicks yes for Surgical Intervention
+    And user selects value as Will
+    And user selects value from Enrollee Primary Goal of Care
+    And user selects value from Family Primary Goal of Care
+    And user selects value from Mortality Risk Assessment Score
+    And user enters text for Goals of Care
+    And user clicks on no for Consumer Responsible for Self
+    And user clicks on Not Applicable checkbox
+    And user clicks on No for Hospice Appropriate
+    And user enters date for Date Last Reviewed
+    And user selects value for Reviewed Care Goals with Interdisciplinary Care Team
+    And user enters text for Reviewed with field
+    And user enters date for Update Date
+    And user enters date for Discussed Date
+    And user enters text for Discussed With
+    And user enters text for Discussed Notes
+    And user clicks on Cancel button on Advance Care Plan page
+    Then verify Advance Care Plan cancelled    
+    When user clicks on Add ACP button    
+    And user clicks on expand all link on Advance Care Plan page    
+    Then verify values present in Enrollees Primary Goal of Care dropdown
+    Then verify values present in Familys Primary Goal of Care dropdown
+   	Then verify values present in Mortality Risk Assessment dropdown   	
+    When user clicks on Full Code radio button
+    And user clicks yes for Antibiotics
+    And user clicks yes for Blood Transfusion
+    And user clicks yes for Tube Feeding 
+    And user clicks yes for Hospitalization 
+    And user clicks yes for IV Hydration
+    And user clicks yes for Surgical Intervention
+    And user selects value as Will
+    And user selects value from Enrollee Primary Goal of Care
+    And user selects value from Family Primary Goal of Care
+    And user selects value from Mortality Risk Assessment Score
+    And user enters text for Goals of Care
+    And user clicks on no for Consumer Responsible for Self
+    And user clicks on Not Applicable checkbox
+    And user clicks on No for Hospice Appropriate
+    And user enters date for Date Last Reviewed
+    And user selects value for Reviewed Care Goals with Interdisciplinary Care Team
+    And user enters text for Reviewed with field
+    And user enters date for Update Date
+    And user enters date for Discussed Date
+    And user enters text for Discussed With
+    And user enters text for Discussed Notes
+    And user clicks on Save button on Advance Care Plan page
+    And user clicks on Update ACP button
+    And user clicks on expand all link on Advance Care Plan page
+    Then verify Advance Care Plan created
+   

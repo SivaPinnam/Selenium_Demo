@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="60.615596">
+<testcase classname="SignIn Intuit application" name="Login in to Intuit portal" time="60.615596">
+<system-out><![CDATA[Given user is logged in with valid credentials..............................passed
+And navigates to Banking tab................................................passed
+When user clicks on Connect link............................................passed
+Then validates the Connect an account page..................................passed
+When user enters bank name in search box....................................passed
+And user clicks on corresponding bank link..................................passed
+And Sign In bank details are displayed......................................passed
+Then validate the Thirdparty banking sign in page...........................passed
+]]></system-out>
+</testcase>
+</testsuite>

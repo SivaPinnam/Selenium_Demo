@@ -1,0 +1,589 @@
+/*Created By : Persistent Automation Team
+Created on: 12/6/2016
+Modified on:12/21/2016 */
+
+package com.pathway.scripts;
+
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Advance_Care_Plan_Page extends SeleniumFunctions {
+
+	// Locators:-
+	By advanceCarePlan_Link = By.xpath("//a[text()='Advance Care Plan']");
+	By addACP_Button = By.xpath("//a[text()='Add ACP']");
+	By advanceCarePlanDetail_Label = By.xpath("//*[contains(text(),'Advance Care Plan - Details')]");
+	By healthSurrogate_Label = By.xpath("//*[contains(text(),'Health Surrogate Information')]");
+	By hospice_Label = By.xpath("//*[contains(text(),'Hospice')]");
+	By advanceCarePlanReview_Label = By.xpath("//*[contains(text(),'Advance Care Plan - Review')]");
+	By advanceCarePlanUpdate_Label = By.xpath("//*[contains(text(),'Advance Care Plan - Update')]");
+	By advanceCarePlanDiscussion_Label = By.xpath("//*[contains(text(),'Advance Care Plan - Discussion')]");
+	By expandAll_Link = By.xpath("//*[text()='Expand All']");
+	By fullCode_Radio = By.xpath("//*[contains(text(),'Code Status')]//following::input[1]");
+	By yes_OptionAntibiotics_Radio = By.xpath("//*[contains(text(),'Antibiotics-IV')]//following::input[1]");
+	By yes_OptionBloodTransfusion_Radio = By.xpath("//*[contains(text(),'Blood Transfusion')]//following::input[1]");
+	By yes_OptionTubeFeeding_Radio = By.xpath("//*[contains(text(),'Feeding Tube')]//following::input[1]");
+	By yes_OptionHospitalization_Radio = By.xpath("//*[contains(text(),'Hospitalization')]//following::input[1]");
+	By yes_OptionIVHydration_Radio = By.xpath("//*[contains(text(),'IV Hydration')]//following::input[1]");
+	By yes_OptionSurgicalIntervention_Radio = By.xpath("//*[contains(text(),'Surgical Intervention')]//following::input[1]");
+	By livingWill_SelectBox = By.xpath("//*[contains(text(),'Surgical Intervention')]//following::select[2]");
+	By livingWillNext_Button = By.xpath("//*[contains(text(),'Living Will, POLST, MOLST on file?')]//following::img");
+	By livingWillChoosed_SelectBox = By.xpath("//*[contains(text(),'Living Will, POLST, MOLST on file?')]//following::select[3]");
+	By enrollPrimaryGoal_DropDown = By.xpath("//*[contains(text(),'Primary Goal of Care')]//following::select[1]");
+	By enrollFamilyPrimaryGoal_DropDown = By.xpath("//*[contains(text(),'Family')]//following::select[1]");
+	By mortalityRisk_DropDown = By.xpath("//*[contains(text(),'Mortality')]//following::select[1]");
+	By previousGoal_TextArea = By.xpath("//*[contains(text(),'Previous Goal')]//following::textarea [1]");
+	By goalOfCare_TextArea = By.xpath("//*[contains(text(),'Goals of Care')]//following::textarea [2]");
+	By no_OptionConsumerResposible_Radio = By.xpath("//*[contains(text(),'Consumer Responsible')]//following::input[@value='No']");
+	By notApplicable_Checkbox = By.xpath("//*[contains(text(),'Health Surrogate Information')]//following::span[@class='slds-checkbox--faux']");
+	By no_OptionHospiceAppropriate_Radio = By.xpath("//*[contains(text(),'Hospice Appropriate')]//following::input[@value='No']");
+	By dateLastReviewed_TextBox = By.xpath("//*[contains(text(),'Last Reviewed Date')]//following::input[1]");
+	By reviewedCareGoals_DropDown = By.xpath("//*[contains(text(),'Reviewed Care Goals')]//following::select");
+	By reviewedWith_TextBox = By.xpath("//*[contains(text(),'Reviewed with')]//following::textarea[1]");
+	By updateDate_TextBox = By.xpath("//*[contains(text(),'Update Date')]//following::input[1]");
+	By discussedDate_TextBox = By.xpath("//*[contains(text(),'Discussed By')]//preceding::input[1]");
+	By discussedBy_DropDown = By.xpath("//*[contains(text(),'Discussed By')]//following::select[1]");
+	By discussedBY_TextBox = By.xpath("//*[contains(text(),'Discussed By')]//following::input[1]");
+	By discussedBy_lookUpIcon_Img = By.xpath("//*[contains(text(),'Discussed By')]//following::img");
+	By discussedWith_DropDown = By.xpath("//*[contains(text(),'Discussed With')]//following::select[1]");
+	By discussedWith_TextBox = By.xpath("//*[contains(text(),'Discussed With')]//following::input[1]");
+	By discussedWith_lookUpIcon_Img = By.xpath("//*[contains(text(),'Discussed With')]//following::img");
+	By disscussedWithUser_Link = By.xpath("//*[@id='//*[@id='User_body']/table/tbody/tr[2]/th/a']");
+	By discussedNote_TextBox = By.xpath("//*[contains(text(),'Discussed Notes')]//following::input[1]");
+	By save_AdvanceCare_Button = By.xpath("//*[@value='Save']");
+	By cancel_AdvanceCare_Button = By.xpath("//*[@value='Cancel']");
+	By updateACP_AdvanceCare_Button = By.xpath("//*[@value='Update ACP']");
+	By no_OptionBloodTransfusion_Radio = By.xpath("//*[contains(text(),'Blood Transfusion')]//following::input[2]");
+	By acpHistory_Button = By.xpath("//*[@value='ACP History']");
+	By spinnerImg = By.xpath("//*[@class='spinner']");
+	By searchFieldLookUp_TextBox = By.xpath("//*[@id='lksrch']");
+	By goButton = By.xpath(".//*[contains(@class,'btn')]");
+	By loggenInUserValue = By.xpath("//*[@id='userNavLabel']");
+	By show_more_link = By.linkText("Show More");
+	By viewLinkFirstPageHistory_Link = By.xpath("//*[contains(text(),'ACP History')]//following::a[contains(text(),'View')]");
+	By viewLinkNextPageHistory_Link = By.xpath("//a[contains(text(),'View')]");
+	By username_lable = By.xpath("//*[@id='userNavLabel']");
+
+	// Data :-
+	String excel_file = "files//Advance_Care_Plan.xlsx";
+	String sheet_name = "AdvanceCarePlan";
+	String var_medication = Excel.readFromExcel(excel_file, sheet_name, 1, 0);
+	String var_PrimaryGoalOption = Excel.readFromExcel(excel_file, sheet_name, 1, 1);
+	String var_FamilyGoalOption = Excel.readFromExcel(excel_file, sheet_name, 2, 1);
+	String var_ModerateRiskOption = Excel.readFromExcel(excel_file, sheet_name, 3, 1);
+	String var_PreviousGoalText = Excel.readFromExcel(excel_file, sheet_name, 4, 1);
+	String var_GoalsOfCareText = Excel.readFromExcel(excel_file, sheet_name, 5, 1);
+	String var_LastReviewedDate = Excel.readFromExcel(excel_file, sheet_name, 6, 1);
+	String var_ReviewCareOptionOption = Excel.readFromExcel(excel_file, sheet_name, 7, 1);
+	String var_ReviewedWithText = Excel.readFromExcel(excel_file, sheet_name, 8, 1);
+	String var_UpdateDate = Excel.readFromExcel(excel_file, sheet_name, 9, 1);
+	String var_DiscussedDate = Excel.readFromExcel(excel_file, sheet_name, 10, 1);
+	String var_DiscussedWithText = Excel.readFromExcel(excel_file, sheet_name, 11, 1);
+	String var_DiscussedNoteText = Excel.readFromExcel(excel_file, sheet_name, 12, 1);
+	String var_DiscussedByText = Excel.readFromExcel(excel_file, sheet_name, 13, 1);
+	String var_LivingWillText = Excel.readFromExcel(excel_file, sheet_name, 14, 1);
+	String var_nameForLookUp = Excel.readFromExcel(excel_file, sheet_name, 15, 1);
+	String var_Update_PrimaryGoalOption = Excel.readFromExcel(excel_file, sheet_name, 16, 1);
+	String var_Update_FamilyGoalOption = Excel.readFromExcel(excel_file, sheet_name, 17, 1);
+	String var_Update_ModerateRiskOption = Excel.readFromExcel(excel_file, sheet_name, 18, 1);
+	String userLoggedInValue = getText(loggenInUserValue);
+	String var_Update_PrimaryGoalOption_Consumer = Excel.readFromExcel(excel_file, sheet_name, 19, 1);
+	String var_Update_FamilyGoalOption_Consumer = Excel.readFromExcel(excel_file, sheet_name, 20, 1);
+	String var_Update_ModerateRiskOption_Consumer = Excel.readFromExcel(excel_file, sheet_name, 21, 1);
+	String var_GoalsOfCareNewText = Excel.readFromExcel(excel_file, sheet_name, 22, 1);
+	
+	String var_PrimaryGoalOptionVerify = Excel.readFromExcel(excel_file, sheet_name, 23, 1);
+	String var_FamilyGoalOptionVerify = Excel.readFromExcel(excel_file, sheet_name, 24, 1);
+	String var_ModerateRiskOptionVerify = Excel.readFromExcel(excel_file, sheet_name, 25, 1);
+	
+
+	@When("^user clicks on Advance Care Plan link$")
+	public void user_clicks_on_Advance_Care_Plan_link() {
+		wait(5);
+		click(advanceCarePlan_Link);
+		waitForElementToDisappear(spinnerImg);
+		System.out.println("Clicked on Advance Care Plan link");
+	}
+
+	@When("^user clicks on Add ACP button$")
+	public void user_clicks_on_Add_ACP_button() {
+		wait(3);
+		click(addACP_Button);
+		waitForElementToDisappear(spinnerImg);
+		System.out.println("Clicked on Add ACP button");
+	}
+
+	@Then("^verify Advance Care Plan form displayed$")
+	public void verify_Advance_Care_Plan_form_displayed() {
+		verifyElementExists("Advance Care Plan form not displayed", advanceCarePlanDetail_Label);
+		System.out.println("Advance Care Plan form displayed");
+	}
+
+	@When("^user clicks on expand all link on Advance Care Plan page$")
+	public void user_clicks_on_expand_all_link_on_Advance_Care_Plan_page() {
+		click(expandAll_Link);
+		System.out.println("Clicked on expand all link on Advance Care Plan page");
+		wait(3);
+	}
+
+	@When("^user clicks on expand all link on Advance Care Plan page if exist$")
+	public void user_clicks_on_expand_all_link_on_Advance_Care_Plan_page_if_exist() {
+		if (isElementExist(expandAll_Link)) {
+			click(expandAll_Link);
+			System.out.println("Clicked on expand all link on Advance Care Plan page");
+		}
+	}
+
+	@When("^user clicks on Full Code radio button$")
+	public void user_clicks_on_Full_Code_radio_button() {
+		click(fullCode_Radio);
+		System.out.println("Clicked on Full Code radio button");
+	}
+
+	@When("^user clicks yes for Antibiotics$")
+	public void user_clicks_yes_for_Antibiotics() {
+		click(yes_OptionAntibiotics_Radio);
+		System.out.println("Clicked on yes for Antibiotics");
+	}
+
+	@When("^user clicks yes for Blood Transfusion$")
+	public void user_clicks_yes_for_Blood_Transfusion() {
+		click(yes_OptionBloodTransfusion_Radio);
+		System.out.println("Clicked on yes for Blood Transfusion");
+	}
+
+	@When("^user clicks yes for Tube Feeding$")
+	public void user_clicks_yes_for_Tube_Feeding() {
+		click(yes_OptionTubeFeeding_Radio);
+		System.out.println("Clicked on yes for Tube Feeding");
+	}
+
+	@When("^user clicks yes for Hospitalization$")
+	public void user_clicks_yes_for_Hospitalization() {
+		click(yes_OptionHospitalization_Radio);
+		System.out.println("Clicked on yes for Hospitalization");
+	}
+
+	@When("^user clicks yes for IV Hydration$")
+	public void user_clicks_yes_for_IV_Hydration() {
+		click(yes_OptionIVHydration_Radio);
+		System.out.println("Clicked on yes for IV Hydration");
+	}
+
+	@When("^user clicks yes for Surgical Intervention$")
+	public void user_clicks_yes_for_Surgical_Intervention() {
+		click(yes_OptionSurgicalIntervention_Radio);
+		System.out.println("Clicked on yes for Surgical Intervention");
+	}
+
+	@When("^user selects value as Will$")
+	public void user_selects_as_Will() {
+		wait(5);
+		for (String val : var_LivingWillText.split(";")) {
+			selectByVisibleText(livingWill_SelectBox, val);
+		}
+		// Click right arrow to add those values
+		click(livingWillNext_Button);		
+	}
+
+	@When("^user selects value from Enrollee Primary Goal of Care$")
+	public void user_selects_from_Enrollee_Primary_Goal_of_Care() {
+		selectByVisibleText(enrollPrimaryGoal_DropDown, var_PrimaryGoalOption);
+		System.out.println("selected" + var_PrimaryGoalOption + "  from Enrollee Primary Goal of Care");
+	}
+
+	@When("^user selects value from Family Primary Goal of Care$")
+	public void user_selects_from_Family_Primary_Goal_of_Care() {
+		selectByVisibleText(enrollFamilyPrimaryGoal_DropDown, var_FamilyGoalOption);
+		System.out.println("selected" + var_FamilyGoalOption + "  from Family Primary Goal of Care");
+	}
+
+	@When("^user selects value from Mortality Risk Assessment Score$")
+	public void user_selects_from_Mortality_Risk_Assessment_Score() {
+		selectByVisibleText(mortalityRisk_DropDown, var_ModerateRiskOption);
+		System.out.println("selected" + var_ModerateRiskOption + "  from Mortality Risk Assessment Score");
+	}
+
+	@When("^user edits value from Enrollee Primary Goal of Care$")
+	public void user_edits_from_Enrollee_Primary_Goal_of_Care() {
+		selectByVisibleText(enrollPrimaryGoal_DropDown, var_Update_PrimaryGoalOption);
+		System.out.println("selected" + var_Update_PrimaryGoalOption + "  from Enrollee Primary Goal of Care");
+	}
+
+	@When("^user edits value from Family Primary Goal of Care$")
+	public void user_edits_from_Family_Primary_Goal_of_Care() {
+		selectByVisibleText(enrollFamilyPrimaryGoal_DropDown, var_Update_FamilyGoalOption);
+		System.out.println("selected" + var_Update_FamilyGoalOption + "  from Family Primary Goal of Care");
+	}
+
+	@When("^user edits value from Mortality Risk Assessment Score$")
+	public void user_edits_from_Mortality_Risk_Assessment_Score() {
+		selectByVisibleText(mortalityRisk_DropDown, var_Update_ModerateRiskOption);
+		System.out.println("selected" + var_Update_ModerateRiskOption + "  from Mortality Risk Assessment Score");
+	}
+
+	@When("^user enters text for Previous Goals of Care$")
+	public void user_enters_text_for_Previous_Goals_of_Care() {
+		enter(previousGoal_TextArea, var_PreviousGoalText);
+		System.out.println("Entered text for Previous Goals of Care");
+	}
+
+	@When("^user enters text for Goals of Care$")
+	public void user_enters_text_for_Goals_of_Care() {
+		enter(goalOfCare_TextArea, var_GoalsOfCareText);
+		System.out.println("Entered text for Goals of Care");
+	}
+
+	@When("^user enters new text for Goals of Care$")
+	public void user_enters_new_text_for_Goals_of_Care() {
+		enter(goalOfCare_TextArea, var_GoalsOfCareNewText);
+		System.out.println("Entered text for Goals of Care");
+	}
+
+	@When("^user clicks on no for Consumer Responsible for Self$")
+	public void user_clicks_on_no_for_Consumer_Responsible_for_Self() {
+		click(no_OptionConsumerResposible_Radio);
+		System.out.println("Clicked on no for Consumer Responsible for Self");
+	}
+
+	@When("^user clicks on Not Applicable checkbox$")
+	public void user_clicks_on_Not_Applicable_checkbox() {
+		click(notApplicable_Checkbox);
+		System.out.println("Clicked on on Not Applicable checkbox");
+	}
+
+	@When("^user clicks on No for Hospice Appropriate$")
+	public void user_clicks_on_No_for_Hospice_Appropriate() {
+		click(no_OptionHospiceAppropriate_Radio);
+		System.out.println("Clicked on No for Hospice Appropriate");
+	}
+
+	@When("^user enters date for Date Last Reviewed$")
+	public void user_enters_date_for_Date_Last_Reviewed() {
+		enter(dateLastReviewed_TextBox, var_LastReviewedDate);
+		System.out.println("Entered date for Date Last Reviewed");
+	}
+
+	@When("^user selects value for Reviewed Care Goals with Interdisciplinary Care Team$")
+	public void user_selects_value_for_Reviewed_Care_Goals_with_Interdisciplinary_Care_Team() {
+		selectByVisibleText(reviewedCareGoals_DropDown, var_ReviewCareOptionOption);
+		System.out.println(
+				"Selected" + var_ReviewCareOptionOption + "for Reviewed Care Goals with Interdisciplinary Care Team");
+	}
+
+	@When("^user enters text for Reviewed with field$")
+	public void user_enters_text_for_Reviewed_with_field() {
+		enter(reviewedWith_TextBox, var_ReviewedWithText);
+		System.out.println("Entered text for Reviewed with field");
+	}
+
+	@When("^user enters date for Update Date$")
+	public void user_enters_date_for_Update_Date() {
+		enter(updateDate_TextBox, var_UpdateDate);
+		System.out.println("Entered date for Update Date");
+	}
+
+	@When("^user enters date for Discussed Date$")
+	public void user_enters_date_for_Discussed_Date() {
+		enter(discussedDate_TextBox, var_DiscussedDate);
+		System.out.println("Entered date for Discussed Date");
+	}
+
+	/**
+	 * This Method select values from Discussed With look up.
+	 */
+	@When("^user enters text for Discussed With$")
+
+	public void user_enters_text_for_Discussed_With() {
+		enter(discussedWith_TextBox, var_DiscussedWithText);
+		System.out.println("Entered value in Discussed With field.");
+	}
+
+	@When("^user enters text for Discussed Notes$")
+	public void user_enters_text_for_Discussed_Notes() {
+		enter(discussedNote_TextBox, var_DiscussedNoteText);
+		System.out.println("text for Discussed Notes");
+	}
+
+	/**
+	 * This Method enters value for Discussed By through look up.
+	 */
+	@When("^user enters text for Discussed By$")
+	public void user_enters_text_for_Discussed_By() {
+		wait(2);
+		selectByVisibleText(discussedBy_DropDown, var_DiscussedByText);
+		wait(2);
+		click(discussedBy_lookUpIcon_Img);
+		String parentHandle = getWindowHandle();
+		for (String winHandle : getWindowHandles()) {
+			if (!(parentHandle.equals(winHandle))) {
+				switchToWindow(winHandle);
+				switchToFrame(("searchFrame"));
+				enter(searchFieldLookUp_TextBox, userLoggedInValue);
+				click(goButton);
+				switchToDefaultContent();
+				switchToFrame("resultsFrame");
+				click(By.linkText(userLoggedInValue));
+				switchToWindow(parentHandle);
+			}
+		}
+		System.out.println("text for Discussed By Text");
+	}
+
+	@When("^user clicks on Cancel button on Advance Care Plan page$")
+	public void user_clicks_on_Cancel_button_on_Advance_Care_Plan_page() {
+		click(cancel_AdvanceCare_Button);
+		System.out.println("Clicked on Cancel button on Advance Care Plan page");
+		wait(3);
+	}
+
+	@Then("^verify Advance Care Plan cancelled$")
+	public void verify_Advance_Care_Plan_cancelled() {
+		wait(3);
+		waitForElementToDisappear(spinnerImg);
+		verifyElementExists("Couldn't cancel Advance Care Plan", addACP_Button);
+		System.out.println("Successfully cancelled Advance Care Plan creation by clicking on cancel");
+	}
+
+	@When("^user clicks on Save button on Advance Care Plan page$")
+	public void user_clicks_on_Save_button_on_Advance_Care_Plan_page() {
+		click(save_AdvanceCare_Button);
+		System.out.println("Clicked on Save button on Advance Care Plan page");
+		wait(3);
+	}
+
+	/**
+	 * This Method verifies Advance Care Plan created with given field.
+	 */
+	@Then("^verify Advance Care Plan created$")
+	public void verify_Advance_Care_Plan_created() {
+		wait(3);
+		verifyValues("Not selected fullCode_Radio ", findElement(fullCode_Radio).getAttribute("checked"),"true");
+		System.out.println("selected  yes for Antibiotics_Radio");
+		verifyValues("Not selected  yes for Antibiotics_Radio  ", findElement(yes_OptionAntibiotics_Radio).getAttribute("checked"),"true");
+		System.out.println("selected  yes for Antibiotics_Radio");
+		verifyValues("Not selected  yes for Blood Transfusion Radio ", findElement(yes_OptionBloodTransfusion_Radio).getAttribute("checked"),"true");
+		System.out.println("selected  yes for Blood Transfusion Radio");
+		verifyValues("Not selected  yes for TubeFeeding Radio ", findElement(yes_OptionTubeFeeding_Radio).getAttribute("checked"),"true");
+		System.out.println("selected  yes for TubeFeeding Radio");
+		verifyValues("Not selected  yes for Hospitalization Radio ", findElement(yes_OptionHospitalization_Radio).getAttribute("checked"),"true");
+		System.out.println("selected  yes for Hospitalization Radio");
+		verifyValues("Not selected  yes for IVHydration Radio ", findElement(yes_OptionIVHydration_Radio).getAttribute("checked"),"true");
+		System.out.println("selected  yes for IVHydration Radio");
+		verifyValues("Not selected  yes for SurgicalIntervention Radio ",findElement(yes_OptionSurgicalIntervention_Radio).getAttribute("checked"),"true");
+		System.out.println("selected  yes for SurgicalIntervention Radio");
+		verifyValues("Primary Goal not inserted", var_PrimaryGoalOption,getFirstSelectedOption(enrollPrimaryGoal_DropDown));
+		System.out.println("Primary Goal inserted");
+		verifyValues("Family Goal not inserted", var_PrimaryGoalOption,getFirstSelectedOption(enrollFamilyPrimaryGoal_DropDown));
+		System.out.println("Family Goal inserted");
+		verifyValues("Mortality Risk not inserted", var_ModerateRiskOption,getFirstSelectedOption(mortalityRisk_DropDown));
+		System.out.println("Mortality Risk inserted");
+		verifyelementText("Previous Goal Care not inserted", previousGoal_TextArea, var_GoalsOfCareText);
+		System.out.println("Previous Goal Care inserted");
+		verifyValues("Not selected no Option Consumer Resposible Radio",findElement(no_OptionConsumerResposible_Radio).getAttribute("checked"),"true");
+		System.out.println("Selected no Option Consumer Resposible Radio");
+		verifyElementAttributeValue("Last reviewed Date not inserted", dateLastReviewed_TextBox, "value",var_LastReviewedDate);
+		verifyElementAttributeValue("Reviewed with text not inserted", reviewedWith_TextBox, "value",var_ReviewedWithText);
+		System.out.println("Reviewed with text inserted");
+		verifyElementAttributeValue("Update date not inserted", updateDate_TextBox, "value", var_UpdateDate);
+		System.out.println("Update date inserted");
+		verifyElementAttributeValue("Discussed Date not inserted", discussedDate_TextBox, "value", var_DiscussedDate);
+		System.out.println("Discussed Date inserted");
+		verifyElementAttributeValue("Last reviewed Date not inserted", dateLastReviewed_TextBox, "value",var_LastReviewedDate);
+		System.out.println("Last reviewed Date inserted");
+		verifyElementAttributeValue("Discussed with text not inserted", discussedWith_TextBox, "value",var_DiscussedWithText);
+		System.out.println("Discussed with text inserted");
+		verifyElementAttributeValue("Discussed Note not inserted", discussedNote_TextBox, "value",var_DiscussedNoteText);
+		System.out.println("Discussed Note inserted");
+		verifyValues("Reviewed Care Goals Drop Down not inserted", var_ReviewCareOptionOption,getFirstSelectedOption(reviewedCareGoals_DropDown));
+		System.out.println("Reviewed Care Goals Drop Down inserted");
+	}
+
+	@Then("^verify Update ACP button displayed$")
+	public void verify_Update_ACP_button_displayed() {
+		verifyElementExists("Page does not have Update ACP button", updateACP_AdvanceCare_Button);
+		System.out.println("Update ACP button displayed");
+	}
+
+	@Then("^Verify ACP History button displayed$")
+	public void verify_ACP_History_button_displayed() {
+		wait(3);
+		verifyElementExists("Page does not have ACP History button", acpHistory_Button);
+		System.out.println("ACP History button displayed");
+	}
+
+	@When("^user clicks on Update ACP button$")
+	public void user_clicks_on_Update_ACP_button() {
+		waitForElementToDisappear(spinnerImg);
+		click(updateACP_AdvanceCare_Button);
+		System.out.println("Clicked on Update ACP button");
+	}
+
+	@When("^user clicks no for Blood Transfusion$")
+	public void user_clicks_no_for_Blood_Transfusion() {
+		click(no_OptionBloodTransfusion_Radio);
+		System.out.println("Clicked on no for Blood Transfusion");
+	}
+
+	/**
+	 * This Method verifies if Update Advance Care Plan cancelled.
+	 */
+	@Then("^verify update cancelled for Advance Care Plan page$")
+	public void verify_update_cancelled_for_Advance_Care_Plan_page() {
+
+		verifyValuesNotEquals("Primary Goal updated ", var_Update_PrimaryGoalOption,
+				getFirstSelectedOption(enrollPrimaryGoal_DropDown));
+		System.out.println("Primary Goal update cancelled");
+		verifyValuesNotEquals("Family Goal updated ", var_Update_FamilyGoalOption,
+				getFirstSelectedOption(enrollFamilyPrimaryGoal_DropDown));
+		System.out.println("Family Goal update cancelled");
+		verifyValuesNotEquals("Mortality Risk updated ", var_Update_ModerateRiskOption,
+				getFirstSelectedOption(mortalityRisk_DropDown));
+		System.out.println("Mortality Risk update cancelled");
+	}
+
+	/**
+	 * This Method verifies if Advance Care Plan updated.
+	 */
+	@Then("^verify record updated in Advance Care Plan page$")
+	public void verify_record_updated_in_Advance_Care_Plan_page() {
+		verifyValues("Primary Goal not updated", var_Update_PrimaryGoalOption,
+				getFirstSelectedOption(enrollPrimaryGoal_DropDown));
+		System.out.println("Primary Goal updated");
+		verifyValues("Family Goal not updated", var_Update_PrimaryGoalOption,
+				getFirstSelectedOption(enrollFamilyPrimaryGoal_DropDown));
+		System.out.println("Family Goal updated");
+		verifyValues("Mortality Risk not pdated", var_Update_ModerateRiskOption,
+				getFirstSelectedOption(mortalityRisk_DropDown));
+		System.out.println("Mortality updated");
+
+	}
+
+	/**
+	 * This Method verifies if first page of History contains only one latest
+	 * record
+	 */
+	@Then("^verify first page of history displayed on ACP Engagement Page$")
+	public void verify_first_page_of_history_displayed_on_ACP_Engagement_Page() {
+		List<WebElement> viewLinks = getElementList(viewLinkFirstPageHistory_Link);
+		int recordCount = viewLinks.size();
+		verifyValues("More than one record showing on first page", 1, recordCount);
+		System.out.println("History page contains one latest record");
+	}
+
+	/**
+	 * This Method verifies if all records displayed on history page, also
+	 * verifies if all the records have view links.
+	 */
+
+	@Then("^verify history displayed on show more of ACP Engagement Page$")
+	public void verify_history_displayed_on_show_more_of_ACP_Engagement_Page() {
+		List<WebElement> viewLinks = getElementList(viewLinkNextPageHistory_Link);
+		boolean flag1 = false;
+		int totalViewLink = viewLinks.size();
+		if (totalViewLink > 1) {
+			flag1 = true;
+		}
+		verifyValues("Show More not displaying entire items", true, flag1);
+		System.out.println("Show More displaying  More than one records in History section");
+		System.out.println("View link present for all the record");
+		wait(3);
+		click(viewLinkNextPageHistory_Link);
+		wait(3);
+		verifyElementExists("Advance Care Plan Detail not displayed", advanceCarePlanDetail_Label);
+		System.out.println("Advance Care Plan Detail displayed");
+		verifyElementExists("Health Surrogate not displayed", healthSurrogate_Label);
+		System.out.println("Health Surrogate displayed");
+		verifyElementExists("Hospice not displayed", hospice_Label);
+		System.out.println("Hospice displayed");
+		verifyElementExists("Advance Care Plan Review not displayed", advanceCarePlanReview_Label);
+		System.out.println("Advance Care Plan Review  displayed");
+		verifyElementExists("Advance Care Plan Update not displayed", advanceCarePlanUpdate_Label);
+		System.out.println("Advance Care Plan Update displayed");
+		verifyElementExists("Advance Care Plan Discussion not displayed", advanceCarePlanDiscussion_Label);
+		System.out.println("Advance Care Plan Discussion displayed");
+		click(expandAll_Link);
+		wait(3);
+		String s1 = getText(previousGoal_TextArea);
+		System.out.println(s1);
+		boolean flag = false;
+		if (s1.contains(var_GoalsOfCareNewText))
+			flag = true;
+		verifyValues("Verified that history screen does not contain Previous Goal history", true, flag);
+		System.out.println("Verified that history screen contains Previous Goal history");
+	}
+
+	@Then("^verify Show More link is displayed on ACP history page$")
+	public void verify_Show_More_link_is_displayed_on_ACP_history_page() {
+		verifyElementExists("Show More Link not displayed ", show_more_link);
+		System.out.println("Show More Link displayed");
+
+	}
+
+	@When("^user clicks on view link of ACP history page$")
+	public void user_clicks_on_view_link_of_ACP_histor_page() {
+		click(viewLinkNextPageHistory_Link);
+	}
+
+	@Then("^verify records displayed on view screen of ACP history page$")
+	public void verify_records_displayed_on_view_screen_of_ACP_history_page() {
+		verifyElementExists("Advance Care Plan Detail not displayed", advanceCarePlanDetail_Label);
+		System.out.println("Advance Care Plan Detail displayed");
+		verifyElementExists("Health Surrogate not displayed", healthSurrogate_Label);
+		System.out.println("Health Surrogate displayed");
+		verifyElementExists("Hospice not displayed", hospice_Label);
+		System.out.println("Hospice displayed");
+		verifyElementExists("Advance Care Plan Review not displayed", advanceCarePlanReview_Label);
+		System.out.println("Advance Care Plan Review  displayed");
+		verifyElementExists("Advance Care Plan Update not displayed", advanceCarePlanUpdate_Label);
+		System.out.println("Advance Care Plan Update displayed");
+		verifyElementExists("Advance Care Plan Discussion not displayed", advanceCarePlanDiscussion_Label);
+		System.out.println("Advance Care Plan Discussion displayed");
+	}
+
+	@Then("^verify update button displayed on ACP history page$")
+	public void verify_update_button_displayed_on_ACP_history_page() {
+		verifyElementExists("Update Advance Care Button not displayed", updateACP_AdvanceCare_Button);
+		System.out.println("Update Advance Care Button displayed");
+	}
+
+	@When("^user selects value from Enrollee Primary Goal of Care on consumer page$")
+	public void user_selects_value_from_Enrollee_Primary_Goal_of_Care_on_consumer_page() {
+		selectByVisibleText(enrollPrimaryGoal_DropDown, var_Update_PrimaryGoalOption_Consumer);
+		System.out.println("selected" + var_Update_PrimaryGoalOption_Consumer + "  from Enrollee Primary Goal of Care");
+	}
+
+	@When("^user selects value from Family Primary Goal of Care on consumer page$")
+	public void user_selects_value_from_Family_Primary_Goal_of_Care_on_consumer_page() {
+		selectByVisibleText(enrollFamilyPrimaryGoal_DropDown, var_Update_FamilyGoalOption_Consumer);
+		System.out.println("selected" + var_Update_FamilyGoalOption_Consumer + "  from Family Primary Goal of Care");
+	}
+
+	@When("^user selects value from Mortality Risk Assessment Score on consumer page$")
+	public void user_selects_value_from_Mortality_Risk_Assessment_Score_on_consumer_page() {
+		selectByVisibleText(mortalityRisk_DropDown, var_Update_ModerateRiskOption_Consumer);
+		System.out.println(
+				"selected" + var_Update_ModerateRiskOption_Consumer + "  from Mortality Risk Assessment Score");
+	}	
+	
+	@Then("^verify values present in Enrollees Primary Goal of Care dropdown$")
+	public void verified_values_present_in_Enrollees_Primary_Goal_of_Care_dropdown() {
+		verifyDropdownValues(var_PrimaryGoalOptionVerify, enrollPrimaryGoal_DropDown, "Enrollees Primary Goal");
+	}
+
+	@Then("^verify values present in Familys Primary Goal of Care dropdown$")
+	public void verified_values_present_in_Familys_Primary_Goal_of_Care_dropdown() {
+		verifyDropdownValues(var_FamilyGoalOptionVerify, enrollFamilyPrimaryGoal_DropDown,"Familys Primary Goal of Care");
+	}
+
+	@Then("^verify values present in Mortality Risk Assessment dropdown$")
+	public void verified_values_present_in_Mortality_Risk_Assessment_dropdown() {
+		verifyDropdownValues(var_ModerateRiskOptionVerify, mortalityRisk_DropDown,"Mortality Risk Assessment");
+	}
+
+}

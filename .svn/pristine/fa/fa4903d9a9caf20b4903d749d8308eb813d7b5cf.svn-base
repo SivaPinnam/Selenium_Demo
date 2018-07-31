@@ -1,0 +1,241 @@
+/**********
+*  Created By: Persistent Automation Team
+*  Created On: 11/30/2016
+*  Modified On: 12/22/2016
+**********/
+package com.pathway.scripts;
+
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Order_Page extends SeleniumFunctions {
+
+	// For Stage Environment
+	By order_type = By.xpath("//*[contains(text(),'Order Type')]//following::select");
+	By order_lable = By.xpath("//*[@class='slds-section-title section-group--is-open']");
+	By orderRelatedList = By.xpath("//table[contains(@class, 'list _dataTable')]/tbody");
+	By record_type_filter_consumer = By.xpath("//*[contains (@aria-label, 'Record Type')]");
+	By order_related_list_consumer =By.xpath("//*[contains(@id, 'ConsumerOrdersTab:')]//tbody");
+			
+	// ** END Stage Environment
+
+	//** For QA Environment
+	//By order_type = By.name("j_id0:j_id25:EngReleatedTab:j_id254:formid:j_id257:j_id284");	 
+	//By order_lable = By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div[2]/div[2]/span/span/div/form/div[1]/div/div/div/div[1]/h2");	
+	//By orderRelatedList = By.xpath("//tbody[@id='j_id0:j_id25:EngReleatedTab:j_id254:formid:j_id257:ShowLimit:tb']");	
+	//By record_type_filter_consumer = By.xpath(".//*[@id='j_id0:ConsumerOrdersTab:j_id507:careplanformid:j_id509:j_id538:j_id547header']");
+	//By order_related_list_consumer = By.xpath("//*[@id='j_id0:ConsumerOrdersTab:j_id507:careplanformid:j_id509:j_id538:tb']");
+	//** END QA Environment 
+
+	By order_consumer_lable = By.xpath(".//*[@id='j_id0:ConsumerOrdersTab:j_id841:careplanformid:j_id844']/div[1]/h3");
+	By add_order = By.xpath("//*[contains(@value,'Add Order')]");
+
+
+
+	By show_more_link = By.linkText("Show More");
+
+	By check_box = By.xpath("(//*[@type='checkbox'])");
+	By record_type_filter = By.xpath("//*[text()='Record Type']");
+	By approve_order_button = By.xpath("//*[@value='Approve Order']");
+	By edit_link = By.linkText("Edit");
+	By view_link = By.linkText("View");
+	By spinnerImg = By.xpath("//*[@class='spinner']");
+	By noOrder_row = By.xpath("//tbody[@id='j_id0:j_id24:EngReleatedTab:j_id238:formid:j_id241:ShowLimit:tb']/tr/td");
+
+
+
+	public static int orderCount_beforeadd;
+	int count;
+
+	@Then("^validates that Orders tab is displayed$")
+	public void user_should_see_the_orders_on_ui() {
+		wait(5);
+		verifyelementText("Order sub-tab not displayed", order_lable, "Orders");
+	}
+
+	@Then("^validates that Orders tab is displayed on Consumer Detail$")
+	public void user_should_see_the_orders_on_consumer_ui() {
+		wait(5);
+		verifyelementText("Order sub-tab not displayed", order_consumer_lable, "ORDERS");
+	}
+
+	@When("^user adds Order type \"([^\"]*)\"$")
+	public void user_adds_Order_type(String ordertype) {
+		selectByVisibleText(order_type, ordertype);
+		orderCount_beforeadd = get_Order_Count(ordertype);
+		click(add_order);
+	}
+
+	/******************************************************************************************
+	 * This method is to return number of Order record present. It will return 0
+	 * in case of no records.
+	 *******************************************************************************************/
+	public int get_Order_Count(String var_OrderType) {
+		count = 0;
+		String noRecordCheck;
+		String cellOrderType;
+		waitForElementtoBeVisible(orderRelatedList);
+		WebElement table = findElement(orderRelatedList);
+		List<WebElement> allRows = table.findElements(By.tagName("tr"));
+		noRecordCheck = allRows.get(0).findElements(By.tagName("td")).get(0).getText();
+		if (!(noRecordCheck.equalsIgnoreCase("No data available in table"))) {
+			for (WebElement row : allRows) {
+				List<WebElement> cells = row.findElements(By.tagName("td"));
+				cellOrderType = cells.get(1).getText();
+				if (cellOrderType.equals(var_OrderType)) {
+					count = count + 1;
+				}
+			}
+		}
+		return count;
+	}
+
+	@When("^clicks on Record type filter$")
+	public void clicks_on_Record_type_filter() {
+		click(record_type_filter);
+	}
+
+	public int get_order_count_by_record_and_approval_type(String record_type, String approval_type) {
+		WebElement table = findElement(orderRelatedList);
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		int count = -1;
+		for (int i = 0; i < rows.size(); i++) {
+			String record = rows.get(i).findElements(By.tagName("td")).get(1).getText();
+			String approval = rows.get(i).findElements(By.tagName("td")).get(7).getText();
+			if (record.equals(record_type) && approval.equals(approval_type)) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public int get_order_number_by_record_and_approval_type(String record_type, String approval_type) {
+		wait(3);
+		WebElement table = findElement(orderRelatedList);
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		int index = 0;
+		for (int i = 0; i < rows.size(); i++) {
+			String record = rows.get(i).findElements(By.tagName("td")).get(1).getText();
+			String approval = rows.get(i).findElements(By.tagName("td")).get(7).getText();
+			if (record.equals(record_type) && approval.equals(approval_type)) {
+				System.out.println("The record is on row number : " + i);
+				index = i;
+				break;
+			}
+		}
+		return index;
+	}
+
+	int value;
+
+	@When("^user Approve Order for Record type \"([^\"]*)\" and Approve type \"([^\"]*)\"$")
+	public void user_Approve_Order_for_Record_type_and_Approve_type(String record_type, String approve_type) {
+		clicks_on_Record_type_filter();
+		int index = get_order_number_by_record_and_approval_type(record_type, approve_type);
+		verifyValues("Record type is not present", true, index >= 0);
+		value = get_order_count_by_record_and_approval_type(record_type, "Approved");
+		getElementList(check_box).get(index).click();
+		click(approve_order_button);
+	}
+
+	@Then("^validate Approval status for Order Record type \"([^\"]*)\"$")
+	public void validate_Approval_status_for_Order_Record_type(String record_type) {
+		wait(6);
+		clicks_on_Record_type_filter();
+		int count = get_order_count_by_record_and_approval_type(record_type, "Approved");
+		verifyValues("Approval status not updated", value + 1, count);
+	}
+
+	@Then("^validates that Approval Needed column should Blank for Order Record type \"([^\"]*)\"$")
+	public void validates__Approval_Needed_Blank_for_Hospital_Transfer(String record_type) {
+		WebElement table = findElement(orderRelatedList);
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		for (int i = 0; i < rows.size(); i++) {
+			String record = rows.get(i).findElements(By.tagName("td")).get(1).getText();
+			String approval = rows.get(i).findElements(By.tagName("td")).get(7).getText();
+			if (record.equals(record_type))
+				verifyValues("Approval Needed column should be Blank for " + record_type, approval, "");
+		}
+	}
+
+	@When("^clicks on Edit link for Record type \"([^\"]*)\" and Approve type \"([^\"]*)\"$")
+	public void clicks_on_Edit_link_for_order(String ordertype, String approve_type) {
+		clicks_on_Record_type_filter();
+		int index = get_order_number_by_record_and_approval_type(ordertype, approve_type);
+		getElementList(edit_link).get(index).click();
+	}
+
+	@When("^clicks on View link for Record type \"([^\"]*)\" and Approve type \"([^\"]*)\"$")
+	public void clicks_on_View_link_for_order(String ordertype, String approve_type) {
+		clicks_on_Record_type_filter();
+		int index = get_order_number_by_record_and_approval_type(ordertype, approve_type);
+		getElementList(view_link).get(index).click();
+
+	}
+
+	public int get_order_number_by_record_and_approval_type_of_Consumer(String record_type, String approval_type) {
+		wait(3);
+		if (isElementExist(show_more_link)) {
+			new Common_Utility_Page().click(show_more_link);
+		}
+		WebElement table = findElement(order_related_list_consumer);
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		int index = -1;
+		for (int i = 0; i < rows.size(); i++) {
+			String record = rows.get(i).findElements(By.tagName("td")).get(1).getText();
+			String approval = rows.get(i).findElements(By.tagName("td")).get(7).getText();
+			if (record.equals(record_type) && approval.equals(approval_type)) {
+				index = i;
+				break;
+			}
+		}
+		return index;
+	}
+
+	@When("^clicks on Record type filter of Consumer$")
+	public void clicks_on_Record_type_filter_of_Consumer() {
+		click(record_type_filter_consumer);
+	}
+
+	@When("^clicks on View link for Record type \"([^\"]*)\" and Approve type \"([^\"]*)\" of Consumer$")
+	public void clicks_on_View_link_for_Consumer(String ordertype, String approve_type) {
+		if (isElementExist(show_more_link)) {
+			new Common_Utility_Page().click(show_more_link);
+		}
+		wait(5);
+		waitForElementToDisappear(spinnerImg);
+		clicks_on_Record_type_filter_of_Consumer();
+		int index = get_order_number_by_record_and_approval_type_of_Consumer(ordertype, approve_type);
+		getElementList(view_link).get(index).click();
+	}
+
+	@When("^clicks on Edit link for Record type \"([^\"]*)\" and Approve type \"([^\"]*)\" of Consumer$")
+	public void clicks_on_Edit_link_for_Record_type_and_Approve_type_of_Consumer(String ordertype,
+			String approve_type) {
+		click(show_more_link);
+		wait(4);
+		clicks_on_Record_type_filter_of_Consumer();
+		int index = get_order_number_by_record_and_approval_type_of_Consumer(ordertype, approve_type);
+		getElementList(edit_link).get(index).click();
+	}
+
+	@Then("^validates that Order with Record type \"([^\"]*)\" and Approve type \"([^\"]*)\" is in Locked status$")
+	public void validates_that_Order_with_Record_type_and_Approve_type_is_in_Locked_status(String ordertype,
+			String approve_type) {
+		wait(4);
+		String order_Status;
+		if (isElementExist(show_more_link)) {
+			new Common_Utility_Page().click(show_more_link);
+		}
+		WebElement table = findElement(order_related_list_consumer);
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		clicks_on_Record_type_filter_of_Consumer();
+		int index = get_order_number_by_record_and_approval_type_of_Consumer(ordertype, approve_type);
+		order_Status = rows.get(index).findElements(By.tagName("td")).get(3).getText();
+		verifyValues("Order is not in Locked Status", "Locked", order_Status);
+	}
+}

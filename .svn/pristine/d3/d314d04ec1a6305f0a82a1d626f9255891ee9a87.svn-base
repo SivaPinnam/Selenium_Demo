@@ -1,0 +1,67 @@
+/**********
+*  Created By: Persistent Automation Team
+*  Created On: 11/21/2016
+*  Modified On: 12/7/2016
+**********/
+package com.pathway.scripts;
+
+import org.openqa.selenium.By;
+import com.pathway.selenium.factory.SeleniumFunctions;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Engagement_Page extends SeleniumFunctions {
+
+// Locators:-	
+	By enguagementdetail_Id = By.xpath("(//*[@class='slds-text-body--regular'])[5]");
+	
+// Data :-
+	//String engagementId = "00000180161125";
+	String engagementId = "00000218161208";
+	String ConsumerName = "DND_TestAutomation326";
+	
+	
+// Code :-	
+	
+	/**
+	 * This method will click on the engagement id link.
+	 */
+	@And("^clicks on Engagement id$")
+	public void user_clicks_on_engagement_id() {
+		click(By.linkText(engagementId));
+		System.out.println("User Successfully clicks on engagement is : " +engagementId);
+	}
+
+	/**
+	 * This method will verify the engagement id present on UI
+	 * @param id :- engagement id which needs to be verified on UI
+	 * 
+	 */
+	@Then("^: user should see the engagement id on ui$")
+	public void user_should_see_the_engagement_id_on_ui() {
+		verifyelementText("Engagement id : " +engagementId +" is not visible ", enguagementdetail_Id, engagementId);
+		System.out.println("User is able to see enguagement Id" +engagementId);
+	}
+	/**
+	 * This method will click on the engagement id link.
+	 */
+	@And("^user clicks on Name of Consumer$")
+	public void user_clicks_on_Consumer_Name() {
+		click(By.linkText(ConsumerName));
+		System.out.println("User Successfully clicks on Consumer : " +ConsumerName);
+	}
+
+
+	@Given("^clicks on Consumer tab$")
+	public void clicks_on_Consumer_tab() {
+		
+	
+		click(By.xpath("//a[contains(text(), '" +engagementId +"')]//following::a"));
+							
+		
+	
+	}	
+}

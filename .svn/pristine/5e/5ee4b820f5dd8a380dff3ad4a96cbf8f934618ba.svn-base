@@ -1,0 +1,439 @@
+/*#Created By : Persistent Automation Team
+#Created on: 12/4/2016
+#Modified on:12/29/2016*/
+
+package com.pathway.scripts;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.TimeZone;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Clinical_Note_Page extends SeleniumFunctions {
+
+	// Locators :-
+	By clinical_note_tab = By.xpath("//a[text()='Clinical Note']");
+	By add_new_clinical_note_button = By.xpath("//a[text()='Add New Clinical Note']");
+	By clinical_note_text = By.xpath("//h2[text()='Clinical Note']");
+	By clinical_note_inside_form_text = By.xpath("//h1[@class='slds-text-heading--large' and text()='Clinical Note']");
+	By validation_text = By.xpath("//span[text()='Please enter all required fields.']");
+	By subject_type_available_field = By.xpath("//*[contains(@id,'subjectType_unselected')]");
+	By subject_type_chosen_field = By.xpath("//*[contains(@id,'subjectType_selected')]");
+	By add_arrow = By.xpath("//img[@title='Add'][@alt='Add']");
+	By remove_arrow = By.xpath("//img[@title='Remove'][@alt='Remove']");
+	By electronically_sign_button = By.xpath("//input[@value='Electronically Sign']");
+	By textarea_field = By.xpath("//textarea");
+	By cancel_button = By.xpath("//input[@type='submit' and @value='Cancel']");
+	By time_text = By.xpath("//*[text()='Time of Clinical Note']//following::span[1]");
+	By orderRelatedList = By.xpath("//span/div/div/table/tbody");
+	By back_to_related_list_link = By.xpath("//a[text()='<< Back to Related list']");
+	By clinical_note_relatedList = By.xpath("//span/div/div/table/tbody");
+	By subject_type_filter = By.xpath("//*[text()='Note Subject']");
+	By edit_link = By.linkText("Edit");
+	By note_Status_field = By.xpath("//*[text()='Note Status']//following::select[1]");	
+	By view_link = By.linkText("View");
+	By subject_selected = By.xpath(".//*[@id='pgclinicalnote:formid:subjectType_selected']");
+	By note_status_view_page = By.xpath("//*[text()='Note Status']//following::span[1]");
+	By note_signature = By.xpath("//input[@value='Cancel']//preceding::span[3]");
+	By note_date = By.xpath("//*[text()='Date of Clinical Note']//following::span[1]");
+	By user_name_text = By.xpath("//*[@id='userNavLabel']");
+	By setup_link = By.xpath("//*[@title='Setup']");
+	By navigate_Menu = By.xpath(".//*[@id='userNavButton']");
+	By personalInfo_link = By.linkText("My Personal Information");
+	By myPersonalInfo_link = By.linkText("Personal Information");
+	By ok_button = By.xpath("//input[@title='OK']");
+
+	
+
+	By myProfile_button = By.xpath("//a[@title='My Profile']");
+	By user_Action_button = By.xpath("//a[@title='User Action Menu']");
+	By user_Detail = By.xpath("//a[@title='User Detail']");
+	By timezone_text = By.xpath("//*[text()='Time Zone']//following::td[1]");
+
+	// Data :-
+
+	String excel_file = "files//Clinical_Note.xlsx";
+	String sheet_name = "Sheet1";
+	String select_care_plan = Excel.readFromExcel(excel_file, sheet_name, 1, 0);
+	String clinical_note_text_area = Excel.readFromExcel(excel_file, sheet_name, 1, 2);
+	String note_Status = Excel.readFromExcel(excel_file, sheet_name, 1, 3);
+
+	int count;
+	String user_name;
+	String date_save;
+	String parent_handle;
+	int order_count = 0;
+	int EXPECTED_ROW_COUNT = 10;
+	
+	@When("^gets the timezone of the user$")
+	public void gets_the_timezone_of_the_user() {
+		writeToExcel(excel_file, sheet_name, 3, 1, "");
+		click(navigate_Menu);
+		click(setup_link);
+		wait(1);
+		click(personalInfo_link);
+		if (isElementExist(ok_button))
+			click(ok_button);
+		click(myPersonalInfo_link);
+		wait(1);
+		String timez = getText(timezone_text);
+		String userTimeZone;
+		if (timez.contains("Central Standard"))
+			userTimeZone = "CST";
+		else if (timez.contains("Pacific Standard"))
+			userTimeZone = "PST";
+		else if (timez.contains("Eastern Standard"))
+			userTimeZone = "EST";
+		else if (timez.contains("Indian Standard"))
+			userTimeZone = "IST";
+		else
+			userTimeZone = "Timezone not found";
+
+		writeToExcel(excel_file, sheet_name, 3, 1, userTimeZone);
+	}
+
+	/**
+	 * This Method clicks on Clinical Note tab.
+	 */
+	@When("^user clicks on Clinical Note tab$")
+	public void user_clicks_on_Clinical_Note_tab() {
+		wait(4);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		click(clinical_note_tab);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+
+		waitForElementtoBeVisible(clinical_note_text);
+		new Common_Utility_Page().user_clicks_on_Show_More_link();
+		wait(3);
+		waitForElementtoBeVisible(back_to_related_list_link);
+		WebElement table = findElement(clinical_note_relatedList);
+		List<WebElement> allRows = table.findElements(By.tagName("tr"));
+		if (allRows.get(0).getText().contentEquals("No data available in table"))
+			order_count = 0;
+		else
+			order_count = allRows.size();
+		System.out.println("Previous Order count in order table is: " + order_count);
+
+	}
+
+	@Then("^validates that Clinical Note tab is displayed$")
+	public void validates_that_Clinical_Note_tab_is_displayed() {
+		verifyelementText("Clinical Note tab is not displayed", clinical_note_text, "Clinical Note");
+
+	}
+
+	@When("^User clicks on Add New Clinical Note button$")
+	public void user_clicks_on_Add_New_Clinical_Note_button() {
+
+		click(add_new_clinical_note_button);
+	}
+
+	@Then("^validates that Clinical Note form is displayed$")
+	public void validates_that_Clinical_Note_form_is_displayed() {
+		verifyelementText("Clinical Note form is not displayed", clinical_note_inside_form_text, "Clinical Note");
+	}
+
+	@Then("^validates that Clinical Note form is displayed for Edit$")
+	public void validates_that_Clinical_Note_form_is_displayed_edit() {
+		parent_handle = getWindowHandle();
+		System.out.println("Parent window is " + parent_handle);
+		for (String child_window : getWindowHandles()) {
+			if (!parent_handle.equals(child_window)) {
+				switchToWindow(child_window);
+			}
+		}
+		verifyelementText("Clinical Note form is not displayed", clinical_note_inside_form_text, "Clinical Note");
+	}
+
+	@Then("^validates that Clinical Note form is displayed for View$")
+	public void validates_that_Clinical_Note_form_is_displayed_View() {
+		WebElement username = findElement(user_name_text);
+		user_name = username.getText().trim();
+		verifyelementText("Clinical Note form is not displayed", clinical_note_inside_form_text, "Clinical Note");
+	}
+
+	@Then("^validates signature for Clinical Note$")
+	public void validates_signature_for_Clinical_Note() {
+		wait(3);
+		String time_view = getText(time_text);
+		String date_view = getText(note_date);
+		WebElement sign = findElement(note_signature);
+		boolean flag = false;
+		if (sign.getText().trim()
+				.contains("Provider Electronic Signature : " + user_name + ", " + date_view + ", " + time_view))
+			flag = true;
+		verifyValues("Signature is not as expected", true, flag);
+
+	}
+
+	@Then("^clicks on Cancel button on Clinical Note form$")
+	public void clicks_on_Cancel_button_on_Clinical_Note_form() {
+		click(cancel_button);
+	}
+
+	@Then("^validates that user should land on Engagement detail list page$")
+	public void validates_that_user_should_land_on_Engagement_detail_list_page() {
+		verifyelementText("User unable to land on Engagement detail list page", clinical_note_text, "Clinical Note");
+
+	}
+
+	@Then("^clicks on Electronically Sign button on Clinical Note$")
+	public void clicks_on_Electronically_Sign_button_on_Clinical_Note() {
+		click(electronically_sign_button);
+		wait(4);
+	}
+
+	@Then("^clicks on Electronically Sign button on Edit form$")
+	public void clicks_on_Electronically_Sign_button_on__Edit_Form() {
+		click(electronically_sign_button);
+		new Common_Utility_Page().user_clicks_on_Show_More_link();
+		waitForElementtoBeVisible(back_to_related_list_link);
+	}
+
+	@Then("^validates that user should gets validation message$")
+	public void validates_that_user_should_gets_validation_message() {
+		verifyelementText("Validation message", validation_text, "Please enter all required fields.");
+
+	}
+
+	@When("^enters value for Subject on Clinical Note Page$")
+	public void enters_value_for_Subject_on_Clinical_Note_Page() {
+		for (String val : select_care_plan.split(";")) {
+			selectByVisibleText(subject_type_available_field, val);
+		}
+		click(add_arrow);
+
+	}
+
+	@When("^enters value for Clinical Note on Clinical Note Page$")
+	public void enters_value_for_Clinical_Note_on_Clinical_Note_Page() {
+		enter(textarea_field, clinical_note_text_area);
+		wait(2);
+	}
+
+	/**
+	 * This Method verifies time zone
+	 */
+	@When("^verify the time is captured$")
+	public void verify_the_time_is_captured() {
+		wait(4);
+		waitForElementtoBeVisible(time_text);
+		String time_save = getText(time_text);
+		date_save = getText(note_date);
+		System.out.println("Time captured at time of Save Operation is : " + time_save);
+		/*
+		 * Calendar currentdate = Calendar.getInstance(); DateFormat formatter =
+		 * new SimpleDateFormat("hh:mm a"); TimeZone cst_zone =
+		 * TimeZone.getTimeZone("CST"); TimeZone estTime =
+		 * TimeZone.getTimeZone("EST"); TimeZone pst_Time =
+		 * TimeZone.getTimeZone("PST"); TimeZone ist_Time =
+		 * TimeZone.getTimeZone("IST"); wait(2);
+		 * formatter.setTimeZone(cst_zone); String cst =
+		 * formatter.format(currentdate.getTime());
+		 * 
+		 * formatter.setTimeZone(estTime); String est =
+		 * formatter.format(currentdate.getTime());
+		 * 
+		 * formatter.setTimeZone(pst_Time); String pst =
+		 * formatter.format(currentdate.getTime());
+		 * 
+		 * formatter.setTimeZone(ist_Time); String ist =
+		 * formatter.format(currentdate.getTime());
+		 * 
+		 * System.out.println("Time captured in CST : " + cst);
+		 * System.out.println("Time captured in EST : " + est);
+		 * System.out.println("Time captured in PST : " + pst);
+		 * System.out.println("Time captured in IST : " + ist); wait(4); String
+		 * time = "0"; if (cst.contains(time_save)) { time = cst; } else if
+		 * (pst.contains(time_save)) { time = pst;
+		 * 
+		 * } else if (est.contains(time_save)) { time = est;
+		 * 
+		 * } else if (ist.contains(time_save)) { time = ist; } wait(4);
+		 * verifyValues(
+		 * "The time captured is not correct as per the timezone of User", time,
+		 * getText(time_text));
+		 */
+
+		/// Rahul Code
+		DateFormat formatter = new SimpleDateFormat("hh:mm a");
+
+		String timeZone = Excel.readFromExcel(excel_file, sheet_name, 3, 1);
+		// for(String t1 : timezones.split(":"))
+		// {
+		TimeZone cst_zone = TimeZone.getTimeZone(timeZone);
+		formatter.setTimeZone(cst_zone);
+		Calendar currentTime_less_1 = Calendar.getInstance();
+		Calendar currentTime = Calendar.getInstance();
+		Calendar currentTime_plus_1 = Calendar.getInstance();
+		currentTime_less_1.add(Calendar.MINUTE, -1);
+		currentTime.add(Calendar.MINUTE, 0);
+		currentTime_plus_1.add(Calendar.MINUTE, 1);
+		String cst1 = formatter.format(currentTime_less_1.getTime());
+		String cst2 = formatter.format(currentTime.getTime());
+		String cst3 = formatter.format(currentTime_plus_1.getTime());
+		boolean match = false;
+		if (time_save.contentEquals(cst1))
+			match = true;
+		else if (time_save.contentEquals(cst2))
+			match = true;
+		else if (time_save.contentEquals(cst3))
+			match = true;
+		System.out.println(match);
+		verifyValues("Time not captured correctly", true, match);
+		// End Rahul Code
+	}
+
+	@When("^clicks on Edit link for Clinical Note$")
+	public void clicks_on_Edit_link_for_order() {
+		getElementList(edit_link).get(0).click();
+
+	}
+
+	@Then("^selects value for status field$")
+	public void enters_value_for_status_field() {
+		selectByVisibleText(note_Status_field, note_Status);
+	}
+
+	@When("^validates the values provided by user on add page for Clinical Note$")
+	public void validates_the_values_provided_on_view_page() {
+		new Common_Utility_Page().validate_multicombo_selected_values(subject_selected, select_care_plan,
+				"Subject Type");
+	}
+
+	// @Then("^verify the time is captured for View form$")
+	// public void verify_the_time_is_captured_for_Edit_form() {
+	// String time_edit = getText(time_text);
+	// System.out.println("Time captured at time of Edit Operation is : " +
+	// time_edit);
+	// verifyValuesNotEquals("Time should be different for Edit Form",
+	// time_save, time_edit);
+	//
+	// }
+
+	@When("^clicks on View link for Clinical Note$")
+	public void clicks_on_View_link_for_Record_type() {
+		getElementList(view_link).get(0).click();
+	}
+
+	@Then("^validates all the fields on clinical note form$")
+	public void verify_all_the_fields_are_disabled() {
+		verifyValues("Subject Type field should disabled", false, isElementEnable(subject_type_chosen_field));
+		verifyValues("Text area field is not disabled", false, isElementEnable(textarea_field));
+		new Common_Utility_Page().validate_multicombo_selected_values(subject_selected, select_care_plan,
+				"Subject Type");
+		verifyelementText("Note status value mismatch", note_status_view_page, "Entered in Error");
+
+	}
+
+	@Then("^validate that Clinical Note is created$")
+	public void validate_that_Clinical_Note_is_created() {
+		new Common_Utility_Page().user_clicks_on_Show_More_link();
+		waitForElementtoBeVisible(back_to_related_list_link);
+
+		int updated_count;
+
+		WebElement table = findElement(clinical_note_relatedList);
+		List<WebElement> allRows = table.findElements(By.tagName("tr"));
+		if (allRows.get(0).getText().contentEquals("No data available in table"))
+			updated_count = 0;
+		else
+			updated_count = allRows.size();
+		System.out.println("Previous Order count in order table is: " + order_count);
+		System.out.println("After Save, Order count in order table is: " + updated_count);
+		verifyValues("New Clinical Note is not created", order_count + 1, updated_count);
+
+	}
+
+	@Then("^validates that new Clinical Note is not created$")
+	public void validates_that_new_Clinical_Note_is_not_created() {
+		new Common_Utility_Page().user_clicks_on_Show_More_link();
+		waitForElementtoBeVisible(back_to_related_list_link);
+		int order_count1;
+
+		WebElement table = findElement(clinical_note_relatedList);
+		List<WebElement> allRows = table.findElements(By.tagName("tr"));
+		if (allRows.get(0).getText().contentEquals("No data available in table"))
+			order_count1 = 0;
+		else
+			order_count1 = allRows.size();
+
+		System.out.println("Previous Order count in order table is: " + order_count);
+		System.out.println("After Cancel, Order count in order table is: " + order_count1);
+		verifyValues("New Clinical Note  is not created after Cancel operation", order_count1, order_count);
+
+	}
+
+	@When("^close current tab for Clinical Note$")
+	public void close_current_tab_for_clinical_note() {
+		closeCurrentTab();
+		switchToWindow(parent_handle);
+	}
+
+	@When("^verify by defaults records for Clinical Note$")
+	public void verify_defaults_records_for_Clinical_Note() {
+		waitForElementtoBePresent(orderRelatedList);
+		get_default_records_clinical_note();
+
+	}
+
+	/**
+	 * This Method verify defaults records on clinical note page.
+	 */
+	public void get_default_records_clinical_note() {
+		WebElement table = findElement(clinical_note_relatedList);
+		List<WebElement> allRows = table.findElements(By.tagName("tr"));
+		System.out.println("All rows count is: " + allRows.size());
+		boolean flag = false;
+		if (allRows.size() <= EXPECTED_ROW_COUNT)
+			flag = true;
+		verifyValues("Default record size not expected", true, flag);
+	}
+
+	@SuppressWarnings("resource")
+	public void writeToExcel(String filePath, String sheetName, int row, int col, String ValueToWrite) {
+
+		try {
+			File src = new File(filePath);
+			FileInputStream file = new FileInputStream(src);
+			XSSFWorkbook workbook = new XSSFWorkbook(file);
+			XSSFSheet sheet = workbook.getSheet(sheetName);
+			XSSFCell cell = null;
+			// Retrieve the row and check for null
+			XSSFRow sheetrow = sheet.getRow(row);
+			if (sheetrow == null) {
+				sheetrow = sheet.createRow(row);
+			}
+			// Update the value of cell
+			cell = sheetrow.getCell(col);
+			if (cell == null) {
+				cell = sheetrow.createCell(col);
+			}
+			cell.setCellValue(ValueToWrite);
+			file.close();
+			FileOutputStream fileOut = new FileOutputStream(src);
+			workbook.write(fileOut);
+			fileOut.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}

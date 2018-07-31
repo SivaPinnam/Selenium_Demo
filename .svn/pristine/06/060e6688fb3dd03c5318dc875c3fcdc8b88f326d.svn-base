@@ -1,0 +1,174 @@
+/**********
+*  Created By: Persistent Automation Team
+*  Created On: 11/30/2016
+*  Modified On: 12/22/2016
+**********/
+package com.pathway.scripts;
+
+import org.openqa.selenium.By;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Orders_DME_Page extends SeleniumFunctions {
+
+	By order_tab = By.xpath("//a[contains(@href, '#Order')]");
+	By enagement_list = By.xpath(".//*[contains(@class,'hotListElement')]");
+	By order_type_drop_down = By.xpath(".//*[contains(@name,'j_id0:j_id24:EngReleatedTab:j_id238:formid:j_id241')]");
+	By order_type_label = By.xpath("//*[@id='pageid:formid:orderType']");
+	By add_order_button = By.xpath(".//*[contains(@value,'Add Order')]");
+	By ordered_multiselect_list = By.xpath("//*[@id='pageid:formid:pclstOrdered_unselected']");
+	By ordered_multiselect_listitem = By.xpath("//*[@id='pageid:formid:pclstOrdered_right_arrow']");
+	By ordered_multiselect_listitem_adding = By
+			.xpath(".//*[@id='pageid:formid:j_id65']/table/tbody/tr/td[2]/table/tbody/tr[1]/td/div/img");
+	By vender_provider = By.xpath("//*[@id='pageid:formid:Lookup3']");
+	By ordering_provider = By.xpath("//img[@title='Ordering Provider Lookup (New Window)']");
+	By search_field = By.xpath(".//*[@id='lksrch']");
+	By go_button = By.xpath(".//*[contains(@class,'btn')]");
+	By telephonic_diagnosis = By.xpath("//input[@id='pageid:formid:teleDiagnosis']");
+	By vender_provider_phone = By.xpath("//*[@id='pageid:formid:vpPhone']");
+	By file_upload = By.xpath("//*[@id='pageid:j_id217:file']");
+	By cancel_button_dme = By.xpath(".//*[contains(@class,'btn slds-button slds-button--neutral')]");
+	By save_button_dme = By.xpath("//input[@value='Save']");
+	By order_list = By.xpath(".//*[contains(@class,'list _dataTable dataTable no-footer')]");
+	By order_dme_view_link = By
+			.xpath(".//*[contains(@href,'https://pathway--Stage--c.cs44.visual.force.com/apex/DME_View?')]");
+	By file_body = By.id("pageid:j_id217:j_id229:j_id230:j_id251:j_id253:tb");
+	By user_naval_label = By.xpath(".//*[contains(@id,'userNavLabel')]");
+	By logout_button = By.xpath(".//*[contains(@title,'Logout')]");
+	
+	// for QA environment
+	
+	//By order_type_label = By.xpath("//h1[@class='slds-text-heading--large']");
+	//By file_upload = By.xpath(".//*[@id='pageid:j_id240:file']");
+	
+    
+	// Data files
+
+	String excel_file = "files//Orders.xlsx";
+	String sheet_name = "DME_Order";
+
+	// Data files attribute
+	String ordered = Excel.readFromExcel(excel_file, sheet_name, 1, 0);
+	String vendor_provider_data = Excel.readFromExcel(excel_file, sheet_name, 1, 1);
+	String telephonic_diagnosis_data = Excel.readFromExcel(excel_file, sheet_name, 1, 2);
+	String vendor_phone = Excel.readFromExcel(excel_file, sheet_name, 1, 3);
+	String filePathAdd = Excel.readFromExcel(excel_file, sheet_name, 1, 4);
+
+	// Class Variable
+	private static String orderType = "DME";
+	int countAfterCancel;
+	int countBeforeAdd;
+	int countAfterSave;
+	int DME_orderCount_beforeadd;
+
+	@Then("^validates that DME order page is displayed$")
+	public void validates_that_DME_order_page_is_displayed() {
+		/*verifyValues("DME order lable is visible. DME Order is displayed.","DME", getText(order_type_label));
+		System.out.println("User is on the DME Order page");*/
+		// FOr QA environment
+		wait(5);
+		verifyValues("DME Order form not opened.", true, isElementVisible(order_type_label));
+		System.out.println("User is on DME Order page");
+	}
+
+	@When("^user enters value for Entered By field$")
+	public void user_enters_value_for_Entered_By_field() {
+		System.out.println("Please enter the values");
+	}
+
+	@When("^enters value for ORDERED field of DME order page$")
+	public void enters_value_for_ORDERED_field_of_DME_order_page() {
+		wait(5);
+		for (String val : ordered.split(";")) {
+			selectByVisibleText(ordered_multiselect_list, val);
+			System.out.println("Values are " + val);
+		}
+		click(ordered_multiselect_listitem);
+	}
+
+	@When("^enters value for ORDERING PROVIDER field of DME order page$")
+	public void enters_value_for_ORDERING_PROVIDER_field_of_DME_order_page() {
+		String searchString = getText(user_naval_label);
+		click(ordering_provider);
+		String parentHandle = getWindowHandle();
+		for (String childHandle : getWindowHandles()) {
+			if (!parentHandle.equals(childHandle)) {
+				switchToWindow(childHandle);
+				switchToFrame("searchFrame");
+				enter(search_field, searchString);
+				click(go_button);
+				driver.switchTo().defaultContent();
+				switchToFrame("resultsFrame");
+				driver.findElement(By.linkText(searchString)).click();
+				switchToWindow(parentHandle);
+			}
+		}
+		System.out.println("Entered value for Ordering Provide");
+	}
+
+	@When("^enters value for VENDER/PROVIDER of DME order page$")
+	public void enters_value_for_VENDER_PROVIDER_of_DME_order_page() {
+		enter(vender_provider, vendor_provider_data);
+	}
+
+	@When("^enters value for TELEPHONIC DIAGNOSIS of DME order page$")
+	public void enters_value_for_TELEPHONIC_DIAGNOSIS_of_DME_order_page() {
+		enter(telephonic_diagnosis, telephonic_diagnosis_data);
+	}
+
+	@When("^enters value for VENDOR/PROVIDER PHONE of DME order page$")
+	public void enters_value_for_VENDOR_PROVIDER_PHONE_of_DME_order_page() {
+		enter(vender_provider_phone, vendor_phone);
+	}
+
+	@When("^uploads file for DME order on DME order page$")
+	public void uploads_file_for_DME_order_on_DME_order_page() {
+		filePathAdd = System.getProperty("user.dir") + "\\" + filePathAdd;
+		enter(file_upload, filePathAdd);
+	}
+
+	@Then("^validates that new DME Order is not created$")
+	public void validates_that_new_DME_Order_is_not_created() {
+		countAfterCancel = new Order_Page().get_Order_Count(orderType);
+		countBeforeAdd = Order_Page.orderCount_beforeadd;
+		System.out.println("Previous Order count in order table is: " + countBeforeAdd);
+		System.out.println("After Cancel, Order count in order table is: " + countAfterCancel);
+		verifyValues("New DME order created after Cancel operation", countAfterCancel, countBeforeAdd);
+		System.out.println("Order Cancelled Successfully");
+	}
+
+	@When("^clicks on Save button on DME order page$")
+	public void clicks_on_Save_button_on_DME_order_page() {
+		click(save_button_dme);
+		wait(5);
+	}
+
+	@Then("^validates that new DME Order is created successfully$")
+	public void validates_that_new_DME_Order_is_created_successfully() {
+		countAfterSave = new Order_Page().get_Order_Count(orderType);
+		countBeforeAdd = Order_Page.orderCount_beforeadd;
+		System.out.println("Previous Order count in order table is: " + countBeforeAdd);
+		System.out.println("After Save, Order count in order table is: " + countAfterSave);
+		countBeforeAdd++;
+		verifyValues("New DME Order is not  created successfully", countAfterSave, countBeforeAdd);
+		System.out.println("Order Created Successfully");
+	}
+
+	@When("^user clicks on Orders tab of DME$")
+	public void user_clicks_on_Orders_tab_of_DME() {
+		click(order_tab);
+	}
+
+	@Then("^validates that Orders tab is displayed on Orders DME Page$")
+	public void validates_that_Orders_tab_is_displayed_on_Orders_DME_Page() {
+		isElementExist(order_list);
+		System.out.println("Orders lists is displayed");
+	}
+
+	@Then("^clicks on Cancel button on DME order page$")
+	public void clicks_on_View_Cancel_button_on_DME_order_page() {
+		click(cancel_button_dme);
+	}
+}

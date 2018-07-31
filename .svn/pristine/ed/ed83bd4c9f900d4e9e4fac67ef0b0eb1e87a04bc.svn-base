@@ -1,0 +1,27 @@
+package com.pathway.scripts;
+
+import org.openqa.selenium.By;
+
+import com.pathway.selenium.factory.SeleniumFunctions;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Home_Page extends SeleniumFunctions{
+	
+	By username_lable = By.xpath("//*[@id='userNavLabel']");
+	By engagements_tab  = By.linkText("Engagements");
+	
+	public void verify_user_is_on_home_page() {
+		verifyValues("Username lable is not visible. Login Page is not displayed.", true, isElementVisible(username_lable));
+		System.out.println("User is on the Home page");
+	}
+	
+	@And("^navigates to Engagement tab$")
+	public void navigate_to_engagement_tab() {
+		click(engagements_tab);
+		System.out.println("User has navigated to engagement tab successfully");
+	}
+}

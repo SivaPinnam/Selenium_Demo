@@ -1,0 +1,125 @@
+/*#Created By : Persistent Automation Team
+#Created on: 11/28/2016
+#Modified on:12/6/2016
+*/
+
+package com.pathway.scripts;
+
+import org.openqa.selenium.By;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Order_Hospital_Transfer_Page extends SeleniumFunctions {
+
+	int orderCount1;
+	int count;
+	int hospitalTransfer_orderCount_beforeadd;
+
+	// Locators :-
+	By username_field = By.xpath("//*[@id='username']");
+	By password_field = By.xpath("//*[@id='password']");
+	By login_button = By.xpath("//*[@id='Login']");
+	By logo_image = By.xpath(".//*[@id='phHeaderLogoImage']");
+	By engagements_tab = By.xpath("//a[text()='Engagements']");
+	By orders_tab = By.linkText("Orders");
+	By selectOrderType = By.xpath(".//*[@class='slds-select']");
+	By addOrder_button = By.xpath("//input[@type='submit' and @value='Add Order']");
+	By cancel_button = By.xpath("//input[@type='submit' and @value='Cancel']");
+	By engagementDetail_text = By.xpath("//h2[text()='Engagement Detail']");
+	By hospitalTransfer_text = By.xpath("//h1[text()='Hospital Transfer']");
+	By faxNumber_field = By.xpath(".//*[@id='j_id0:formid:CTMFax']");
+	By save_button = By.xpath("//input[@type='button' and @value='Save']");
+	By edit_link = By.linkText("Edit");
+	By phoneNumber_field = By.xpath(".//*[@id='j_id0:formid:CTMPhone']");
+	By view_link = By.linkText("View");
+	//for Stage
+	//By faxNumber_text = By.xpath(".//*[@id='HospitalTransferPage:formid:j_id153']");
+	//for QA
+	By faxNumber_text = By.xpath(".//*[@id='HospitalTransferPage:formid:j_id149']");
+	
+	By faxNumber_text_edit_page = By.xpath(".//*[@id='j_id0:formid:CTMFax']");
+	By phoneNumber_text = By.xpath(".//span[@id='HospitalTransferPage:formid:j_id150']");
+	By orderRelatedList = By.xpath("//tbody[@id='j_id0:j_id24:EngReleatedTab:j_id238:formid:j_id241:ShowLimit:tb']");
+	By record_type_filter = By.xpath("//*[text()='Record Type']");
+
+	// Data :-
+	String excel_file = "files//Orders.xlsx";
+	String sheet_name = "HospitalTransfer_Order";
+	String phoneNumber = Excel.readFromExcel(excel_file, sheet_name, 4, 0);
+	String faxNumber = Excel.readFromExcel(excel_file, sheet_name, 1, 1);
+	String var_OrderType = Excel.readFromExcel(excel_file, sheet_name, 1, 2);
+
+	@Then("^validates that Hospital Transfer form is displayed$")
+	public void validates_that_Hospital_Transfer_form_is_displayed() throws Throwable {
+		hospitalTransfer_orderCount_beforeadd = new Order_Page().orderCount_beforeadd;
+		verifyValues("Hospital Transfer form  is displayed.", true, isElementVisible(hospitalTransfer_text));
+
+		System.out.println("User is on the Hospital Transfer page");
+	}
+
+	@When("^clicks on Cancel button on Hospital Transfer form$")
+	public void clicks_on_Cancel_button_on_Hospital_Transfer_form() throws Throwable {
+		click(cancel_button);
+
+	}
+
+	@Then("^validates that new Hospital Order is not created$")
+	public void validates_that_new_Hospital_Order_is_not_created() throws Throwable {
+
+		orderCount1 = new Order_Page().get_Order_Count(var_OrderType);
+		System.out.println("Previous Order count in order table is: " + hospitalTransfer_orderCount_beforeadd);
+		System.out.println("After Cancel, Order count in order table is: " + orderCount1);
+		verifyValues("New Hospital Transfer  Order is not created after Cancel operation", orderCount1,
+				hospitalTransfer_orderCount_beforeadd);
+
+	}
+
+	@When("^user enters value for Fax field$")
+	public void user_enters_value_for_Fax_field() throws Throwable {
+		enter(faxNumber_field, faxNumber);
+	}
+
+	@Then("^validate Order is created of type Hospital Transfer$")
+	public void validate_Order_is_created_of_type_Hospital_Transfer() throws Throwable {
+		int orderCount2 = new Order_Page().get_Order_Count(var_OrderType);
+		System.out.println("Previous Order count in order table is: " + hospitalTransfer_orderCount_beforeadd);
+		System.out.println("After Save, Order count in order table is: " + orderCount2);
+		verifyValues("New Hospital Transfer Order is created successfully", orderCount2,
+				hospitalTransfer_orderCount_beforeadd + 1);
+
+	}
+
+	@When("^enters value for phone field$")
+	public void enters_value_for_phone_field() throws Throwable {
+		enter(phoneNumber_field, phoneNumber);
+
+	}
+
+	@When("^clicks on Save button on Hospital Transfer form$")
+	public void clicks_on_Save_button() throws Throwable {
+		click(save_button);
+
+	}
+
+	@Then("^validates browser navigate to Engagement tab$")
+	public void validates_browser_navigate_to_Engagement_tab() throws Throwable {
+
+		verifyValues("Browser navigated to Engagement tab", true, isElementVisible(engagementDetail_text));
+		System.out.println("Browser navigated to Engagement tab");
+
+	}
+
+	@Then("^validates values provided by user$")
+	public void validates_values_provided_by_user() throws Throwable {
+		verifyelementText("Wrong phone number", phoneNumber_text, phoneNumber);
+		verifyelementText("Wrong fax number", faxNumber_text, faxNumber);
+	}
+
+	@When("^validates values provided by user on add page for Hospital Transfer$")
+	public void validates_values_provided_by_user_on_add_page() throws Throwable {
+		verifyelementText("Wrong fax number", faxNumber_text, faxNumber);
+	}
+
+}

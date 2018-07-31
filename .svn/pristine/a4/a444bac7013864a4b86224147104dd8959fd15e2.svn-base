@@ -1,0 +1,935 @@
+package com.pathway.scripts;
+
+import java.awt.Robot;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.server.commands.SeleniumCoreCommand;
+import org.openqa.selenium.support.ui.Select;
+//import org.openqa.selenium.remote.RemoteWebDriver;
+
+import com.pathway.selenium.factory.SeleniumBuilder;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.DFConstants;
+import com.pathway.util.Excel;
+import com.thoughtworks.selenium.Selenium;
+import com.thoughtworks.selenium.webdriven.commands.KeyEvent;
+
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class SmokeTestCase extends SeleniumFunctions{
+	
+	//Global Variables
+	private static final int Int = 0;
+	private static String ContactName="";
+	private static String Membership="";
+	static String EngagementNo="";
+	private static String CCprogram="";
+	private static String CCMCampaign="";
+	private static String timeStamp="";
+	private static String Clprogname="";
+	private static String AccClient="";
+	private static String AccFacility="";
+	private static String AccHousehold="";
+	private static String today1;
+	private static String todaydup1;
+	private static String todaydup;
+	private static String todayex;
+
+	// Locators :-	
+			By username_field = By.xpath("//*[@id='username']"); 
+			By password_field = By.xpath("//*[@id='password']");
+			By login_button = By.xpath("//*[@id='Login']");
+			
+	//Data
+			String excel_file = "files//data.xlsx";
+			String sheet_name = "LoginDetails";
+			String url = Excel.readFromExcel(excel_file, sheet_name, 1, 1); 
+			String username = Excel.readFromExcel(excel_file, sheet_name, 2, 1); 
+			String password = Excel.readFromExcel(excel_file, sheet_name, 3, 1);
+			
+			
+	public static WebDriver driver;
+
+	
+	@Given("^user is logged in with valid credentails$")
+	public void user_is_logged_in_with_valid_credentails()  {
+		
+			 getUrl(url);
+		if(! isElementExist(new Home_Page().username_lable)){
+			enter(username_field, username);
+			enter(password_field, password);
+			click(login_button);	
+		}
+		new Home_Page().verify_user_is_on_home_page();
+		System.out.println("User is on Home Page ");
+	}
+	
+	//Contact functionality
+	@When("^I click on the plus sign$")
+	public void i_click_on_the_plus_sign() throws Throwable {
+		wait(2);
+		click(By.className("allTabsArrow"));
+	}
+
+	@And("^Click on the Contacts object$")
+	public void click_on_the_Contacts_object() throws Throwable {
+		
+		switchToDefaultContent();
+		click(By.linkText("Contacts"));
+
+	}
+
+	@And("^click on new and select Record type as Consumer$")
+	public void click_on_new_and_select_Record_type_as_Consumer() throws Throwable {
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[3]/div[1]/div/div[1]/form/table/tbody/tr/td[2]/input"));
+		
+		wait(2);
+		WebElement element =findElement(By.id("p3"));
+		Select sel1 = new Select(element);
+		sel1.selectByIndex(1);
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div[3]/table/tbody/tr/td[2]/input[1]"));
+
+		
+		wait(8);
+
+	}
+
+	@And("^Fill all required fields$")
+	public void fill_all_required_fields() throws Throwable {
+		
+		List<WebElement> reqfields =  findElements(By.className("requireInput")) ; 
+				
+		String timeStamp = new SimpleDateFormat("dd_HH_mm_ss").format(new Date());
+		ContactName="testContact_"+timeStamp;
+		
+		
+		reqfields.get(0).sendKeys(ContactName);
+		reqfields.get(1).sendKeys("12345");
+		reqfields.get(2).sendKeys("4352345334");
+		reqfields.get(5).sendKeys("9102 NorthStreet");
+		reqfields.get(6).sendKeys("Louisville");
+		reqfields.get(8).sendKeys("40220");
+		reqfields.get(9).sendKeys("USA");
+
+		
+
+		Select Phonetype = new Select(reqfields.get(3));
+		Select PhyState = new Select(reqfields.get(7));
+		PhyState.selectByValue("KY");
+
+		Phonetype.selectByValue("Home");
+
+
+
+
+		Calendar cal = Calendar.getInstance();
+		int todayDate = cal.get(Calendar.DAY_OF_MONTH);
+		int tomorrowDate = todayDate+1;
+		int yesterdaydate=todayDate-2;
+		int month1=cal.get(Calendar.MONTH);
+		int month2=month1+1;
+		int Year1=cal.get(Calendar.YEAR);
+		String today=String.valueOf(yesterdaydate);
+		String today1="06/26/1989";
+		
+
+		reqfields.get(4).sendKeys(today1);
+	
+		reqfields.get(10).sendKeys(Clprogname);
+		
+		wait(1);
+		reqfields.get(11).sendKeys(AccClient);
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div[5]/div[2]/table/tbody/tr[2]/td[2]/span/input"), AccClient); 
+		
+	
+
+
+	}
+
+	@And("^click on save$")
+	public void click_on_save() throws Throwable {
+
+		String ContactNames=ContactName;
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[1]/table/tbody/tr/td[2]/input")); 
+		wait(5);
+	}
+
+	@Then("^Validate Edit button is working$")
+	public void validate_Edit_button_is_working() throws Throwable {
+		/*driver.switchTo().defaultContent();
+		driver.switchTo().frame("contentPane");
+		driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div/div[2]/div/div/div/span/form/span/center/input[1]")).click();
+		Thread.sleep(2000);
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("contentPane");
+		assertThat(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[4]/div[2]/div/div/div/input[1]")).getText(),containsString(ContactName));;*/
+
+	}
+
+	@Then("^Validate Cancel button is working$")
+	public void validate_Cancel_Button_is_working() throws Throwable {
+		/*driver.switchTo().defaultContent();
+		driver.switchTo().frame("contentPane");
+		driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[7]/center/input")).click();
+		Thread.sleep(2000);
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("contentPane");
+		assertThat(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div/div[2]/div/div/div/span/form/span/div/div[1]/div/div[1]/div/div/span")).getText(),containsString(ContactName));;*/
+	}
+
+	@After("@contact")
+	public void tearDown2(Scenario scenario){
+		if (scenario.isFailed()) {  
+			try {  
+				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);  
+				scenario.embed(screenshot, "image1/png");  
+			} catch (WebDriverException wde) {  
+				System.err.println(wde.getMessage());  
+			} catch (ClassCastException cce) {  
+				cce.printStackTrace();  
+			}  
+		}
+	}
+
+	// Create Membership record
+	@When("^Click on Membership object$")
+	public void click_on_Membership_object() throws Throwable {
+		
+		click(By.linkText("Memberships"));
+	}
+
+	@When("^Create Membership for existing consumer$")
+	public void create_Membership_for_existing_consumer() throws Throwable {
+
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td/form/div[2]/div/div/div/div[2]/table/tbody/tr/td[2]/input"));
+
+		wait(2);
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td/form/div[1]/div/div/div/div[2]/table/tbody/tr[1]/td[2]/div/span/input"), ContactName);
+		
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td/form/div[1]/div/div/div/div[3]/table/tbody/tr/td[2]/b/input"));
+		
+		Membership=getText(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td/form/div[3]/div/div/div/div[1]/div/div[2]/table/tbody/tr[2]/td/label"));
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td/form/div[1]/div/div/div/div[3]/table/tbody/tr/td[2]/input[2]"));
+
+	}
+
+	// Engagement Record
+
+	@When("^Contact is existing$")
+	public void contact_is_existing() throws Throwable {
+		
+		wait(3);
+		
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td/form/div[1]/div/div/div/div[1]/div/div[2]/table/tbody/tr[1]/td/div/input"), ContactName);
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td/form/div[1]/div/div/div/div[2]/table/tbody/tr/td[2]/input"));
+
+		
+		click(By.linkText(ContactName));
+
+
+	}
+
+	@Then("^Create Engagement with required fields$")
+	public void create_Engagement_with_required_fields() throws Throwable {
+
+	
+		wait(2);
+		click(By.linkText("Engagement"));
+		wait(5);	
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div/div[2]/div/div/span/span[2]/span/form/div[1]/div/div/div/div[1]/center/a"));
+		getWindowHandle1();
+		wait(2);
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[3]/span[1]"));
+		wait(2);
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[5]/div[2]/span/div/div[1]/div/div/span/input"), Membership);
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[5]/div[2]/span/div/div[3]/div/div/span/input"), CCprogram);
+		wait(2);
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[7]/div[2]/span/div/div[1]/div/div/span/input"), CCMCampaign);
+
+		// After saving engagement if we get unexpected popups below code handles
+		try {
+			//driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[2]/span/input")).click();
+			click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/div[2]/span/input"));
+
+			//acceptAlertIfAvailable(3000);
+			
+		} catch (UnhandledAlertException f) {
+			try {
+				switchToAlertAndAccept();
+				/* Commented by Persistent Team
+				Alert alert = driver.switchTo().alert();
+				String alertText = alert.getText();
+				System.out.println("Alert data: " + alertText);
+				alert.accept();*/
+			} catch (NoAlertPresentException e) {
+				e.printStackTrace();
+			}
+	}
+	
+		//Thread.sleep(10000);
+		wait(10);
+		
+		
+		EngagementNo=getText(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/div/div[2]/div/div/span/span[2]/span/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]"));
+		
+		//wait(5);
+		
+		//click(By.linkText(EngagementNo));
+		//driver.findElement(By.linkText(EngagementNo)).click(); 
+		
+		//wait(5);
+		
+		//ArrayList<String> tabseng = new ArrayList<String> (driver.getWindowHandles());
+		//ArrayList<String> tabseng = new ArrayList<String> (getWindowHandles());
+		//getWindowHandle1();
+		
+		//driver.window(tabs2.get(0)).close();
+
+
+		//driver.window(tabs2.get(0)).close();
+		
+		
+		// driver.switchTo().frame("contentPane");
+
+		//  WebDriverWait(driver, 5);*/
+
+		//Thread.sleep(8000);
+		//wait(8);
+		//try {
+			//driver.findElement(By.xpath("//div/span/a[@class='slds-button slds-button--brand']")).click();
+			//click(By.xpath("//div/span/a[@class='slds-button slds-button--brand']"));
+			
+			//acceptAlertIfAvailable(3000);
+		//} catch (UnhandledAlertException f) {
+			//try {
+			//switchToAlertAndAccept();
+				/* Commented by Persistent Team
+				Alert alert = driver.switchTo().alert();
+				String alertText = alert.getText();
+				System.out.println("Alert data: " + alertText);
+				alert.accept();*/
+
+			//} catch (NoAlertPresentException e) {
+			//	e.printStackTrace();
+			//}
+		//}
+
+		
+		//wait(2);
+		// ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+		// driver.switchTo().window(tabs2.get(0));
+		
+		// driver.switchTo().frame("contentPane");
+		// driver.findElement(By.xpath("//div/span/a[@class='btn slds-button slds-button--neutral']")).click();
+		//driver.findElement(By.xpath("//input[@value='Cancel']")).click();
+		//click(By.xpath("//input[@value='Cancel']"));
+		
+		//driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/center/input")).click();
+		//html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/center/input
+		
+		//wait(3);
+		// driver.findElement(By.xpath("html/body")).sendKeys(Keys.F5);
+		//html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/center/input
+		// driver.navigate().back();
+		// driver.navigate().refresh();
+
+		// driver.findElement(By.id("thePage:formid:j_id68")).click();
+
+		//driver.close();
+		
+	}
+
+
+
+
+	// Soap Note Creation
+	@When("^Engagement is existing$")
+	public void engagement_is_existing() throws Throwable {
+
+		/* Thread.sleep(4000);
+		  // driver.switchTo().defaultContent();
+		  //driver.switchTo().frame("contentPane");
+
+		   driver.findElement(By.linkText("Medication")).click(); 
+		   driver.findElement(By.linkText("Medication")).click(); 
+
+		   Thread.sleep(2000);
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/form/div[1]/div/div/div/div[1]/center/span/div/a")).click();
+		   Thread.sleep(3000);
+
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div/form/div[2]/div[1]/div[3]/div[1]/div/div/span/span/input")).sendKeys("Demo Medication");
+
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div/form/div[2]/div[1]/div[4]/div[1]/div/div/input")).sendKeys("4");
+
+
+		   Select DoseFreq = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div/form/div[2]/div[1]/div[4]/div[3]/div/div/select")));
+		   DoseFreq.selectByIndex(1);
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div/form/div[2]/div[1]/div[9]/div/center/span/span/center/input[1]")).click();
+		   Thread.sleep(3000);
+
+
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a[1]")).click();
+		   Thread.sleep(3000);
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div/form/div[2]/div[1]/div[9]/div/center/span/span/center/input")).click();
+		   Thread.sleep(3000);
+
+		   driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a[2]")).click();
+		   Thread.sleep(3000);
+		   driver.navigate().back();*/
+
+
+
+
+		//driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div/form/div[2]/div[1]/div[9]/div/center/span/span/center/span/input")).click();
+		
+		wait(2);
+
+
+
+		//html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/span[3]/div/center/span/input[2]
+
+
+
+		/*  driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div/form[1]/span[5]/div/div/input[1]")).click();
+		   Thread.sleep(2000);
+
+			driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/a")).click();  
+
+							   Thread.sleep(2000);
+		 driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div/form[1]/span[5]/div/div/input[2]")).click();
+							   Thread.sleep(2000);
+			driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr/td[1]/span/a")).click();
+
+							   Thread.sleep(2000);
+		driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div/form[1]/span[5]/div/div/input[2]")).click();*/
+
+
+
+
+
+
+
+
+
+
+		//html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr[1]/td[1]/a[2]
+		//html/body/div[1]/div[2]/table/tbody/tr/td[2]/div/form/center/input
+
+		//WebElement table_element = driver.findElement(By.id("j_id0:j_id23:EngReleatedTab:j_id245:formid:j_id251:j_id261"));
+
+		//List<WebElement> tr_collection=table_element.findElements(By.xpath("id('j_id0:j_id23:EngReleatedTab:j_id245:formid:j_id251:j_id261')/tbody/tr"));
+		//List<WebElement> rows= driver.findElements(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/form/div[1]/div/div/div/div[1]/span/span/div/div/table/tbody/tr"));
+
+		// WebElement tr_collection=driver.findElements(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/table/tbody/tr/td/div/div[2]/div[2]/div/div/span/div/span/form/div[1]/div/div/div/div[1]/span/span/div/div/table/colgroup"));
+		
+		
+		wait(3);
+		//driver.frame("contentPane");
+		// driver.findElement(By.linkText("SOAP Note")).click();
+		
+		
+		wait(3);
+
+
+	}
+
+	@Then("^Create New Soap Note$")
+	public void create_New_Soap_Note() throws Throwable {
+
+
+
+	}
+
+	@Then("^View, Edit, Cancel Soap Note$")
+	public void view_Edit_Cancel_Soap_Note() throws Throwable {
+
+	}
+
+
+	// Account Record with Client record type
+
+	@And("^Click on the Account Object$")
+	public void click_on_the_Account_Object() throws Throwable {
+
+		
+		wait(2);
+		
+		
+		
+		click(By.linkText("Accounts"));
+	}
+
+	@And("^Create Account with Client record type$")
+	public void create_Account_with_Client_record_type() throws Throwable {
+		timeStamp = new SimpleDateFormat("dd_HH_mm_ss").format(new Date());
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[3]/div[1]/div/div[1]/form/table/tbody/tr/td[2]/input"));
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div[3]/table/tbody/tr/td[2]/input[1]"));
+		
+		wait(3);
+		AccClient="TestClientaccount_"+timeStamp;
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[2]/div[3]/div/div/input"), AccClient);
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[2]/div[9]/div/div/input"), "3452454789");
+		
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[2]/div[10]/div/div/input"), "3452454789");
+
+	
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[4]/div[1]/div/div/div/input"), "123 shellbyville");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[4]/div[3]/div/div/div/input"), "Louisville");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[4]/div[5]/div/div/div/input"), "KY");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[4]/div[7]/div/div/div/input"), "40220");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[4]/div[9]/div/div/div/input"), "USA");
+		
+		
+		click(By.linkText("Copy Billing Address to Shipping Address"));
+		
+		wait(5);
+		 selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[6]/div/div/table/tbody/tr[2]/td[1]/select"), 1);
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[6]/div/div/table/tbody/tr[2]/td[2]/a[1]/img"));
+		selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[7]/div/div/table/tbody/tr[2]/td[1]/select"), 1);
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[7]/div/div/table/tbody/tr[2]/td[2]/a[1]/img"));
+		Calendar calclie = Calendar.getInstance();
+		int todayDateclie = calclie.get(Calendar.DAY_OF_MONTH);
+		int tomorrowDateclie = todayDateclie+1;
+		int yesterdaydateclie=todayDateclie-1;
+		int month1cl=calclie.get(Calendar.MONTH);
+		int month2cl=month1cl+1;
+		int Year1cl=calclie.get(Calendar.YEAR);
+		String todaycl=String.valueOf(yesterdaydateclie);
+		String today1cl=month2cl +"/"+yesterdaydateclie+"/"+Year1cl;
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/div[2]/div[8]/div/span/input"), today1cl);
+		click(By.xpath("//input[@value='Save']"));
+		wait(3);
+
+	}
+
+	@Then("^Validate Edit and Cancel of account record with client record type$")
+	public void validate_Edit_and_Cancel_of_account_record_with_client_record_type() throws Throwable {
+
+		//Edit
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/input[1]"));
+		//Cancel
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/input[3]"));
+
+	}
+
+
+	//Account Record with Household record type
+
+	@When("^Create Account with Household record type$")
+	public void create_Account_with_Household_record_type() throws Throwable {
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[3]/div[1]/div/div[1]/form/table/tbody/tr/td[2]/input"));	
+		selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div[2]/div[2]/table/tbody/tr[1]/td[2]/div/select"), 2);
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div[3]/table/tbody/tr/td[2]/input[1]"));
+		wait(3);
+		AccHousehold="TestHouseholdaccount_"+timeStamp;
+		switchToDefaultContent();
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[1]/td[1]/div/input"), AccHousehold);
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[2]/td[1]/input"), "3534523451");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div[2]/div[2]/table/tbody/tr[1]/td[1]/textarea"), "9000");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div[2]/div[2]/table/tbody/tr[2]/td[1]/input"), "Louisville");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div[2]/div[2]/table/tbody/tr[4]/td[1]/input"), "40220");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div[2]/div[2]/table/tbody/tr[5]/td[1]/input"), "USA");
+		selectByValue(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div[2]/div[2]/table/tbody/tr[3]/td[1]/select"), "KY");
+		wait(3);
+	}
+
+	@Then("^Validate Edit and Cancel of account record with Household record type$")
+	public void validate_Edit_and_Cancel_of_account_record_with_Household_record_type() throws Throwable {
+
+	}
+
+	//Account Record with Facility record type
+
+	@When("^Create Account with Facility record type$")
+	public void create_Account_with_Facility_record_type() throws Throwable {
+
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[3]/div[1]/div/div[1]/form/table/tbody/tr/td[2]/input"));
+		selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div[2]/div[2]/table/tbody/tr[1]/td[2]/div/select"), 1);
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div[3]/table/tbody/tr/td[2]/input[1]"));
+		wait(3);
+		AccFacility="TestFacilityaccount_"+timeStamp;
+		switchToDefaultContent();
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[1]/td[1]/div/input"), AccFacility);
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[2]/td[1]/textarea"), "9000");
+		selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[2]/td[2]/table/tbody/tr[2]/td[1]/select"), 2);
+		wait(1);
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[2]/td[2]/table/tbody/tr[2]/td[2]/a[1]/img"));
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[3]/td[1]/input"), "Louisville");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[4]/td[1]/input"), "AL");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[5]/td[1]/input"), "35035");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[6]/td[1]/input"), "3425345233");
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div/div/div/div[2]/div[1]/div[2]/table/tbody/tr[6]/td[2]/input"), "3425345233");
+		wait(2);
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div/div/div/div/div[1]/table/tbody/tr/td[2]/input[1]"));
+		
+	}
+
+	@Then("^Validate Edit and Cancel of account record with Facility record type$")
+	public void validate_Edit_and_Cancel_of_account_record_with_Facility_record_type() throws Throwable {
+
+
+	}
+
+
+
+
+	//Clinical program record
+
+	@When("^Click on the Clinical Programs$")
+	public void click_on_the_Clinical_Programs() throws Throwable {
+		
+		click(By.linkText("Clinical Programs"));
+		wait(2);
+	}
+
+	@When("^Create Clinical Program$")
+	public void create_Clinical_Program() throws Throwable {
+
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div/div[1]/center[1]/input[2]"));
+		getWindowHandle1();
+		
+		Clprogname="Clprogautomation_"+timeStamp;
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div/div[2]/table/tbody/tr[1]/td/input"), Clprogname);
+		selectByIndex((By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[2]/div/div[2]/table/tbody/tr[3]/td/select")), 1);
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[3]/table/tbody/tr/td[2]/input[1]"));
+		wait(5);
+		
+	}
+
+	@Then("^Validate Edit and Cancel of Clinical Program$")
+	public void validate_Edit_and_Cancel_of_Clinical_Program() throws Throwable {
+		
+		switchToDefaultContent();
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div[1]/table/tbody/tr/td[2]/input[1]"));
+		
+		wait(3);
+		
+		switchToDefaultContent();
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[1]/table/tbody/tr/td[2]/input[2]"));
+
+
+	
+
+	}
+
+	//Client Clinical Program record
+
+	@When("^Click on the Client Clinical Programs$")
+	public void click_on_the_Client_Clinical_Programs() throws Throwable {
+		
+		switchToDefaultContent();
+		
+		click(By.linkText("Client Clinical Programs"));
+		
+		wait(2);
+
+	}
+
+	@When("^Create Client Clinical Program$")
+	public void create_Client_Clinical_Program() throws Throwable {
+		
+		switchToDefaultContent();
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div[1]/center[1]/input[2]"));
+		
+		wait(3);
+		
+		getWindowHandle1();
+		
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[2]/div/div[2]/table/tbody/tr[1]/td/span/div/span/input"), AccClient);
+		wait(2);
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[2]/div/div[2]/table/tbody/tr[3]/td/span/div/div[2]/span/input"), Clprogname);
+		wait(2);
+		
+		selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[2]/div/div[2]/table/tbody/tr[12]/td/span/div/select"), 1);
+		selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[2]/div/div[2]/table/tbody/tr[14]/td/select"), 1);
+		wait(3);
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[3]/table/tbody/tr/td[2]/input[1]"));
+		wait(5);
+
+
+
+	}
+
+	@When("^Add Market Territory$")
+	public void add_Market_Territory() throws Throwable {
+		
+		
+		
+		CCprogram=getText(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[1]/div[1]/div[1]/h2"));
+		//Adding Market territory
+		
+		
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div[1]/table/tbody/tr/td[2]/input[3]"));
+		
+		swithtoWindowHandle();
+		
+		
+		
+		
+		
+		click(By.xpath("html/body/form/span/span/div/ul/li[2]/ul/li[3]/ul/li[2]/span/span[2]"));
+		
+		
+		String mark=getText(By.xpath("html/body/form/span/span/div/ul/li[2]/ul/li[3]/ul/li[2]/span/a"));
+
+		
+		click(By.xpath("html/body/form/input[2]"));
+		wait(3);
+		
+		
+		
+		swithToOiriginalndowHandle();
+
+		
+		wait(3);
+
+	}
+
+	@When("^Edit Market Territory$")
+	public void edit_Market_Territory() throws Throwable {
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div[1]/table/tbody/tr/td[2]/input[3]"));
+		
+		swithtoWindowHandle();
+		
+		
+		click(By.xpath("html/body/form/span/span/div/ul/li[3]/ul/li[1]/ul/li/span/span[2]"));
+		
+		String markedit=getText(By.xpath("html/body/form/span/span/div/ul/li[2]/ul/li[3]/ul/li[2]/span/a"));
+		
+		
+		click(By.xpath("html/body/form/input[2]"));
+		
+		swithToOiriginalndowHandle();
+	}
+
+	@Then("^Validate Edit and Cancel of Client Clinical Program$")
+	public void validate_Edit_and_Cancel_of_Client_Clinical_Program() throws Throwable {
+
+
+
+
+	/*	
+		
+		//driver.switchTo().frame("contentPane");
+
+		//driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div[1]/table/tbody/tr/td[2]/input[1]")).click();
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/div[2]/div[1]/table/tbody/tr/td[2]/input[1]"));
+		wait(8);
+		
+		
+		//driver.switchTo().frame("contentPane");
+
+		//driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/table/tbody/tr/td[2]/input[2]")).click();	
+		click(By.xpath("html/body/div/div[2]/table/tbody/tr/td[2]/form/div[3]/div/div/div/div/div[1]/table/tbody/tr/td[2]/input[2]"));
+						
+		//Thread.sleep(8000);	
+		
+		//driver.findElement(By.xpath("html/body/div[1]/div[1]/div/div/nav/ul/li[1]/a")).click();
+		//driver.navigate().to("https://pathway--qa.cs44.my.salesforce.com/home/home.jsp");*/
+
+
+	}
+
+
+
+	//CCM Campaign Record
+
+	@When("^Click on the CCM Campaign$")
+	public void click_on_the_CCM_Campaign() throws Throwable {
+		
+		
+		
+		click(By.linkText("CCM Campaign"));
+		wait(5);
+		 
+	}
+
+	@When("^Create CCM Campaign$")
+	public void create_CCM_Campaign() throws Throwable {
+		
+		
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[1]/input"));
+
+		CCMCampaign="Campaign_"+timeStamp;
+		
+		
+		
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[1]/td[1]/div/input"), CCMCampaign);
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[1]/td[2]/div/span[1]/input"), CCprogram);
+		 
+		wait(5);
+		
+		selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[4]/td[1]/div/select"), 1);
+		 
+		wait(1);
+		//Select CCprog1 = new Select(driver.findElement(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[4]/td[1]/div/select")));
+		//CCprog1.selectByIndex(1);
+		selectByIndex(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[4]/td[1]/div/select"), 1);
+		Calendar cal = Calendar.getInstance();
+		int todayDate = cal.get(Calendar.DAY_OF_MONTH);
+		int tomorrowDate = todayDate+1;
+		int yesterdaydate=todayDate-1;
+		int month1=cal.get(Calendar.MONTH);
+		int month2=month1+1;
+		int Year1=cal.get(Calendar.YEAR);
+		String today=String.valueOf(yesterdaydate);
+		String today1=month2 +"/"+yesterdaydate+"/"+Year1;
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[6]/td[1]/div/span/input"),("today1"));
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[5]/td[2]/div/span/input"),("today1"));
+		
+		enter(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[5]/td[1]/div/span/input"),("today1"));
+		 
+		wait(1);
+		
+		click(By.xpath("html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/center/input[1]"));
+
+		wait(5); 
+	}
+
+	@Then("^Validate Edit and Cancel of CCM Campaign$")
+	public void validate_Edit_and_Cancel_of_CCM_Campaign() throws Throwable {
+
+	}
+
+	//html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[1]/div/div/div/div[1]/input
+
+	//html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[1]/td[1]/div/input
+
+	//html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[4]/td[1]/div/select
+
+	//html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/div/div[2]/table/tbody/tr[6]/td[1]/div/span/span/a
+
+	//
+
+	//html/body/div[1]/div[2]/table/tbody/tr/td[2]/form/div[2]/div/div/div/div/div[1]/center/input[1]
+
+
+	// Useful methods&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+	private Object containsString(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*private static void getdriver(){
+		public WebDriver driver;
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Suresh\\Desktop\\New folder (3)\\chromedriver_win32\\chromedriver.exe");
+		driver=new ChromeDriver();
+	}*/
+
+	public static void ClickOnSearch (WebDriver driver, String xpath, String SearchString) throws Exception
+
+	{
+
+		try{
+
+			Thread.sleep(5000);
+			//wait(5);
+			driver.findElement(By.xpath(xpath)).click();
+
+			
+			//wait(5);
+			
+			//Get the list of all window handles
+			ArrayList<String> windowHandles = new ArrayList<String>(driver.getWindowHandles());
+
+			System.out.println(windowHandles.size());                
+
+			//Now switchTo new Tab.
+			driver.switchTo().window(windowHandles.get(1));
+
+
+			driver.switchTo().frame("searchFrame");
+			Thread.sleep(5000);
+			//wait(5);
+			driver.findElement(By.id("lksrch")).click();
+
+			driver.findElement(By.id("lksrch")).sendKeys(SearchString);
+			driver.findElement(By.name("go")).click();
+			Thread.sleep(2000);
+			driver.switchTo().defaultContent();
+			
+			driver.switchTo().frame("resultsFrame");
+			driver.findElement(By.linkText(SearchString)).click();
+
+			driver.switchTo().window(windowHandles.get(0));
+
+			windowHandles = null;
+
+		}catch (Exception e){
+
+			System.out.println(e.getMessage());
+
+		}
+	}
+
+
+
+	//#############################################################################################################################	
+
+	@Then("^Create related list data for engagement$")
+	public void create_related_list_data_for_engagement() throws Throwable {
+
+
+
+	}
+}
+
+

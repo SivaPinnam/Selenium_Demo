@@ -1,0 +1,230 @@
+package com.pathway.scripts;
+
+import org.openqa.selenium.By;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class Survey_Cage extends SeleniumFunctions {
+	
+//Locator
+	By Surveytab = By.xpath("//*[@href='#Survey']");
+	By Cage_title_text = By.xpath(".//*[@id='j_id0:j_id20:j_id63']/div/div/div/h1");
+	By Cage_Survey_date_field = By.xpath(".//*[@id='j_id0:j_id20:Completeddatetime']");
+	By Save_Lock_Button = By.xpath("//input[@value='Save & Lock']");
+	By Save_Button = By.xpath("//input[@value='Save']");
+	By Cancel_Button = By.xpath("//input[@value='Cancel']");
+	By AddSurveyButton = By.xpath("//a[text()='Add Survey']");
+	By Refused_Radiobutton = By.xpath(".//*[@id='j_id0:j_id20:j_id263:0:j_id265:0:j_id280:0']");
+	By radiobutton2 = By.xpath(".//*[@id='j_id0:j_id20:j_id263:0:j_id265:1:j_id280:0']")	;
+	By radiobutton3 = By.xpath(".//*[@id='j_id0:j_id20:j_id263:0:j_id265:2:j_id280:0']")	;
+	By radiobutton4 = By.xpath(".//*[@id='j_id0:j_id20:j_id263:0:j_id265:3:j_id280:0']")	;
+	By radiobutton5 = By.xpath(".//*[@id='j_id0:j_id20:j_id263:0:j_id265:4:j_id280:0']")	;
+	By CalculateScore = By.xpath(".//*[@id='calculateScoreButton']");
+	By Edit_link = By.xpath("//a[contains(text(),'Edit')]");
+	By Name = By.xpath("//div[text()='Name']");
+	By Survey_label = By.xpath("//*[text()='CAGE Survey']");
+	By Gender = By.xpath("//span[@id='j_id0:j_id20:Gender']");
+	By Consumer = By.xpath(".//*[@id='j_id0:j_id20:Consumer']");
+	By Datefield = By.xpath("//span[@id='j_id0:j_id20:j_id79']/span");
+	By Statusfield = By.xpath("//span[text()='In Progress']");
+	By Totalscore = By.xpath(".//*[@id='ScoreBox']");
+	By view_link = By.xpath("//a[contains(text(),'View')]");
+	By Survey_Lable = By.xpath("//*[text()='Surveys']");
+	By ConsumerName = By.xpath(".//*[@id='j_id0:j_id20:Consumer']");
+	By Refused_Radiobutton_View = By.xpath(".//*[@id='j_id0:j_id20:j_id263:0:j_id265:0:j_id280:0']");
+	By Cage_Survey_Date_View = By.xpath(".//*[@id='j_id0:j_id20:j_id79']/span");
+
+	
+
+	// Data
+	String excel_file = "files//Survey.xlsx";
+	String sheet_name = "Cage";
+	String Cage_title  = Excel.readFromExcel(excel_file, sheet_name, 1, 1);
+	String Cage_Survey_date = Excel.readFromExcel(excel_file, sheet_name, 2, 1);
+	
+	String var_SurveyType = "CAGE Survey";
+	int CAGE_Survey_surveyCount_beforeadd, surveyCount1;
+				
+	@Then("^validates that Surveys tab is displayed$")
+	public void validates_that_Surveys_tab_is_displayed() {
+		verifyValues("Survey tab is displayed.", "Surveys", getText(Surveytab));
+		System.out.println("User is on the Surveys page");
+	}
+
+	@Then("^validates that CAGE Survey form is displayed$")
+	public void validates_that_CAGE_Survey_form_is_displayed() {
+		verifyelementText("CAGE Survey Page is not displayed", Cage_title_text, Cage_title);
+	}
+
+	@Then("^selects date for CAGE Survey$")
+	public void selects_date_for_CAGE_Survey() {
+		enter(Cage_Survey_date_field, Cage_Survey_date);
+	}
+
+	@When("^user enters value for Date field on CAGE Survey page$")
+	public void user_enters_value_for_Date_field_on_CAGE_Survey_page() {
+		enter(Cage_Survey_date_field, Cage_Survey_date);
+	}
+
+	@When("^selects Have you felt you should cut down on your drinking\\? as Yes$")
+	public void selects_Have_you_felt_you_should_cut_down_on_your_drinking_as_Yes() {
+		click(radiobutton2);
+		System.out.println("Have you felt you should cut down on your drinking? radio button selected successfully");
+	}
+
+	@When("^Select Have others annoyed you by criticizing your drinking\\? as Yes$")
+	public void select_Have_others_annoyed_you_by_criticizing_your_drinking_as_Yes() {
+		click(radiobutton3);
+		System.out.println("Have others annoyed you by criticizing your drinking? radio button selected successfully");
+	}
+
+	@When("^selects Have you ever felt guilty about your drinking\\? as Yes$")
+	public void selects_Have_you_ever_felt_guilty_about_your_drinking_as_Yes() {
+		click(radiobutton4);
+		System.out.println("Have you ever felt guilty about your drinking? radio button selected successfully");
+	}
+
+	@When("^Select Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover\\? as Yes$")
+	public void select_Have_you_ever_had_a_drink_first_thing_in_the_morning_to_steady_your_nerves_or_get_rid_of_a_hangover_as_Yes() {
+		click(radiobutton5);
+		System.out.println(
+				"Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover? radio button selected successfully");
+	}
+
+	@When("^clicks on Cancel button on CAGE Survey page$")
+	public void clicks_on_Cancel_button_on_CAGE_Survey_page() {
+		click(Cancel_Button);
+		System.out.println("Clicks on Cancel Button Successfully");
+	}
+	@Then("^Click on Calculate Score Button$")
+	public void click_on_Calculate_Score_Button()  {
+		wait(10);
+		click(CalculateScore);
+		System.out.println("Calculate the Total Score");
+	}
+	@Then("^clicks on Save button for CAGE Survey$")
+	public void clicks_on_Save_button_for_CAGE_Survey() {
+		click(Save_Button);
+		System.out.println("Clicks on Save Button Successfully");
+	}
+
+	@When("^clicks on Save button on CAGE Survey page$")
+	public void clicks_on_Save_button_on_CAGE_Survey_page() {
+		click(Save_Button);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		System.out.println("Clicks on Save Button Successfully");
+	}
+
+	@Then("^clicks on Save&Lock button for CAGE Survey$")
+	public void clicks_on_Save_Lock_button_for_CAGE_Survey() {
+		click(Save_Lock_Button);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		System.out.println("Clicks on Save&Lock Button Successfully");
+	}
+
+	@When("^clicks on Cancel button for CAGE Survey$")
+	public void clicks_on_Cancel_button_for_CAGE_Survey() {
+		click(Cancel_Button);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		System.out.println("Clicks on Cancel Button Successfully");
+	}
+
+	@When("^user clicks on Add Survey button to add type \"([^\"]*)\"$")
+	public void user_clicks_on_Add_Survey_button_to_add_type(String arg1) {
+		click(AddSurveyButton);
+		System.out.println("Clicks on Add Survey Button Successfully");
+	}
+
+	@When("^clicks on Edit link for Record type \"([^\"]*)\" and status \"([^\"]*)\"$")
+	public void clicks_on_Edit_link_for_Record_type_and_status(String arg1, String arg2) {
+		wait(10);
+		new Common_Utility_Page().user_clicks_on_Show_More_link();
+		click(Edit_link);
+		System.out.println("clicked on Edit link");
+	}
+
+	@Then("^validates that CAGE Survey details page displayed$")
+	public void validates_that_CAGE_Survey_details_page_displayed() {
+		verifyelementText("CAGE Survey Page is not displayed", Cage_title_text, Cage_title);
+	}
+
+	@Then("^validates Consumer field$")
+	public void validates_Consumer_field() {
+		wait(10);
+		click(ConsumerName);
+		System.out.println("clicked on Survey tab");
+	}
+
+	@Then("^validates Gender field$")
+	public void validates_Gender_field() {
+		verifyValues("Gender field is avialble", true, isElementExist(Gender));
+		System.out.println("Gender field is displayed successfully");
+	}
+
+	@Then("^user enters Date in Date field$")
+	public void user_enters_Date_in_Date_field() {
+		enter(Cage_Survey_date_field, Cage_Survey_date);
+	}
+
+	@Then("^user select Refused radio button as Yes$")
+	public void user_select_Refused_radio_button_as_Yes() {
+		click(Refused_Radiobutton);
+		System.out.println("Refused radio button is selected successfully");
+	}
+
+	@Then("^user clicks on Save button$")
+	public void user_clicks_on_Save_button()  {
+		click(Save_Button);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		System.out.println("Clicks on Save Button Successfully");
+	}
+
+	@Then("^user clicks on Cancel button$")
+	public void user_clicks_on_Cancel_button()  {
+		click(Cancel_Button);
+		System.out.println("Clicks on Cancel Button Successfully");
+	}
+
+
+	@Then("^Verify the Total Score displayed$")
+	public void verify_the_Total_Score_displayed() {
+		isElementVisible(Totalscore);
+		verifyElementExists("Total score is zero", Totalscore);
+		//verifyElementAttributeValue("Total score is 0", Totalscore, "value", "0");
+		System.out.println("Total Score box is displayed");
+	}
+
+	@Then("^Verify Survey is Updated$")
+	public void verify_Survey_is_Updated() {
+		verifyElementExists("Survey label is displayed after update survey", Survey_Lable);
+		System.out.println("Survey is updates successfully");
+	}
+
+	@When("^clicks on View link for Record type \"([^\"]*)\" and status \"([^\"]*)\"$")
+	public void clicks_on_View_link_for_Record_type_and_status(String arg1, String arg2) {
+		wait(10);
+		// click(Name);
+		click(view_link);
+		System.out.println("clicked on view link");
+	}
+
+	@Then("^validates Updated Date field$")
+	public void validates_Updated_Date_field() {
+		verifyValues("Date field is avialble", true, isElementExist(Datefield));
+		verifyValues("Missmatch  date for CAGE Survey" , Cage_Survey_date, getText(Cage_Survey_Date_View));
+		System.out.println(" Date for CAGE Survey is same while adding");
+		System.out.println("Date field is displayed successfully");
+	}
+	@Then("^validates that Refused radio button as Yes is selected$")
+	public void validates_that_Refused_radio_button_as_Yes_is_selected()  {
+		verifyValues("Refused radio button is selected" , true, isElementSelected(Refused_Radiobutton_View));
+		System.out.println(" Refused radio button is selected");
+	}
+	@Then("^validates Updated Total Score$")
+	public void validates_Updated_Total_Score() {
+		verifyValues("Total score field is avialable", true, isElementExist(Totalscore));
+		//verifyElementAttributeValue("Total score is 0", Totalscore, "value", "0");
+	}
+}

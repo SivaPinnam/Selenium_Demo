@@ -1,0 +1,293 @@
+//Created By : Persistent Automation Team
+//Created on: 12/9/2016
+//Modified on:12/9/2016
+
+package com.pathway.scripts;
+
+import java.util.Random;
+import org.openqa.selenium.By;
+import com.pathway.selenium.factory.SeleniumFunctions;
+import com.pathway.util.Excel;
+import cucumber.api.java.en.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class Create_Engagement extends SeleniumFunctions {
+
+	// Locators:-
+	// Added for creation of New Engagement ID
+	By search_field = By.xpath(".//*[@id='lksrch']");
+	By go_button = By.xpath(".//*[contains(@class,'btn')]");
+	By engagements_tab = By.linkText("Engagements");
+	By all_Tabs_button = By.xpath("//*[@id='AllTab_Tab']/a");
+	By contacts_link = By.xpath("//a[contains(text(),'Contacts')]");
+	By contactPage_New_Button = By.xpath("//*[@name='new']");
+	By contactPage_Continue_Button = By.xpath("//*[@value='Continue']");
+	By contactPage_ConsumerLastName_textBox = By.xpath("//*[contains(text(),'Consumer Last Name')]//following::input");
+	//By contactPage_IMSID_TextBox = By.xpath("//*[contains(text(),'IMS ID')]//following::input");
+	By contactPage_IMSID_TextBox = By.xpath(".//*[@id='pg:form:pgblock:pgblocksec:j_id50:j_id53']");
+//	By contactPage_Phone_TextBox = By.xpath("//*[contains(text(),'Phone')]//following::input");
+	By contactPage_Phone_TextBox = By.xpath(".//*[@id='pg:form:pgblock:pgblocksec:j_id60:j_id62']");
+	By contactPage_BirthDate_TextBox = By.xpath("//*[contains(text(),'Birthdate')]//following::input");
+	By contactPage_Physical_Street_textArea = By.xpath("//*[contains(text(),'Physical Street')]//following::textarea");
+	By contactPage_Physical_City_text = By.xpath("//*[contains(text(),'Physical City')]//following::input");
+	By contactPage_PhoneType_SelectBox = By.xpath("//*[contains(text(),'Phone Type')]//following::select");
+	By contactPage_PhysicalState_SelectBox = By.xpath("//*[contains(text(),'Physical State')]//following::select");
+	By contactPage_PhysicalZipCode_TextBox = By.xpath("//*[contains(text(),'Physical Zip')]//following::input");
+	By contactPage_PhysicalCountry_TextBox = By.xpath("//*[contains(text(),'Physical Country')]//following::input");
+	By contactPage_ClinicalProgramLookUp_IMG = By.xpath("//img[@title='Clinical Program Lookup (New Window)']");
+	By membershipPage_LookUp_IMG = By.xpath("//img[@title='Consumer Lookup (New Window)']");
+	By contactPage_ClientLookUp_IMG = By.xpath("//img[@title='Client Lookup (New Window)']");
+	By searchFieldLookUp_TextBox = By.xpath("//*[@id='lksrch']");	
+	By goButton = By.xpath(".//input[@title='Go!']");
+	By consumerPage_Go_Button = By.xpath("//input[@name='go']");
+	By contactPage_Save_Button = By.xpath("//*[@value='Save']");
+	By cancel_button = By.xpath("//input[@value='Cancel']");
+	By contactPage_Engagement_Link = By.xpath("//a[contains(text(),'Consumer Detail')]//following::a[contains(text(),'Engagement')]");
+	By contactPage_Add_Engagement_Button = By.xpath("//*[contains(text(),'Add Engagement')]");
+	By contactPage_Home_Link = By.xpath("//a[contains(text(),'Home')]");
+	By spinnerImg = By.xpath("//*[@class='spinner']");
+	By NewMemberShip_Button = By.xpath("//*[@value='New Membership']");
+	By expandAll_link = By.xpath("//*[text()='Expand All']");
+	By collapseAll_link = By.xpath("//*[text()='Collapse All']");
+	By clinical_program_Id_lookUp = By.xpath("//img[@title='Client Clinical Program Lookup (New Window)']");
+	By clinical_program_Id_text = By.xpath("//*[contains(text(),'Client Clinical Program ID')]//following::input[@type='text']");
+	By membership_Id_lookUp = By.xpath("//img[@title='Membership ID Lookup (New Window)']");
+	By campaign_lookup = By.xpath("//img[@title='Campaign Lookup (New Window)']");	
+	
+
+	// Data :-
+	String excel_file = "files//Contacts.xlsx";
+	String sheet_name = "Contacts";
+	String engagement_ID = "";
+	String newConsumerName = "";
+	String inputData = Excel.readFromExcel(excel_file, sheet_name, 1, 1);
+	String consumeDefaultText = Excel.readFromExcel(excel_file, sheet_name, 2, 1);
+	String birthDate = Excel.readFromExcel(excel_file, sheet_name, 3, 1);
+	String consumer_Name = consumeDefaultText + getRandomNumberInRange(100, 500);
+	String phoneType = Excel.readFromExcel(excel_file, sheet_name, 4, 1);
+	String physicalStreet = Excel.readFromExcel(excel_file, sheet_name, 5, 1);
+	String physicalCity = Excel.readFromExcel(excel_file, sheet_name, 6, 1);
+	String physicalState = Excel.readFromExcel(excel_file, sheet_name, 7, 1);
+	String physicalZip = Excel.readFromExcel(excel_file, sheet_name, 8, 1);
+	String physicalCountry = Excel.readFromExcel(excel_file, sheet_name, 9, 1);
+	String clinicalProgramLookUpText = Excel.readFromExcel(excel_file, sheet_name, 10, 1);
+	String clientLookUpTest = Excel.readFromExcel(excel_file, sheet_name, 11, 1);
+	String newlyCreatedEngagementID = Excel.readFromExcel(excel_file, sheet_name, 1, 3);
+	String newlyCreatedConsumerName = Excel.readFromExcel(excel_file, sheet_name, 1, 4);
+	String clinical_Program_Id = Excel.readFromExcel(excel_file, sheet_name, 12, 1);
+	String campaign_value = Excel.readFromExcel(excel_file, sheet_name, 13, 1);
+
+	String parentHandle;
+	String newTab1;
+	/**
+	 * This method generate random number between min and max number provided by
+	 * user
+	 * 
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	public int getRandomNumberInRange(int min, int max) {
+		if (min >= max) {
+			throw new IllegalArgumentException("max must be greater than min");
+		}
+		Random r = new Random();
+		return r.nextInt((max - min) + 1) + min;
+	}
+
+	/**
+	 * This method write values to excel sheet please provide below parametrs
+	 * 
+	 * @param filePath
+	 * @param sheetName
+	 * @param row
+	 * @param col
+	 * @param ValueToWrite
+	 */
+
+	public void writeToExcel(String filePath, String sheetName, int row, int col, String ValueToWrite) {
+
+		try {
+			File src = new File(filePath);
+			FileInputStream file = new FileInputStream(src);
+			XSSFWorkbook workbook = new XSSFWorkbook(file);
+			XSSFSheet sheet = workbook.getSheet(sheetName);
+			XSSFCell cell = null;
+			// Retrieve the row and check for null
+			XSSFRow sheetrow = sheet.getRow(row);
+			if (sheetrow == null) {
+				sheetrow = sheet.createRow(row);
+			}
+			// Update the value of cell
+			cell = sheetrow.getCell(col);
+			if (cell == null) {
+				cell = sheetrow.createCell(col);
+			}
+			cell.setCellValue(ValueToWrite);
+			file.close();
+			FileOutputStream fileOut = new FileOutputStream(src);
+			workbook.write(fileOut);
+			fileOut.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * This method create a new engagement id and consumer for further use It
+	 * writes the engagement id and consumer name in contacts excel sheet for
+	 * further use.
+	 * 
+	 * @return
+	 */
+	@When("^user creates new engagement id$")
+	public void user_creates_new_engagement_id() {
+		createNewEngagementId();
+	}
+
+	public void createNewEngagementId() {
+		click(all_Tabs_button);
+		click(contacts_link);
+		waitForElementToDisappear(spinnerImg);
+		
+		//Create Consumer
+		parentHandle = getWindowHandle();
+		click(contactPage_New_Button);
+		waitForElementToDisappear(spinnerImg);
+		click(contactPage_Continue_Button);
+		waitForElementToDisappear(spinnerImg);
+		enter(contactPage_ConsumerLastName_textBox, consumer_Name);
+		enter(contactPage_IMSID_TextBox, inputData);
+		enter(contactPage_Phone_TextBox, inputData);
+		enter(contactPage_BirthDate_TextBox, birthDate);
+		selectByVisibleText(contactPage_PhoneType_SelectBox, phoneType);
+		enter(contactPage_Physical_Street_textArea, physicalStreet);
+		enter(contactPage_Physical_City_text, physicalCity);
+		selectByVisibleText(contactPage_PhysicalState_SelectBox, physicalState);
+		enter(contactPage_PhysicalZipCode_TextBox, physicalZip);
+		enter(contactPage_PhysicalCountry_TextBox, physicalCountry);
+		click(contactPage_Save_Button);
+		waitForElementToDisappear(spinnerImg);
+		wait(3);
+		parentHandle = getWindowHandle();
+		click(all_Tabs_button);
+		click(By.linkText("Memberships"));
+		click(NewMemberShip_Button);
+		click(membershipPage_LookUp_IMG);
+		for (String winHandle : getWindowHandles()) {
+			if (!(parentHandle.equals(winHandle))) {
+				switchToWindow(winHandle);
+				switchToFrame(("searchFrame"));
+				enter(searchFieldLookUp_TextBox, consumer_Name);
+				click(goButton);
+				switchToDefaultContent();
+				switchToFrame("resultsFrame");
+				click(By.linkText(consumer_Name));
+				switchToWindow(parentHandle);
+			}
+		}
+		click(contactPage_Save_Button);
+		click(cancel_button);
+		click(all_Tabs_button);
+		click(contacts_link);
+		click(By.linkText(consumer_Name));
+
+		click(contactPage_Engagement_Link);
+		waitForElementToDisappear(spinnerImg);
+		click(contactPage_Add_Engagement_Button);
+		wait(2);
+		click(expandAll_link);
+		wait(2);
+		click(membership_Id_lookUp);				
+		for (String winHandle1 : getWindowHandles()) {
+			if (!((parentHandle.equals(winHandle1)) )) {
+				switchToWindow(winHandle1);
+				click(By.linkText(consumer_Name));
+				switchToWindow(parentHandle);
+			}
+		}			
+		
+		
+		enter(clinical_program_Id_text, clinical_Program_Id);				
+		wait(2);
+		click(campaign_lookup);
+		for (String winHandle1 : getWindowHandles()) {
+			if (!((parentHandle.equals(winHandle1)) )) {					
+				switchToWindow(winHandle1);
+				switchToFrame("searchFrame");
+				enter(search_field, campaign_value);
+				click(go_button);
+				wait(2);
+				driver.switchTo().defaultContent();
+				switchToFrame("resultsFrame");
+				driver.findElement(By.linkText(campaign_value)).click();
+				switchToWindow(parentHandle);
+			}
+		}
+		
+	/*parentHandle = getWindowHandle();
+		String newTab1;
+		for (String winHandle : getWindowHandles()) {
+		if (!(parentHandle.equals(winHandle))) {
+				switchToWindow(winHandle);
+				newTab1 = winHandle;
+				click(expandAll_link);
+				wait(2);
+				click(membership_Id_lookUp);				
+				for (String winHandle1 : getWindowHandles()) {
+					if (!((parentHandle.equals(winHandle1)) || (newTab1.equals(winHandle1)))) {
+						switchToWindow(winHandle1);
+						click(By.linkText(consumer_Name));
+						switchToWindow(newTab1);
+					}
+				}			
+				
+				enter(clinical_program_Id_text, clinical_Program_Id);				
+				wait(2);
+				click(campaign_lookup);
+				for (String winHandle1 : getWindowHandles()) {
+					if (!((parentHandle.equals(winHandle1)) || (newTab1.equals(winHandle1)))) {					
+						switchToWindow(winHandle1);
+						switchToFrame("searchFrame");
+						enter(search_field, campaign_value);
+						click(go_button);
+						wait(2);
+						driver.switchTo().defaultContent();
+						switchToFrame("resultsFrame");
+						driver.findElement(By.linkText(campaign_value)).click();
+						switchToWindow(newTab1);
+					}
+				}*/
+				
+				click(contactPage_Save_Button);
+				wait(4);
+				click(all_Tabs_button);
+				click(contacts_link);
+				click(By.linkText(consumer_Name));
+				click(engagements_tab);				
+				waitForElementToDisappear(spinnerImg);
+				wait(4);
+				By engagment_Id = By.xpath("//a[contains(text(), '" + consumer_Name + "')]//preceding::a[1]");
+				engagement_ID = getText(engagment_Id);
+				System.out.println("Engagement ID value is   " + engagement_ID);
+				System.out.println("Consumer Name value is   " + consumer_Name);
+				writeToExcel(excel_file, sheet_name, 1, 3, engagement_ID);
+				writeToExcel(excel_file, sheet_name, 1, 4, consumer_Name);
+				waitForElementToDisappear(spinnerImg);
+				closeCurrentTab();
+			//}
+		}
+		//switchToWindow(parentHandle);
+	//}
+
+}

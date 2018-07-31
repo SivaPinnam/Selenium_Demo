@@ -1,0 +1,99 @@
+/**********
+*  Created By: Persistent Automation Team
+*  Created On: 11/30/2016
+*  Modified On: 12/8/2016
+**********/
+package com.pathway.scripts;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import com.pathway.selenium.factory.SeleniumFunctions;
+
+import cucumber.api.java.en.When;
+
+public class Engagement_Details_Page extends SeleniumFunctions{
+
+	By order_subtab = By.xpath("//*[@href='#Order']");
+	By survey_subtab = By.xpath("//*[@href='#Survey']");
+	By show_more_link =  By.linkText("Show More"); 
+	By in_stay_list = By.xpath(".//*[contains(@class,'list _dataTable dataTable no-footer')]");
+	By admit_type_filter = By.xpath("//*[text()='Admit Type']");
+	By facility_filter = By.xpath("//*[text()='Facility']");
+	By view_link = By.linkText("View");
+	By edit_link = By.linkText("Edit");
+	By back_to_related_list =  By.linkText("<< Back to Related list");
+	
+	@When("^user clicks on Orders tab$")
+	public void user_clicks_on_Order_tab(){
+		wait(5);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		click(order_subtab);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+	}
+	
+	@When("^user clicks on Surveys tab$")
+	public void user_clicks_on_Surveys_tab() {
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		wait(4);
+		click(survey_subtab);
+		waitForElementToDisappear(Common_Utility_Page.spinner);
+		System.out.println("clicked on Surveys tab");
+	}
+	
+	/**
+	 * This method will get index of latest record .
+	 * Created On: 12/05/2016
+     * Modified On: 12/08/2016 
+
+	 */
+
+	public int get_order_number_by_admit_type_and_facility_of_in_Patient_Stay_page(String admit_type, String facility) {
+		wait(3);
+	    WebElement table = findElement(in_stay_list);
+		List<WebElement> rows = table.findElements(By.tagName("tr"));
+		System.out.println(rows.size());
+		int index = -1;
+		for (int i = 0; i < rows.size(); i++) {
+			String record = rows.get(i).findElements(By.tagName("td")).get(0).getText();
+			String approval = rows.get(i).findElements(By.tagName("td")).get(1).getText();
+			// System.out.println("Record Type : " +record +" || Approval Type :
+			// " +approval);
+			if (record.equals(admit_type) && approval.equals(facility)) {
+				System.out.println("We got the record on row number : " + i);
+				index = i;
+				break;
+			}
+		}
+		return index;
+	}
+	
+
+	@When("^clicks on Admit type filter in Patient Stay page$")
+	public void clicks_on_Admit_type_filter_in_Patient_Stay_page() {
+		click(admit_type_filter);
+	}
+
+	@When("^clicks on View link for Admit type \"([^\"]*)\" and Facility \"([^\"]*)\" in Patient Stay page$")
+	public void clicks_on_View_link_in_Patient_Stay_page(String admit_type, String facility) {
+		
+		 clicks_on_Admit_type_filter_in_Patient_Stay_page();
+		int index = get_order_number_by_admit_type_and_facility_of_in_Patient_Stay_page( admit_type, facility);
+		System.out.println(index);
+		getElementList(view_link).get(index).click();
+	}
+
+	@When("^clicks on Edit link for Admit type \"([^\"]*)\" and Facility \"([^\"]*)\" in Patient Stay page$")
+	public void clicks_on_Edit_link_for_Admit_type_and_facility_of_in_Patient_Stay_page(String admit_type, 
+			String facility)
+	{  
+		clicks_on_Admit_type_filter_in_Patient_Stay_page();
+		int index = get_order_number_by_admit_type_and_facility_of_in_Patient_Stay_page( admit_type, facility);
+		wait(3);
+		getElementList(edit_link).get(index).click();
+	}
+}
+	
+

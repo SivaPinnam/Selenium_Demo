@@ -1,0 +1,30 @@
+/**********
+ *  Created By: Persistent Automation Team
+ *  Created On: 11/30/2016
+ *  Modified On: 12/06/2016
+ **********/
+package com.pathway.scripts;
+
+import org.openqa.selenium.By;
+
+import com.pathway.selenium.factory.SeleniumFunctions;
+
+import cucumber.api.java.en.*;
+
+
+public class Home_Page extends SeleniumFunctions{
+	
+	By username_lable = By.xpath("//*[@id='userNavLabel']");
+	By engagements_tab  = By.linkText("Engagements");
+	
+	public void verify_user_is_on_home_page() {
+		verifyValues("Username lable is not visible. Login Page is not displayed.", true, isElementVisible(username_lable));
+		System.out.println("User is on the Home page");
+	}
+	
+	@And("^navigates to Engagement tab$")
+	public void navigate_to_engagement_tab() {
+		click(engagements_tab);
+		System.out.println("User has navigated to engagement tab successfully");
+	}
+}

@@ -1,0 +1,51 @@
+#Created By : Persistent Automation Team
+#Created on: 11/28/2016
+#Modified on:12/6/2016
+
+
+@RegressionTest
+Feature: Hospital Order
+
+Background:
+    Given user is logged in with valid credentials
+    And navigates to Engagement tab
+    And clicks on Engagement id
+    When user clicks on Orders tab
+    Then validates that Orders tab is displayed
+  
+
+  Scenario: To add a new order of type Hospital and validates that a new order gets added.
+	        
+    #Cancel order:
+    When user adds Order type "Hospital Transfer"
+    Then validates that Hospital Transfer form is displayed
+    And clicks on Cancel button on Hospital Transfer form
+    And user clicks on Orders tab
+		And validates that Orders tab is displayed
+    Then validates that new Hospital Order is not created
+    
+    #Add order:
+    When user adds Order type "Hospital Transfer"
+    Then validates that Hospital Transfer form is displayed
+    When user enters value for Fax field
+    And clicks on Save button on Hospital Transfer form
+    When user clicks on Orders tab
+		And validates that Orders tab is displayed
+    Then validate Order is created of type Hospital Transfer
+    
+    Scenario: To check Hospital Transfer order cannot be Approved
+    #Approve: 
+    Then validates that Approval Needed column should Blank for Order Record type "Hospital Transfer"
+    
+    Scenario: To edit Hospital Transfer order
+    #Edit order:
+    When clicks on Edit link for Record type "Hospital Transfer" and Approve type ""
+    And enters value for phone field
+    And clicks on Save button on Hospital Transfer form
+    Then validates browser navigate to Engagement tab
+    
+    Scenario: To view Hospital Transfer order
+    #View order:
+    When clicks on View link for Record type "Hospital Transfer" and Approve type ""
+    Then validates values provided by user
+    
